@@ -12,7 +12,7 @@ namespace Research.Domain.Entity
     public class Skill
     {
         [Key]
-        public Guid SkillId { get; set; }
+        public Guid Id { get; set; }
 
         [ForeignKey("SkillId")]
         public virtual Guid SkillId { get; set; }
@@ -26,5 +26,7 @@ namespace Research.Domain.Entity
         public string ProjectRef { get; set; }
         
         public string Description { get; set; }
+        
+        public Skill Skill1 { get; set; }
     }
 }

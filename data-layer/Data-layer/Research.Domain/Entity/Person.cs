@@ -30,5 +30,8 @@ namespace Research.Domain.Entity
         public bool Remote { get; set; }
         
         public bool IsRecruiter { get; set; }
+
+        public Site Site { get; set; }  
+        
     }
 }

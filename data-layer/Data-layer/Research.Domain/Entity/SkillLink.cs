@@ -22,5 +22,9 @@ namespace Research.Domain.Entity
 
         [ForeignKey("SkillLevelId")]
         public virtual Guid LevelId { get; set; }
+
+        public Skill Skill { get; set; }
+        public Person Person { get; set; }
+        public SkillLevel SkillLevel { get; set; }
     }
 }

@@ -26,5 +26,7 @@ namespace Research.Domain.Entity
         public virtual Guid CountryId { get; set; }
         
         public int CAP { get; set; }
+
+        public Country Country { get; set; }
     }
 }

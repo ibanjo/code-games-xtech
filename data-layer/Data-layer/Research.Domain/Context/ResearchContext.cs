@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Research.Domain.Context
 {
-    internal class ResearchContext : DbContext
+    public class ResearchContext : DbContext
     {
         public DbSet<Country> Country { get; set; }
         public DbSet<Language> Language { get; set; }
@@ -23,7 +23,8 @@ namespace Research.Domain.Context
 
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Research;Trusted_Connection=True;");
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(@"Server=20201067-AIT\MEMA;Database=App;Trusted_Connection=True;");
         }
     }
 }

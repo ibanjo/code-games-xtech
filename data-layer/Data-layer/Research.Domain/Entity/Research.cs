@@ -27,5 +27,8 @@ namespace Research.Domain.Entity
 
         [ForeignKey("LanguageId")]
         public int LanguageId { get; set; }
+
+        public Person Person { get; set; }
+        public Language Language { get; set; }
     }
 }

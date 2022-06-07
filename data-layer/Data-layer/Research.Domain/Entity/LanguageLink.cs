@@ -24,5 +24,9 @@ namespace Research.Domain.Entity
         public virtual Guid? LanguageLevelId { get; set; }
         
         public bool? Preferred { get; set; }
+
+        public Language Language { get; set; }
+        public Person Person { get; set; }
+        public LanguageLevel LanguageLevel { get; set; }
     }
 }
