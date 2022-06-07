@@ -23,10 +23,10 @@ namespace Research.Domain.Entity
         public string Company { get; set; }
 
         [ForeignKey("PersonId")]
-        public int PersonId { get; set; }
+        public virtual Guid PersonId { get; set; }
 
         [ForeignKey("LanguageId")]
-        public int LanguageId { get; set; }
+        public virtual Guid LanguageId { get; set; }
 
         public Person Person { get; set; }
         public Language Language { get; set; }

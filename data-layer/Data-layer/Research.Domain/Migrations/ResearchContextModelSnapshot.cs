@@ -162,16 +162,10 @@ namespace Research.Domain.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("LanguageId1")
+                    b.Property<Guid>("LanguageId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("PersonId1")
+                    b.Property<Guid>("PersonId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Remote")
@@ -179,9 +173,9 @@ namespace Research.Domain.Migrations
 
                     b.HasKey("ResearchId");
 
-                    b.HasIndex("LanguageId1");
+                    b.HasIndex("LanguageId");
 
-                    b.HasIndex("PersonId1");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Research");
                 });
@@ -345,13 +339,13 @@ namespace Research.Domain.Migrations
                 {
                     b.HasOne("Research.Domain.Entity.Language", "Language")
                         .WithMany()
-                        .HasForeignKey("LanguageId1")
+                        .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Research.Domain.Entity.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("PersonId1")
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

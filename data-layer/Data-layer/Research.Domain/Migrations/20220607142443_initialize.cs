@@ -173,23 +173,21 @@ namespace Research.Domain.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Remote = table.Column<bool>(type: "bit", nullable: false),
                     Company = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonId = table.Column<int>(type: "int", nullable: false),
-                    LanguageId = table.Column<int>(type: "int", nullable: false),
-                    PersonId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LanguageId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LanguageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Research", x => x.ResearchId);
                     table.ForeignKey(
-                        name: "FK_Research_Language_LanguageId1",
-                        column: x => x.LanguageId1,
+                        name: "FK_Research_Language_LanguageId",
+                        column: x => x.LanguageId,
                         principalTable: "Language",
                         principalColumn: "LanguageId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Research_Person_PersonId1",
-                        column: x => x.PersonId1,
+                        name: "FK_Research_Person_PersonId",
+                        column: x => x.PersonId,
                         principalTable: "Person",
                         principalColumn: "PersonId",
                         onDelete: ReferentialAction.Cascade);
@@ -249,14 +247,14 @@ namespace Research.Domain.Migrations
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Research_LanguageId1",
+                name: "IX_Research_LanguageId",
                 table: "Research",
-                column: "LanguageId1");
+                column: "LanguageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Research_PersonId1",
+                name: "IX_Research_PersonId",
                 table: "Research",
-                column: "PersonId1");
+                column: "PersonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Site_CountryId",
