@@ -6,11 +6,11 @@ from models.research import Research
 
 def has_feature(feat, cat, research):
     if cat == 'FEBEDevops':
-        return research.FEBEDevops == feat
+        return 1 if research.FEBEDevops == feat else 0
     if cat == 'WebMobile':
-        return research.WebMobile == feat
+        return 1 if research.WebMobile == feat else 0
     if cat == 'Technology':
-        return research.Technology == feat
+        return 1 if research.Technology == feat else 0
 
 
 def research_to_model_table(research: Research):
