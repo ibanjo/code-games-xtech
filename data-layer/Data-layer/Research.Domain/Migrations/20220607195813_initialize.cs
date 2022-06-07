@@ -53,23 +53,15 @@ namespace Research.Domain.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FEBEDevops = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WebMobile = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Technology = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProjectRef = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Skill1Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Skill", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Skill_Skill_Skill1Id",
-                        column: x => x.Skill1Id,
-                        principalTable: "Skill",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,10 +190,10 @@ namespace Research.Domain.Migrations
                 columns: table => new
                 {
                     SkillLinkId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LevelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SkillLevelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    SkillLevelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -260,11 +252,6 @@ namespace Research.Domain.Migrations
                 name: "IX_Site_CountryId",
                 table: "Site",
                 column: "CountryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Skill_Skill1Id",
-                table: "Skill",
-                column: "Skill1Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SkillLink_PersonId",

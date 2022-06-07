@@ -31,27 +31,16 @@ namespace Research.Domain.Context
         public DbSet<SkillLevel> SkillLevel { get; set; }
         public DbSet<SkillLink> SkillLink { get; set; }
 
-        public string _connectionString = @"Server=20201067-AIT\MEMA:Database=App;Trusted_Connection=True;";
+        public string _connectionString = @"Server=20201067-AIT\MEMA;Database=App;Trusted_Connection=True;";
+
+        public ResearchContext(DbContextOptions options) : base(options)
+        {
+        }
 
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(_connectionString);
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            RemovePluralizingTableNameConvention(modelBuilder);
-        }
-
-        private void RemovePluralizingTableNameConvention(ModelBuilder modelBuilder)
-        {
-            foreach (IMutableEntityType entity in modelBuilder.Model.GetEntityTypes())
-            {
-                entity.SetTableName(entity.DisplayName());
-            }
         }
     }
     public static class MigrationUtility

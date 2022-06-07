@@ -14,8 +14,8 @@ namespace Research.Domain.Entity
         [Key]
         public Guid Id { get; set; }
 
-        [ForeignKey("SkillId")]
-        public virtual Guid SkillId { get; set; }
+        //[ForeignKey("Id")]
+        //public virtual Guid SkillId { get; set; }
         
         public string FEBEDevops { get; set; }
         
@@ -27,6 +27,6 @@ namespace Research.Domain.Entity
         
         public string Description { get; set; }
         
-        public Skill Skill1 { get; set; }
+        //public Skill Skill1 { get; set; }
     }
 }

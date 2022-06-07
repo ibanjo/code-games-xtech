@@ -232,12 +232,6 @@ namespace Research.Domain.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Skill1Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SkillId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Technology")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -247,8 +241,6 @@ namespace Research.Domain.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Skill1Id");
 
                     b.ToTable("Skill");
                 });
@@ -278,7 +270,7 @@ namespace Research.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("LevelId")
+                    b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PersonId")
@@ -363,17 +355,6 @@ namespace Research.Domain.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("Research.Domain.Entity.Skill", b =>
-                {
-                    b.HasOne("Research.Domain.Entity.Skill", "Skill1")
-                        .WithMany()
-                        .HasForeignKey("Skill1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Skill1");
                 });
 
             modelBuilder.Entity("Research.Domain.Entity.SkillLink", b =>
