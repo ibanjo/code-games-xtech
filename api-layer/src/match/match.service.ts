@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { MatchDto, MatchListDto } from './dto/match.dto';
 import { validate } from 'class-validator';
-import { instanceToPlain, plainToInstance } from 'class-transformer';
+import { instanceToInstance, instanceToPlain, plainToInstance } from 'class-transformer';
 import { HttpException } from '@nestjs/common/exceptions/http.exception';
 import { HttpStatus } from '@nestjs/common';
 import { CreateMatchDto } from './dto/create-match.dto';
@@ -18,12 +18,14 @@ export class MatchService {
             {
                 matchId: '1',
                 researchId: query.researchId,
+                recruiterId: '1',
                 userId: '1',
                 matchAccepted: true
             }, 
             {
                 matchId: '2',
                 researchId: query.researchId,
+                recruiterId: '1',
                 userId: '2',
                 matchAccepted: true
             }
@@ -41,7 +43,7 @@ export class MatchService {
             throw new HttpException({ errors }, 401);
         }
         // return match
-        return plainToInstance(MatchDto, match);
+        return instanceToInstance<MatchDto>(match);
     }
 
     private async find(id: string): Promise<any> {
@@ -49,6 +51,7 @@ export class MatchService {
         const match = {
             matchId: '1',
             researchId: '1',
+            recruiterId: '1',
             userId: '1',
             matchAccepted: true
         };
@@ -62,15 +65,17 @@ export class MatchService {
             throw new HttpException({ message: 'Input data validation failed', errors }, HttpStatus.BAD_REQUEST);
         } else {
             // create new match
-            let newMatch = instanceToPlain(dto);
+            let newMatch = instanceToInstance(dto);
             // data access layer
             const match = {
                 matchId: '1',
                 researchId: '1',
-                userId: '1'
+                userId: '1',
+                recruiterId: '1',
+                matchAccepted: false
             };
             // return saved match
-            return plainToInstance(MatchDto, match);
+            return instanceToInstance<MatchDto>(match);
         }
     }
 
@@ -83,16 +88,17 @@ export class MatchService {
             // update match
             let matchToUpdate = await this.find(id);
             delete matchToUpdate.matchAccepted;
-            let updateMatch = instanceToPlain(Object.assign(matchToUpdate, dto));
+            let updateMatch = Object.assign(matchToUpdate, dto);
             // data access layer
             const match = {
                 matchId: '1',
                 researchId: '1',
                 userId: '1',
-                matchAccepted: true
+                recruiterId: '1',
+                matchAccepted: false
             };
             // return saved match
-            return plainToInstance(MatchDto, match);
+            return instanceToInstance<MatchDto>(updateMatch);
         }
     }
 }

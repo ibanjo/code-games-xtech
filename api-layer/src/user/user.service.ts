@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserDto, UserListDto } from './dto/user.dto';
 import { validate } from 'class-validator';
-import { instanceToPlain, plainToInstance } from 'class-transformer';
+import { instanceToInstance, instanceToPlain, plainToInstance } from 'class-transformer';
 import { HttpException } from '@nestjs/common/exceptions/http.exception';
 import { HttpStatus } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -26,7 +26,7 @@ export class UserService {
         code: 1,
         name: 'Sa',
         surname: 'Fa',
-        siteId: '1',
+        site: 'city',
         yearsOfExperience: 4,
         position: 'tech position',
         remote: true,
@@ -34,6 +34,10 @@ export class UserService {
         skills: {
           skills: [],
           skillsCount: 0
+        },
+        languages: {
+          languages: [],
+          languagesCount: 0
         }
       },
       {
@@ -41,33 +45,48 @@ export class UserService {
         code: 2,
         name: 'Sa',
         surname: 'Fa',
-        siteId: '1',
-        yearsOfExperience: 19,
+        site: 'city',
+        yearsOfExperience: 4,
         position: 'tech position',
         remote: true,
         isRecruiter: false,
         skills: {
           skills: [],
           skillsCount: 0
+        },
+        languages: {
+          languages: [],
+          languagesCount: 0
         }
       }
     ];
     const usersCount = users.length;
     // get research
     const research = await this.researchService.findById(query.researchId);
-    
+
     return { research, users, usersCount };
   }
 
   async findById(id: string): Promise<UserDto> {
-    // get user
+    // data access layer
     const user = {
-      id: 1,
-      username: 'Safa',
-      email: 'email',
-      bio: 'bio',
-      image: 'image',
-      password: ''
+      userId: '1',
+      code: 1,
+      name: 'Sa',
+      surname: 'Fa',
+      site: 'city',
+      yearsOfExperience: 4,
+      position: 'tech position',
+      remote: true,
+      isRecruiter: false,
+      skills: {
+        skills: [],
+        skillsCount: 0
+      },
+      languages: {
+        languages: [],
+        languagesCount: 0
+      }
     };
     // throw error if not found
     if (!user) {
@@ -75,7 +94,7 @@ export class UserService {
       throw new HttpException({ errors }, 404);
     }
     // return user
-    return plainToInstance(UserDto, user);
+    return instanceToInstance<UserDto>(user);
   }
 
   async create(dto: CreateUserDto): Promise<UserDto> {
@@ -85,17 +104,29 @@ export class UserService {
       throw new HttpException({ message: 'Input data validation failed', errors }, HttpStatus.BAD_REQUEST);
     } else {
       // create new user
-      let newUser = instanceToPlain(dto);
+      let userEntity = instanceToInstance(dto);
       // data access layer
       const user = {
-        id: 1,
-        username: 'Safa',
-        email: 'email',
-        bio: 'bio',
-        image: 'image'
-      };
+        userId: '1',
+        code: 1,
+        name: 'Sa',
+        surname: 'Fa',
+        site: 'city',
+        yearsOfExperience: 4,
+        position: 'tech position',
+        remote: true,
+        isRecruiter: false,
+        skills: {
+          skills: [],
+          skillsCount: 0
+        },
+        languages: {
+          languages: [],
+          languagesCount: 0
+        }
+      }
       // return saved user
-      return plainToInstance(UserDto, user);
+      return instanceToInstance<UserDto>(user);
     }
   }
 }

@@ -16,8 +16,3 @@ export interface SkillListDto {
     skills: SkillDto[];
     skillsCount: number;
 }
-
-export interface UserSkillListDto {
-    skills: UserSkillDto[];
-    skillsCount: number;
-}
