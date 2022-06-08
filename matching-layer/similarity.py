@@ -1,22 +1,36 @@
 import numpy as np  
 import pandas as pd
-from matplotlib import pyplot as plt
-from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
-
+from collections import Counter
+import pickle
 
 class Similarity:
+    
     def fit(self):
         data = pd.read_csv("data.csv")
-        print(data)
+        X = data.drop("idUser", 1)
         
-        x, y = make_blobs(n_samples=300, centers=4, cluster_std=0.60, random_state=0)
-        
-        kmeans = KMeans(n_clusters=4)
-        kmeans.fit(x)
-        y_kmeans = kmeans.predict(x)
-        
-        return y_kmeans
+        kmeans = KMeans(n_clusters=5, init='k-means++', max_iter=200, n_init=100)
+        kmeans.fit(X)
+
+        y_pred_fit = kmeans.predict(X)
+        X_dist = kmeans.transform(X) ** 2
+
+        df = data.assign(cluster=y_pred_fit, distance=X_dist.sum(axis=1))
+
+        df.to_pickle("./data.pkl")
+        pickle.dump(kmeans, open("./model.pkl", "wb"))
+
+        cluster_num = Counter(kmeans.labels_)
+        return cluster_num
     
-    def result(self):
-        return "Results"
+    def research(self, features):
+        df = pickle.load(open("./data.pkl", "rb"))
+        model = pickle.load(open("./model.pkl", "rb"))
+
+        X_input = np.array(features).reshape(1, -1)
+        y_pred = model.predict(X_input)
+
+        df_result = df[df['cluster'] == y_pred[0]]
+
+        return y_pred, df_result

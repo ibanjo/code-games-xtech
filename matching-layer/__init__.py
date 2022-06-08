@@ -18,17 +18,18 @@ def init():
 def fit_search():
     sim = Similarity()
     x = sim.fit()
-    print(x, file=sys.stderr)
-
-    return render_template("fitSearch.html", values=x)
+    #return render_template("fitSearch.html", values=x)
+    return x
 
 
 @app.route("/getSimilarities", methods=['POST'])
 @map_input(Research)
 def get_similarities(research):
     features = research_to_model_table(research)
-    return "<p>Similarities</p>"
-
+    sim = Similarity()
+    y_pred, df_result = sim.research(features)
+    #return render_template("similarities.html", cluster=y_pred[0], values=df_result)
+    return df_result
 
 if __name__ == '__main__':
     app.run(debug=True)
