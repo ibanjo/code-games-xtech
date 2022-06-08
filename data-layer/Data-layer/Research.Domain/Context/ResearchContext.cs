@@ -29,6 +29,7 @@ namespace Research.Domain.Context
         public DbSet<Site> Site { get; set; }
         public DbSet<Skill> Skill { get; set; }
         public DbSet<SkillLink> SkillLink { get; set; }
+        public DbSet<Match> Match { get; set; }
 
         public string _connectionString = @"Server=20201067-AIT\MEMA;Database=App;Trusted_Connection=True;";
 

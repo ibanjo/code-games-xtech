@@ -13,7 +13,6 @@ builder.Services.AddSwaggerGen(options =>
     options.AddSecurityDefinition("Swagger acces token", new OpenApiSecurityScheme
     {
         Name = "Swagger access token",
-        In = ParameterLocation.Header,
         Type = SecuritySchemeType.OAuth2
     });
 });
