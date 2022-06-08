@@ -1,6 +1,6 @@
 import { Area, SkillDto, Technology } from './../../api/xvision-dto';
 import { XVisionApiService } from './../../api/xvision-api.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MacroArea } from 'src/app/api/xvision-dto';
@@ -14,6 +14,8 @@ import { AuthService } from 'src/app/core/auth.service';
   styleUrls: ['./skill-page.component.scss']
 })
 export class SkillPageComponent implements OnInit, OnDestroy {
+  @ViewChild('skillsScrollMe') private _skillsScrollContainer: ElementRef;
+  @ViewChild('languagesScrollMe') private _languagesScrollContainer: ElementRef;
 
   form!: FormGroup;
 
@@ -55,6 +57,7 @@ export class SkillPageComponent implements OnInit, OnDestroy {
     });
 
     this.formLanguages.push(language);
+    setTimeout(() => this._scrollToBottom(false));
   }
 
   deleteLanguage(index: number) {
@@ -78,6 +81,7 @@ export class SkillPageComponent implements OnInit, OnDestroy {
     this.formSkills.push(skill);
     this.areaList.push([]);
     this.techList.push([]);
+    setTimeout(() => this._scrollToBottom(true));
   }
 
   deleteSkill(index: number) {
@@ -100,6 +104,16 @@ export class SkillPageComponent implements OnInit, OnDestroy {
 
   goBack() {
     this.router.navigate(['home']);
+  }
+
+  private _scrollToBottom(skills: boolean): void {
+    try {
+      if (skills) {
+        this._skillsScrollContainer.nativeElement.scrollTop = this._skillsScrollContainer.nativeElement.scrollHeight;
+      } else {
+        this._languagesScrollContainer.nativeElement.scrollTop = this._languagesScrollContainer.nativeElement.scrollHeight;
+      }
+    } catch(err) { }
   }
 
   private _createFormGroup() {
