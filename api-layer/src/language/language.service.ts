@@ -1,48 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { LanguageListDto } from './dto/language.dto';
+import { LanguageDto, LanguageListDto } from './dto/language.dto';
+import { DataLayerClient } from 'src/adapter/data-layer';
+import { instanceToInstance } from 'class-transformer';
 
 @Injectable()
 export class LanguageService {
+
+    constructor(private dataLayer: DataLayerClient) { }
+
     async findAll(): Promise<LanguageListDto> {
         // data access layer
-        const languages = [
-            {
-                languageId: '1',
-                code: 1,
-                description: ''
-            },
-            {
-                languageId: '2',
-                code: 1,
-                description: ''
-            }
-        ];
-        const languagesCount = languages.length;
+        const languagesEntities = await this.dataLayer.languageAll();
+        const languages = instanceToInstance<LanguageDto[]>(languagesEntities);
+        const languagesCount = languagesEntities.length;
         return { languages, languagesCount };
     }
 
     async findByUserId(query, userId: string): Promise<LanguageListDto> {
         // data access layer
-        const languages = [
-            {
-                languageId: '1',
-                code: 1,
-                description: '',
-                userId: '1',
-                languageLevelCode: 'C1',
-                languageLevelDescription: 'C1',
-                preferred: true
-            },
-            {
-                languageId: '2',
-                code: 1,
-                description: '',
-                userId: '1',
-                languageLevelCode: 'B1',
-                languageLevelDescription: 'B1',
-                preferred: false
-            }
-        ];
+        const languagesLinkEntities = (await this.dataLayer.languageLinkAll()).find(language => language.personId === userId);
+        const languagesEntities = (await this.dataLayer.languageAll()).filter(language => languagesLinkEntities.languageId.includes(language.languageId));
+        const languages = instanceToInstance<LanguageDto[]>(languagesEntities);
         const languagesCount = languages.length;
         return { languages, languagesCount };
     }

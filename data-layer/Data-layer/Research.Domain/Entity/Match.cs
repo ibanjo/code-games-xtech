@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace Research.Domain.Entity
 {
-    [Table("SkillLink")]
-    public class SkillLink 
+    [Table("Match")]
+    public class Match
     {
         [Key]
-        public Guid SkillLinkId { get; set; }
-
-        [ForeignKey("SkillId")]
-        public virtual Guid SkillId { get; set; }
-
+        public Guid MatchId { get; set; }
+        
         [ForeignKey("PersonId")]
-        public virtual Guid PersonId { get; set; }
+        public virtual Guid? EmployeeId { get; set; }
 
-        public int Level { get; set; }
+        [ForeignKey("ResearchId")]
+        public virtual Guid? ResearchId { get; set; }
+        
+        public bool? MatchAcceptedByEmployee { get; set; }
 
-        public Skill Skill { get; set; }
         public Person Person { get; set; }
+        public Research Research { get; set; }
     }
 }

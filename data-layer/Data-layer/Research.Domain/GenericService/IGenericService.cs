@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Research.ServiceLayer.GenericService
+namespace Research.Domain.GenericService
 {
     public interface IGenericService<TEntity, TKey> where TEntity : class
     {

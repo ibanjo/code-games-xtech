@@ -1,9 +1,10 @@
 .content-container {
   height: 100%;
   width: 100%;
+  max-height: calc(100vh - 12rem);
 
   .spinner-container {
-    height: calc(100vh - 10rem);
+    height: calc(100vh - 12rem);
   }
 }
 
@@ -16,7 +17,13 @@
 
 .person-card {
   width: 300px;
+  height: 256px;
   border: 1px solid lightgray;
+
+  .mat-card-actions {
+    position: absolute;
+    bottom: 12px;
+  }
 }
 
 .card-container {
@@ -28,6 +35,7 @@
 .skills-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  height: 104px;
 
   .title-skill {
     font-weight: 500;

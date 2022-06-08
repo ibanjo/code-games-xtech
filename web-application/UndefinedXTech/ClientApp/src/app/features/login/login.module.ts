@@ -1,28 +1,28 @@
+import { FormsModule } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { SearchResultRoutingModule } from './search-result-routing.module';
-import { SearchResultComponent } from './search-result.component';
+import { LoginRoutingModule } from './login-routing.module';
+import { LoginComponent } from './login.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    SearchResultRoutingModule,
+    LoginRoutingModule,
     SharedModule,
     MatButtonModule,
-    MatIconModule,
+    MatInputModule,
     MatCardModule,
-    MatTooltipModule
+    FormsModule
   ],
   exports: [],
   declarations: [
-    SearchResultComponent
+    LoginComponent
   ],
   providers: [],
 })
-export class SearchResultModule { }
+export class LoginModule { }

@@ -1,7 +1,7 @@
 export interface LanguageDto {
-    languageId: string;
-    code: number;
-    description: string;
+    languageId?: string;
+    code?: number;
+    description?: string;
 }
 
 export interface LanguageListDto {
@@ -10,8 +10,8 @@ export interface LanguageListDto {
 }
 
 export interface UserLanguageDto extends LanguageDto {
-    userId: string;
-    languageLevelCode: number;
-    languageLevelDescription: string;
-    preferred: boolean;    
+    userId?: string;
+    languageLevelCode?: number;
+    languageLevelDescription?: string;
+    preferred?: boolean;
 }

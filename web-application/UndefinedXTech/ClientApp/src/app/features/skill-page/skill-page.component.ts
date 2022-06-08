@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { MacroArea } from 'src/app/api/xvision-dto';
 import { Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-skill-page',
@@ -31,7 +32,7 @@ export class SkillPageComponent implements OnInit, OnDestroy {
 
   private _subs = new Subscription();
 
-  constructor(private fb: FormBuilder, private api: XVisionApiService, private router: Router) { }
+  constructor(private fb: FormBuilder, private api: XVisionApiService, private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
     this._createFormGroup();
@@ -97,12 +98,16 @@ export class SkillPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  goBack() {
+    this.router.navigate(['home']);
+  }
+
   private _createFormGroup() {
     this.form = this.fb.group({
-      isRecruiter: [],
-      code: [],
-      name: [],
-      surname: [],
+      isRecruiter: [this.auth.data?.isRecruiter],
+      code: [this.auth.data?.code],
+      name: [this.auth.data?.name],
+      surname: [this.auth.data?.surname],
       siteID: [''],
       remote: [false],
       yearsOfExperience: [null, [Validators.required]],

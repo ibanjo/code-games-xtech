@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Research.Domain.GenericService;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,14 +13,14 @@ namespace Research.API.Controllers
         [HttpGet]
         public IEnumerable<Domain.Entity.LanguageLevel> Get()
         {
-            return new ServiceLayer.GenericService.GenericService<Domain.Entity.LanguageLevel, Guid>().Get();
+            return new GenericService<Domain.Entity.LanguageLevel, Guid>().Get();
         }
 
         // GET api/<LanguageLevel>/5
         [HttpGet("{id}")]
         public Domain.Entity.LanguageLevel Get(Guid id)
         {
-            return new ServiceLayer.GenericService.GenericService<Domain.Entity.LanguageLevel, Guid>().GetById(id);
+            return new GenericService<Domain.Entity.LanguageLevel, Guid>().GetById(id);
         }
     }
 }

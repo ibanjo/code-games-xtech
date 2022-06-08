@@ -1,6 +1,9 @@
 {
   "login": {
-    "name": "John Smith",
+    "name": "John",
+    "surname": "Smith",
+    "code": "123123",
+    "isRecruiter": false,
     "token": "123456789"
   },
   "sites": [
@@ -296,29 +299,29 @@
     }
   ],
   "person": {
-    "isRecruiter": null,
-    "code": null,
-    "name": null,
-    "surname": null,
-    "siteID": "",
+    "isRecruiter": false,
+    "code": "123123",
+    "name": "John",
+    "surname": "Smith",
+    "siteID": "b95c9e04-b6d1-478b-b77b-cf847bf73c9a",
     "remote": false,
-    "yearsOfExperience": 5,
-    "position": "test",
+    "yearsOfExperience": 4,
+    "position": "tester",
     "languages": [
       {
         "languageID": "72c8854c-634e-4105-8f03-ca107dd3741a",
-        "levelID": "a3392ba0-d385-49b1-9eae-92bd503cf5fd",
+        "levelID": "524fe4ce-20ad-40a9-8fde-2ec17a06080f",
         "preferred": null
       }
     ],
     "skills": [
       {
-        "feBeDevops": "Backend",
+        "feBeDevops": "DevOps",
         "webMobile": "Mobile",
-        "technology": "Spring",
+        "technology": "React",
         "projectRef": null,
         "description": null,
-        "level": 1
+        "level": 2
       }
     ]
   },
