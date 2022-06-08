@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SkillListDto, UserSkillListDto } from './dto/skill.dto';
+import { SkillListDto } from './dto/skill.dto';
 
 @Injectable()
 export class SkillService {
@@ -28,7 +28,7 @@ export class SkillService {
         return {skills, skillsCount};
     }
 
-    async findByUserId(query, userId: string): Promise<UserSkillListDto> {
+    async findByUserId(query, userId: string): Promise<SkillListDto> {
 
         // data access layer
         const skills = [
