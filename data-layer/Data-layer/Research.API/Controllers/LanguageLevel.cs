@@ -12,15 +12,13 @@ namespace Research.API.Controllers
         // GET: api/<LanguageLevel>
         [HttpGet]
         public IEnumerable<Domain.Entity.LanguageLevel> Get()
-        {
-            return new GenericService<Domain.Entity.LanguageLevel, Guid>().Get();
-        }
+        => new GenericService<Domain.Entity.LanguageLevel, Guid>().Get();
+        
 
         // GET api/<LanguageLevel>/5
         [HttpGet("{id}")]
         public Domain.Entity.LanguageLevel Get(Guid id)
-        {
-            return new GenericService<Domain.Entity.LanguageLevel, Guid>().GetById(id);
-        }
+        => new GenericService<Domain.Entity.LanguageLevel, Guid>().GetById(id);
+        
     }
 }

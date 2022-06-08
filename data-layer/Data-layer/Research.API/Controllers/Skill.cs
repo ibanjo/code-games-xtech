@@ -12,22 +12,18 @@ namespace Research.API.Controllers
         // GET: api/<Skill>
         [HttpGet]
         public IEnumerable<Domain.Entity.Skill> Get()
-        {
-            return new GenericService<Domain.Entity.Skill, Guid>().Get();
-        }
+        => new GenericService<Domain.Entity.Skill, Guid>().Get();
+        
 
         // GET api/<Skill>/5
         [HttpGet("{id}")]
         public Domain.Entity.Skill Get(Guid id)
-        {
-            return new GenericService<Domain.Entity.Skill, Guid>().GetById(id);
-        }
-
+        => new GenericService<Domain.Entity.Skill, Guid>().GetById(id);
+        
         // POST api/<Skill>
         [HttpPost]
         public void Post([FromBody] Domain.Entity.Skill value)
-        {
-            new GenericService<Domain.Entity.Skill, Guid>().Insert(value);
-        }
+        => new GenericService<Domain.Entity.Skill, Guid>().Insert(value);
+        
     }
 }
