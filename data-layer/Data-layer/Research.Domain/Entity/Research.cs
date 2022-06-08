@@ -19,8 +19,9 @@ namespace Research.Domain.Entity
         public string Description { get; set; }
         
         public bool Remote { get; set; }
-        
-        public string Company { get; set; }
+
+        [ForeignKey("SiteID")]
+        public virtual Guid SiteId { get; set; }
 
         [ForeignKey("PersonId")]
         public virtual Guid PersonId { get; set; }
@@ -30,5 +31,6 @@ namespace Research.Domain.Entity
 
         public Person Person { get; set; }
         public Language Language { get; set; }
+        public Site Site { get; set; }
     }
 }
