@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Research.ServiceLayer", "Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Research.Infrastructure", "Research.Infrastructure\Research.Infrastructure.csproj", "{81706ACC-6975-4D21-BF59-730E20A75310}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Research.API", "Research.API\Research.API.csproj", "{1884A7BC-79F4-474A-B58B-EC03D5D6B403}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{81706ACC-6975-4D21-BF59-730E20A75310}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81706ACC-6975-4D21-BF59-730E20A75310}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81706ACC-6975-4D21-BF59-730E20A75310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1884A7BC-79F4-474A-B58B-EC03D5D6B403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1884A7BC-79F4-474A-B58B-EC03D5D6B403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1884A7BC-79F4-474A-B58B-EC03D5D6B403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1884A7BC-79F4-474A-B58B-EC03D5D6B403}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
