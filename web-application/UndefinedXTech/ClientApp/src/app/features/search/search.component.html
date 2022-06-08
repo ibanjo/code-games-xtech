@@ -18,7 +18,7 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Area</mat-label>
-          <mat-select formControlName="webMobile">
+          <mat-select formControlName="webMobile" [disabled]="!form.value.feBeDevops">
             <mat-option *ngFor="let area of areaList" [value]="area.description">
               {{area.description}}
             </mat-option>
@@ -27,7 +27,7 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Technology</mat-label>
-          <mat-select formControlName="technology">
+          <mat-select formControlName="technology" [disabled]="!form.value.webMobile">
             <mat-option *ngFor="let tech of techList" [value]="tech.description">
               {{tech.description}}
             </mat-option>
