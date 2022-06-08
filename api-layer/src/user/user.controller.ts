@@ -2,6 +2,7 @@ import { Get, Post, Body, Controller, HttpCode, ParseUUIDPipe, Param, Query } fr
 import { UserService } from './user.service';
 import { UserDto, UserListDto } from './dto/user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { GetSimilaritiesRequestDto } from './dto/get-similarities-request.dto';
 
 @Controller('users')
 export class UserController {
@@ -10,6 +11,11 @@ export class UserController {
     @Get()
     async findAll(@Query() query) : Promise<UserListDto> {
         return await this.userService.findAll(query);
+    }
+
+    @Post('get-similarities')
+    async getSimilarities(@Body() request: GetSimilaritiesRequestDto) : Promise<UserListDto> {
+        return await this.userService.getSimilarities(request);
     }
 
     @Get(':id')

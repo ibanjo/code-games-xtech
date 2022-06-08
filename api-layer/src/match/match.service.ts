@@ -1,18 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { MatchDto, MatchListDto } from './dto/match.dto';
 import { validate } from 'class-validator';
-import { instanceToInstance, instanceToPlain, plainToInstance } from 'class-transformer';
+import { instanceToInstance } from 'class-transformer';
 import { HttpException } from '@nestjs/common/exceptions/http.exception';
 import { HttpStatus } from '@nestjs/common';
 import { CreateMatchDto } from './dto/create-match.dto';
 import { UpdateMatchDto } from './dto/update-match.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class MatchService {
+    constructor(private readonly configService: ConfigService) {
+    }
 
     async findAll(query): Promise<MatchListDto> {
-        //researchId
-        //includeMatchPending
         // data access layer
         const matches = [
             {
@@ -21,7 +22,7 @@ export class MatchService {
                 recruiterId: '1',
                 userId: '1',
                 matchAccepted: true
-            }, 
+            },
             {
                 matchId: '2',
                 researchId: query.researchId,
@@ -31,7 +32,7 @@ export class MatchService {
             }
         ];
         const matchesCount = matches.length;
-        return {matches, matchesCount};
+        return { matches, matchesCount };
     }
 
     async findById(id: string): Promise<MatchDto> {

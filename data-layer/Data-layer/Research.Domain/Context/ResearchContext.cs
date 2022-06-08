@@ -31,7 +31,7 @@ namespace Research.Domain.Context
         public DbSet<SkillLink> SkillLink { get; set; }
         public DbSet<Match> Match { get; set; }
 
-        public string _connectionString = @"Server=20201067-AIT\MEMA;Database=App;Trusted_Connection=True;";
+        public string _connectionString = @"Server=(LocalDb)\MSSQLLocalDB;Database=App;Trusted_Connection=True;";
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
