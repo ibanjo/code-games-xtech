@@ -9,7 +9,6 @@ from utils.training_data_gen import generate_training_data
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def init():
     return "<p>CodeGames 2022</p>"
@@ -19,7 +18,7 @@ def init():
 def fit_search():
     training_data = generate_training_data()
     sim = Similarity()
-    x = sim.fit()
+    x = sim.fit(training_data)
     #return render_template("fitSearch.html", values=x)
     return x
 
