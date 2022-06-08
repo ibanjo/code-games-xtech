@@ -233,3 +233,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/.vs
+/data-layer/Data-layer/.vs

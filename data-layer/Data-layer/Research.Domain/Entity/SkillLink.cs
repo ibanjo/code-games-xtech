@@ -14,17 +14,15 @@ namespace Research.Domain.Entity
         [Key]
         public Guid SkillLinkId { get; set; }
 
-        [ForeignKey("Id")]
-        public virtual Guid Id { get; set; }
+        [ForeignKey("SkillId")]
+        public virtual Guid SkillId { get; set; }
 
         [ForeignKey("PersonId")]
         public virtual Guid PersonId { get; set; }
 
-        [ForeignKey("SkillLevelId")]
-        public virtual Guid SkillLevelId { get; set; }
+        public int Level { get; set; }
 
         public Skill Skill { get; set; }
         public Person Person { get; set; }
-        public SkillLevel SkillLevel { get; set; }
     }
 }

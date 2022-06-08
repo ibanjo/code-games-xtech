@@ -17,7 +17,7 @@ namespace Research.ServiceLayer.GenericService
 
         public GenericService(DbContextOptions options)
         {
-            _context = new ResearchContext(options);
+            _context = new ResearchContext();
         }
 
         public GenericService(ResearchContext context)
