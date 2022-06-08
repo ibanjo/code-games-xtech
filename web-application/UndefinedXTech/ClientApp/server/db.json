@@ -303,25 +303,25 @@
     "code": "123123",
     "name": "John",
     "surname": "Smith",
-    "siteID": "b95c9e04-b6d1-478b-b77b-cf847bf73c9a",
+    "siteID": "bf391b83-ad95-448c-a6e8-dc01631001ae",
     "remote": false,
     "yearsOfExperience": 4,
-    "position": "tester",
+    "position": "developer",
     "languages": [
       {
         "languageID": "72c8854c-634e-4105-8f03-ca107dd3741a",
-        "levelID": "524fe4ce-20ad-40a9-8fde-2ec17a06080f",
+        "levelID": "a3392ba0-d385-49b1-9eae-92bd503cf5fd",
         "preferred": null
       }
     ],
     "skills": [
       {
-        "feBeDevops": "DevOps",
+        "feBeDevops": "Frontend",
         "webMobile": "Mobile",
         "technology": "React",
         "projectRef": null,
         "description": null,
-        "level": 2
+        "level": 1
       }
     ]
   },

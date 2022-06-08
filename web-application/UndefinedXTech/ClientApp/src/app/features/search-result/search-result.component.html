@@ -5,9 +5,10 @@
   <div class="content-container" slot="content">
     <div *ngIf="isLoading" class="spinner-container">
       <app-spinner></app-spinner>
+      <p class="waiting-text">Please wait, our machine learning algorithm is looking for the most interesting profiles for you.</p>
     </div>
 
-    <div class="card-container">
+    <div *ngIf="!isLoading" class="card-container">
       <mat-card class="person-card" *ngFor="let person of searchResults; let i = index;">
         <mat-card-title>{{ person.name }} {{ person.surname }}</mat-card-title>
         <mat-card-subtitle>{{ person.position }} - {{ person.yearsOfExperience }} years of experience</mat-card-subtitle>
@@ -21,7 +22,7 @@
               <ul>
                 <li *ngFor="let skill of person.skills"
                   [matTooltip]="skill.level === 0 ? 'Beginner' : skill.level === 1 ? 'Medium' : 'Advanced'"
-                  [style.color] = "skill.level === 0 ? 'red' : skill.level === 1 ? 'yellow' : 'green'">{{ skill.technology}}
+                  [style.color] = "skill.level === 0 ? 'red' : skill.level === 1 ? 'goldenrod' : 'green'">{{ skill.technology}}
                 </li>
               </ul>
             </div>
