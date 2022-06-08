@@ -38,11 +38,15 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   apply() {
-    this.router.navigate(['search-result'], {
-      state: {
-        searchDto: this.form.getRawValue()
-      }
-    });
+    if (this.form.valid) {
+      this.router.navigate(['search-result'], {
+        state: {
+          searchDto: this.form.getRawValue()
+        }
+      });
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 
   private _createFormGroup() {

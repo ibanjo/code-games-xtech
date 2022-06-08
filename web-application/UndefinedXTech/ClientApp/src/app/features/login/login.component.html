@@ -1,1 +1,37 @@
-<p>login works!</p>
+<div class="card-container">
+  <mat-card class="card-login">
+    <h2>Login</h2>
+    <form #f="ngForm">
+      <div>
+        <mat-form-field style="width: 100%" appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput
+            type="text"
+            [ngModel] name="username">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field style="width: 100%" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput
+            type="password"
+            [ngModel] name="password">
+        </mat-form-field>
+      </div>
+    </form>
+    <div class="submit-login">
+      <button
+        mat-raised-button
+        [class.spinner]="loading"
+        [disabled]="!f.value?.username || !f.value?.password || loading"
+        type="submit"
+        color="primary"
+        (click)="login(f.value)">
+        Login
+      </button>
+    </div>
+
+
+  </mat-card>
+</div>
+
