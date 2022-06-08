@@ -100,3 +100,11 @@ export interface SearchResultDto {
   languages: LanguageSearchDto[];
   liked?: boolean;
 }
+
+export interface Auth {
+  name: string;
+  surname: string;
+  token: string;
+  code: string;
+  isRecruiter: boolean;
+}

@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 import { PageComponent } from './components/page/page.component';
-
 
 @NgModule({
   imports: [
@@ -13,6 +13,7 @@ import { PageComponent } from './components/page/page.component';
     MatTableModule,
     MatButtonModule,
     MatButtonModule,
+    MatDialogModule,
     MatProgressSpinnerModule
   ],
   declarations: [
