@@ -1,0 +1,284 @@
+{
+  "login": {
+    "name": "John Smith",
+    "token": "123456789"
+  },
+  "sites": [
+    {
+      "id": "0376a3ec-a7cc-4fa1-ab44-901ea7a95967",
+      "city": "Milan"
+    },
+    {
+      "id": "bf391b83-ad95-448c-a6e8-dc01631001ae",
+      "city": "Paris"
+    },
+    {
+      "id": "b95c9e04-b6d1-478b-b77b-cf847bf73c9a",
+      "city": "Amsterdam"
+    },
+    {
+      "id": "13b2d2f9-17ed-47b3-b4d8-5d19de8715bb",
+      "city": "New York"
+    },
+    {
+      "id": "da6f7cee-1d9d-485d-af68-5cbefd4704ce",
+      "city": "Madrid"
+    }
+  ],
+  "languages": [
+    {
+      "id": "9f5472e4-2001-47d5-bda8-f9b26ac016f7",
+      "description": "English"
+    },
+    {
+      "id": "72c8854c-634e-4105-8f03-ca107dd3741a",
+      "description": "French"
+    },
+    {
+      "id": "42d05297-1eb0-4bb4-9929-00f8d1b0bb78",
+      "description": "German"
+    },
+    {
+      "id": "baa9f1a6-59de-448b-82aa-f936cae07d1f",
+      "description": "Italian"
+    },
+    {
+      "id": "0a3fd2d5-f00d-4939-9c4a-3ba0025316dd",
+      "description": "Dutch"
+    },
+    {
+      "id": "44a9e277-891a-4fe8-a18c-a9bd4f4af42f",
+      "description": "Spanish"
+    },
+    {
+      "id": "94658167-9368-4170-a81b-554ecd1bea90",
+      "description": "Chinese"
+    }
+  ],
+  "languagesLevel": [
+    {
+      "id": "b99b5424-8779-4f8b-b943-5423992c4b1d",
+      "description": "A1"
+    },
+    {
+      "id": "524fe4ce-20ad-40a9-8fde-2ec17a06080f",
+      "description": "A2"
+    },
+    {
+      "id": "a3392ba0-d385-49b1-9eae-92bd503cf5fd",
+      "description": "B1"
+    },
+    {
+      "id": "90588f5c-f01c-4422-98c8-ed033cf3f4d0",
+      "description": "B2"
+    },
+    {
+      "id": "b7cd1e0d-4c2e-4c25-b385-ef767c18f8a3",
+      "description": "C1"
+    },
+    {
+      "id": "66ebc0e0-9857-4950-bdc1-de68e1443ab3",
+      "description": "C2"
+    }
+  ],
+  "skills": [
+    {
+      "id": "d3ed5ffd-bb4c-4a3f-80a1-0e8e86f745a9",
+      "description": "Frontend",
+      "areas": [
+        {
+          "id": "2676498a-6a34-4b1d-9337-61b8e23d54d4",
+          "description": "Web",
+          "technologies": [
+            {
+              "id": "30663433-bb39-45aa-ad0b-9bbae7e5a3d1",
+              "description": "Angular"
+            },
+            {
+              "id": "0ea6676b-2e94-453e-ba6e-de7c0706bf6d",
+              "description": "React"
+            },
+            {
+              "id": "74ca108e-0fff-496d-92e5-6d1a59e53bcc",
+              "description": "Vue"
+            },
+            {
+              "id": "3862a9f3-6c00-4753-b4a1-76e9b5f531a5",
+              "description": "Svelte"
+            }
+          ]
+        },
+        {
+          "id": "0f7e37bc-21e5-471e-96ec-1bbe5cce9201",
+          "description": "Mobile",
+          "technologies": [
+            {
+              "id": "30663433-bb39-45aa-ad0b-9bbae7e5a3d1",
+              "description": "Angular"
+            },
+            {
+              "id": "0ea6676b-2e94-453e-ba6e-de7c0706bf6d",
+              "description": "React"
+            },
+            {
+              "id": "74ca108e-0fff-496d-92e5-6d1a59e53bcc",
+              "description": "Vue"
+            },
+            {
+              "id": "3862a9f3-6c00-4753-b4a1-76e9b5f531a5",
+              "description": "Svelte"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9d69d670-08ac-4edb-8e61-01809978baf5",
+      "description": "Backend",
+      "areas": [
+        {
+          "id": "2676498a-6a34-4b1d-9337-61b8e23d54d4",
+          "description": "Web",
+          "technologies": [
+            {
+              "id": "91c6bcc4-ddd1-4f90-a7ee-16704b48eb6d",
+              "description": ".NET"
+            },
+            {
+              "id": "177e73bd-125a-47be-b726-fc0d138980eb",
+              "description": "Spring"
+            },
+            {
+              "id": "257ce9c8-5f96-4273-8560-28e80c749e49",
+              "description": "Laravel"
+            },
+            {
+              "id": "92a55327-1458-4f36-babe-1c661f2dce16",
+              "description": "Django"
+            },
+            {
+              "id": "e047a737-c5ae-4834-ab4c-13c8333e170b",
+              "description": "ExpressJS"
+            }
+          ]
+        },
+        {
+          "id": "0f7e37bc-21e5-471e-96ec-1bbe5cce9201",
+          "description": "Mobile",
+          "technologies": [
+            {
+              "id": "91c6bcc4-ddd1-4f90-a7ee-16704b48eb6d",
+              "description": ".NET"
+            },
+            {
+              "id": "177e73bd-125a-47be-b726-fc0d138980eb",
+              "description": "Spring"
+            },
+            {
+              "id": "257ce9c8-5f96-4273-8560-28e80c749e49",
+              "description": "Laravel"
+            },
+            {
+              "id": "92a55327-1458-4f36-babe-1c661f2dce16",
+              "description": "Django"
+            },
+            {
+              "id": "e047a737-c5ae-4834-ab4c-13c8333e170b",
+              "description": "ExpressJS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b52bc8e5-fa98-4bb8-9949-172d51b66add",
+      "description": "DevOps",
+      "areas": [
+        {
+          "id": "2676498a-6a34-4b1d-9337-61b8e23d54d4",
+          "description": "Web",
+          "technologies": [
+            {
+              "id": "30663433-bb39-45aa-ad0b-9bbae7e5a3d1",
+              "description": "Angular"
+            },
+            {
+              "id": "0ea6676b-2e94-453e-ba6e-de7c0706bf6d",
+              "description": "React"
+            },
+            {
+              "id": "74ca108e-0fff-496d-92e5-6d1a59e53bcc",
+              "description": "Vue"
+            },
+            {
+              "id": "3862a9f3-6c00-4753-b4a1-76e9b5f531a5",
+              "description": "Svelte"
+            },
+            {
+              "id": "91c6bcc4-ddd1-4f90-a7ee-16704b48eb6d",
+              "description": ".NET"
+            },
+            {
+              "id": "177e73bd-125a-47be-b726-fc0d138980eb",
+              "description": "Spring"
+            },
+            {
+              "id": "257ce9c8-5f96-4273-8560-28e80c749e49",
+              "description": "Laravel"
+            },
+            {
+              "id": "92a55327-1458-4f36-babe-1c661f2dce16",
+              "description": "Django"
+            },
+            {
+              "id": "e047a737-c5ae-4834-ab4c-13c8333e170b",
+              "description": "ExpressJS"
+            }
+          ]
+        },
+        {
+          "id": "0f7e37bc-21e5-471e-96ec-1bbe5cce9201",
+          "description": "Mobile",
+          "technologies": [
+            {
+              "id": "30663433-bb39-45aa-ad0b-9bbae7e5a3d1",
+              "description": "Angular"
+            },
+            {
+              "id": "0ea6676b-2e94-453e-ba6e-de7c0706bf6d",
+              "description": "React"
+            },
+            {
+              "id": "74ca108e-0fff-496d-92e5-6d1a59e53bcc",
+              "description": "Vue"
+            },
+            {
+              "id": "3862a9f3-6c00-4753-b4a1-76e9b5f531a5",
+              "description": "Svelte"
+            },
+            {
+              "id": "91c6bcc4-ddd1-4f90-a7ee-16704b48eb6d",
+              "description": ".NET"
+            },
+            {
+              "id": "177e73bd-125a-47be-b726-fc0d138980eb",
+              "description": "Spring"
+            },
+            {
+              "id": "257ce9c8-5f96-4273-8560-28e80c749e49",
+              "description": "Laravel"
+            },
+            {
+              "id": "92a55327-1458-4f36-babe-1c661f2dce16",
+              "description": "Django"
+            },
+            {
+              "id": "e047a737-c5ae-4834-ab4c-13c8333e170b",
+              "description": "ExpressJS"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

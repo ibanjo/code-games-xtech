@@ -1,0 +1,169 @@
+<app-page>
+  <div class="header-container" slot="header">
+    <h1 class="mr-4">New employee skills</h1>
+  </div>
+  <div class="content-container" slot="content">
+    <form [formGroup]="form">
+
+      <div class="first-row-grid">
+        <mat-form-field appearance="fill">
+          <mat-label>Current position</mat-label>
+          <input matInput
+            type="text"
+            formControlName="position">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Years of experience</mat-label>
+          <input matInput
+            type="number"
+            formControlName="yearsOfExperience">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Site</mat-label>
+          <mat-select formControlName="siteID" [disabled]="form?.value?.remote">
+            <mat-option *ngFor="let site of sites$ | async" [value]="site.id">
+              {{site.city}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="remote">Remote</mat-checkbox>
+      </div>
+
+      <div class="form-array-container">
+
+        <div class="skills-container" formArrayName="skills">
+          <ng-container *ngFor="let skill of formSkills.controls; let i = index; let last = last"; >
+            <div class="skill-row" [formGroupName]="i">
+              <mat-form-field appearance="fill">
+                <mat-label>Macro area</mat-label>
+                <mat-select formControlName="feBeDevops">
+                  <mat-option *ngFor="let skill of skillsList" [value]="skill.description">
+                    {{skill.description}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Area</mat-label>
+                <mat-select formControlName="webMobile">
+                  <mat-option *ngFor="let area of areaList" [value]="area.description">
+                    {{area.description}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Technology</mat-label>
+                <mat-select formControlName="technology">
+                  <mat-option *ngFor="let tech of techList" [value]="tech.description">
+                    {{tech.description}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </ng-container>
+
+        </div>
+
+        <div class="languages-container" formArrayName="languages">
+          <ng-container *ngFor="let language of formLanguages.controls; let i = index; let last = last"; >
+            <div class="language-row" [formGroupName]="i">
+
+              <mat-form-field appearance="fill">
+                <mat-label>Language</mat-label>
+                <mat-select formControlName="languageID">
+                  <mat-option *ngFor="let lang of languages$ | async" [value]="lang.id">
+                    {{lang.description}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Level</mat-label>
+                <mat-select formControlName="levelID">
+                  <mat-option *ngFor="let level of languagesLevel$ | async" [value]="level.id">
+                    {{level.description}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-checkbox formControlName="preferred">Preferred</mat-checkbox>
+
+              <div *ngIf="!(last && i === 0)" class="delete-item">
+                <mat-icon class="delete-btn" (click)="deleteLanguage(i)">delete_forever</mat-icon>
+              </div>
+            </div>
+          </ng-container>
+          <div class="add-language">
+            <button mat-mini-fab (click)="addLanguage()">
+              <mat-icon class="add-course-btn">add</mat-icon>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+      <!--<mat-form-field
+        *ngIf="searchTypeSelected === 'Name'" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput
+          type="text"
+          placeholder="Search for repository name"
+          formControlName="name">
+          <mat-error *ngIf="toolbarForm.controls['name'].hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        *ngIf="searchTypeSelected === 'Name'" class="ml-2" appearance="fill">
+        <mat-label>Language</mat-label>
+        <input matInput
+          type="text"
+          placeholder="Language of the code in repo"
+          formControlName="language">
+      </mat-form-field>
+
+      <mat-form-field
+        *ngIf="searchTypeSelected === 'Name'" class="ml-2" appearance="fill">
+        <mat-label>Minimum numbers of stars</mat-label>
+        <input matInput
+          type="number"
+          formControlName="stars">
+      </mat-form-field>
+
+      <mat-form-field
+        *ngIf="searchTypeSelected === 'Issue'" appearance="fill">
+        <mat-label>Issue text</mat-label>
+        <input matInput
+          type="text"
+          formControlName="issue">
+          <mat-error *ngIf="toolbarForm.controls['issue'].hasError('required')">
+            Issue text is <strong>required</strong>
+          </mat-error>
+      </mat-form-field> -->
+
+
+    </form>
+  </div>
+  <div class="footer-container" slot="footer">
+    <button class="ml-2"
+      mat-raised-button
+      type="submit"
+      color="primary"
+      (click)="submit()">
+      Apply
+    </button>
+  </div>
+</app-page>
