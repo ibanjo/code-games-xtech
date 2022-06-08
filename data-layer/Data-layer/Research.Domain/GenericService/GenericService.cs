@@ -8,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Research.ServiceLayer.GenericService
+namespace Research.Domain.GenericService
 {
     public class GenericService<TEntity, TKey> : IGenericService<TEntity, TKey> where TEntity : class
     {

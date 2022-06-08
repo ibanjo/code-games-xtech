@@ -32,6 +32,5 @@ namespace Research.Domain.Entity
         public bool IsRecruiter { get; set; }
 
         public Site Site { get; set; }  
-        
     }
 }

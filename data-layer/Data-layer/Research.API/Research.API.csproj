@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Research.Domain\Research.Domain.csproj" />
-    <ProjectReference Include="..\Research.ServiceLayer\Research.ServiceLayer.csproj" />
   </ItemGroup>
 
 </Project>
