@@ -9,9 +9,9 @@ namespace Research.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SkillLink : ControllerBase
+    public class SkillLinkController : ControllerBase
     {
-        public SkillLink()
+        public SkillLinkController()
         {
             _context = new ResearchContext();
         }

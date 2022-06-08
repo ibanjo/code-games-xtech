@@ -9,9 +9,9 @@ namespace Research.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Person : ControllerBase
+    public class PersonController : ControllerBase
     {
-        public Person()
+        public PersonController()
         {
             _context = new ResearchContext();
         }

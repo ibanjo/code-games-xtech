@@ -9,9 +9,9 @@ namespace Research.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LanguageLink : ControllerBase
+    public class LanguageLinkController : ControllerBase
     {
-        public LanguageLink()
+        public LanguageLinkController()
         {
             _context = new ResearchContext();
         }

@@ -7,7 +7,7 @@ namespace Research.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Site : ControllerBase
+    public class SiteController : ControllerBase
     {
         // GET: api/<ValuesController>
         [HttpGet]

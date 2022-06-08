@@ -7,7 +7,7 @@ namespace Research.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LanguageLevel : ControllerBase
+    public class LanguageLevelController : ControllerBase
     {
         // GET: api/<LanguageLevel>
         [HttpGet]
