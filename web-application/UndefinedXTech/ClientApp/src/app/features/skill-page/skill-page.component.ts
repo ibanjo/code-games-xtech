@@ -98,6 +98,10 @@ export class SkillPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  goBack() {
+    this.router.navigate(['home']);
+  }
+
   private _createFormGroup() {
     this.form = this.fb.group({
       isRecruiter: [this.auth.data?.isRecruiter],
