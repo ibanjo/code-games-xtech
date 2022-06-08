@@ -280,5 +280,22 @@
         }
       ]
     }
-  ]
+  ],
+  "skillLevel": [
+    {
+      "id": 0,
+      "description": "Beginner"
+    },
+    {
+      "id": 1,
+      "description": "Medium"
+    },
+    {
+      "id": 2,
+      "description": "Advanced"
+    }
+  ],
+  "person": {
+
+  }
 }

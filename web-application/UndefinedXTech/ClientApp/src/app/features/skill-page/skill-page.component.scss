@@ -23,12 +23,16 @@
   }
 
   .skills-container {
+    height: 400px;
+    overflow-y: auto;
     border: 1px solid gainsboro;
     border-right: none;
     padding: 1rem;
 
     .skill-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: 15% 12% 15% 12% 15% 17% 5%;
+      column-gap: 1rem;
       align-items: center;
     }
   }
@@ -36,6 +40,8 @@
   .languages-container {
     border: 1px solid gainsboro;
     padding: 1rem;
+    height: 400px;
+    overflow-y: auto;
 
     .language-row {
       display: grid;
@@ -49,7 +55,7 @@
     cursor: pointer;
   }
 
-  .add-language {
+  .add-item {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
