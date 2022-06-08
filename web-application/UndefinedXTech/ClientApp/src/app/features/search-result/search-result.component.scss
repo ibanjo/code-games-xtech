@@ -1,0 +1,38 @@
+.content-container {
+  height: 100%;
+  width: 100%;
+
+  .spinner-container {
+    height: calc(100vh - 10rem);
+  }
+}
+
+.footer-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  margin-top: 2rem;
+}
+
+.person-card {
+  width: 300px;
+  border: 1px solid lightgray;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 1rem;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  .title-skill {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+}
+
+

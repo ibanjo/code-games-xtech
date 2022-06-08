@@ -1,1 +1,80 @@
-<p>search works!</p>
+<app-page>
+  <div class="header-container" slot="header">
+    <h1 class="mr-4">New search</h1>
+  </div>
+  <div class="content-container" slot="content">
+
+    <form [formGroup]="form">
+      <h2>Skill</h2>
+      <div class="form-grid-skill">
+        <mat-form-field appearance="fill">
+          <mat-label>Macro area</mat-label>
+          <mat-select formControlName="feBeDevops">
+            <mat-option *ngFor="let skill of skillsList" [value]="skill.description">
+              {{skill.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Area</mat-label>
+          <mat-select formControlName="webMobile">
+            <mat-option *ngFor="let area of areaList" [value]="area.description">
+              {{area.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Technology</mat-label>
+          <mat-select formControlName="technology">
+            <mat-option *ngFor="let tech of techList" [value]="tech.description">
+              {{tech.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Level</mat-label>
+          <mat-select formControlName="level">
+            <mat-option *ngFor="let level of skillLevels$ | async" [value]="level.id">
+              {{level.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+      <h2>Language</h2>
+      <div class="form-grid-language">
+        <mat-form-field appearance="fill">
+          <mat-label>Language</mat-label>
+          <mat-select formControlName="languageID">
+            <mat-option *ngFor="let lang of languages$ | async" [value]="lang.id">
+              {{lang.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Level</mat-label>
+          <mat-select formControlName="languageLevel">
+            <mat-option *ngFor="let level of languagesLevel$ | async" [value]="level.id">
+              {{level.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="footer-container" slot="footer">
+    <button class="ml-2"
+      mat-raised-button
+      type="submit"
+      color="primary"
+      (click)="apply()">
+      Apply
+    </button>
+  </div>
+</app-page>

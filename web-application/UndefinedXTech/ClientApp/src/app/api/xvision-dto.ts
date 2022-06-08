@@ -47,14 +47,22 @@ export interface SkillDto {
   feBeDevops: string;
   webMobile: string;
   technology: string;
-  projectRef: string;
-  description: string;
+  projectRef?: string;
+  description?: string;
   level: number;
 }
 
 export interface LanguageDto {
   languageID: string;
   levelID: string;
+  preferred: boolean;
+}
+
+export interface LanguageSearchDto {
+  code: number;
+  description: string;
+  languageLevelCode: number;
+  languageLevelDescription: string;
   preferred: boolean;
 }
 
@@ -69,4 +77,26 @@ export interface PersonDto {
   position: string;
   languages: LanguageDto[];
   skills: SkillDto[];
+}
+
+export interface SearchDto {
+  feBeDevops: string;
+  webMobile: string;
+  technology: string;
+  level?: number;
+  languageID?: string;
+  languageLevel?: string;
+}
+
+export interface SearchResultDto {
+  id: string;
+  name: string;
+  surname: string;
+  city: string;
+  remote: boolean;
+  yearsOfExperience: number;
+  position: string;
+  skills: SkillDto[];
+  languages: LanguageSearchDto[];
+  liked?: boolean;
 }
