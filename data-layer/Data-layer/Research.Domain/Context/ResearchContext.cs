@@ -37,7 +37,7 @@ namespace Research.Domain.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            #region MyRegion
+            #region Language
             var language1 = Guid.NewGuid();
             var language2 = Guid.NewGuid();
             var language3 = Guid.NewGuid();
@@ -45,6 +45,15 @@ namespace Research.Domain.Context
             var language5 = Guid.NewGuid();
             var language6 = Guid.NewGuid();
             var language7 = Guid.NewGuid();
+
+            var languages = new List<Guid>();
+            languages.Add(language1);
+            languages.Add(language2);
+            languages.Add(language3);
+            languages.Add(language4);
+            languages.Add(language5);
+            languages.Add(language6);
+            languages.Add(language7);
 
             modelBuilder.Entity<Language>().HasData(
                 new Language { LanguageId = language1, Code = 1, Description = "English" },
@@ -80,11 +89,19 @@ namespace Research.Domain.Context
 
             #region Site
             ///
+            
             var site1 = Guid.NewGuid();
             var site2 = Guid.NewGuid();
             var site3 = Guid.NewGuid();
             var site4 = Guid.NewGuid();
             var site5 = Guid.NewGuid();
+
+            var sites = new List<Guid>();
+            sites.Add(site1);
+            sites.Add(site2);
+            sites.Add(site3);
+            sites.Add(site4);
+            sites.Add(site5);
 
             modelBuilder.Entity<Site>().HasData(
                 new Site { SiteId = site1, Code = 1, Description = "NEW YORK" },
@@ -128,6 +145,15 @@ namespace Research.Domain.Context
             var person5 = Guid.NewGuid();
             var person6 = Guid.NewGuid();
             var person7 = Guid.NewGuid();
+
+            var people = new List<Guid>();
+            people.Add(person1);
+            people.Add(person2);
+            people.Add(person3);
+            people.Add(person4);
+            people.Add(person5);
+            people.Add(person6);
+            people.Add(person7);
 
             modelBuilder.Entity<Person>().HasData(
                 new Person { PersonId = person1, Code = 1, Name = "Nicoletta", Surnamme = "Morsia", SiteId = site1, YearsOfExperience = 2, Position = "dev", Remote = false, IsRecruiter = false },
@@ -175,20 +201,27 @@ namespace Research.Domain.Context
 
             #region Research
 
-            modelBuilder.Entity<Entity.Research>().HasData(
-                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 1, Description = "Front end Angular", Remote = true, SiteId = site1, PersonId = person2, LanguageId = language1 },
-                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 2, Description = "Back end .NET", Remote = true, SiteId = site2, PersonId = person2, LanguageId = language2 },
-                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 3, Description = "Typescript", Remote = true, SiteId = site3, PersonId = person2, LanguageId = language1 },
-                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 4, Description = "Azure", Remote = false, SiteId = site4, PersonId = person2, LanguageId = language3 },
-                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 5, Description = "Smss", Remote = false, SiteId = site5, PersonId = person2, LanguageId = language4 },
-                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 6, Description = "Back end .NET", Remote = true, SiteId = site2, PersonId = person3, LanguageId = language5 },
-                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 7, Description = "Azure", Remote = true, SiteId = site4, PersonId = person3, LanguageId = language4 },
-                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 8, Description = "Flutter", Remote = true, SiteId = site1, PersonId = person3, LanguageId = language6 },
-                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 9, Description = "Back end .NET", Remote = true, SiteId = site5, PersonId = person3, LanguageId = language7 }
-                );
+            List<Entity.Research> researches = new List<Entity.Research>();
+            for (int i = 0; i < 1000; i++)
+            {
+                researches.Add(new Entity.Research()
+                {
+                    ResearchId = Guid.NewGuid(),
+                    Code = i + 1,
+                    Description = "Research " + i,
+                    Remote = new Random().Next(0, 1) == 1,
+                    SiteId = sites[new Random().Next(sites.Count)],
+                    PersonId = people[new Random().Next(people.Count)],
+                    LanguageId = languages[new Random().Next(languages.Count)]
+                });
+            };
+            
+            modelBuilder.Entity<Entity.Research>().HasData(researches.ToArray());
+        
             #endregion
 
-        }
+    }
+
 
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
