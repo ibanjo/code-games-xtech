@@ -7,7 +7,7 @@
     "header"
     "content"
     "footer";
-  grid-template-rows: auto 2fr 1fr;
+  grid-template-rows: auto 2fr auto;
 
   .header {
     grid-area: header;

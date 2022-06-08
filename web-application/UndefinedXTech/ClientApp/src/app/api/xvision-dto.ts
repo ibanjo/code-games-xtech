@@ -37,3 +37,36 @@ export interface MacroArea {
   description: string;
   areas: Area[];
 }
+
+export interface SkillLevel {
+  id: number;
+  description: string;
+}
+
+export interface SkillDto {
+  feBeDevops: string;
+  webMobile: string;
+  technology: string;
+  projectRef: string;
+  description: string;
+  level: number;
+}
+
+export interface LanguageDto {
+  languageID: string;
+  levelID: string;
+  preferred: boolean;
+}
+
+export interface PersonDto {
+  isRecruiter: boolean;
+  code: string;
+  name: string;
+  surname: string;
+  siteID: string;
+  remote: boolean;
+  yearsOfExperience: number;
+  position: string;
+  languages: LanguageDto[];
+  skills: SkillDto[];
+}

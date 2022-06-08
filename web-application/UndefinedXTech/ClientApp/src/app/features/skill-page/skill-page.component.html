@@ -49,7 +49,7 @@
               <mat-form-field appearance="fill">
                 <mat-label>Area</mat-label>
                 <mat-select formControlName="webMobile">
-                  <mat-option *ngFor="let area of areaList" [value]="area.description">
+                  <mat-option *ngFor="let area of areaList[i]" [value]="area.description">
                     {{area.description}}
                   </mat-option>
                 </mat-select>
@@ -58,14 +58,46 @@
               <mat-form-field appearance="fill">
                 <mat-label>Technology</mat-label>
                 <mat-select formControlName="technology">
-                  <mat-option *ngFor="let tech of techList" [value]="tech.description">
+                  <mat-option *ngFor="let tech of techList[i]" [value]="tech.description">
                     {{tech.description}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Level</mat-label>
+                <mat-select formControlName="level">
+                  <mat-option *ngFor="let level of skillLevels$ | async" [value]="level.id">
+                    {{level.description}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Project</mat-label>
+                <input matInput
+                  type="text"
+                  formControlName="projectRef">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput
+                  type="text"
+                  formControlName="description">
+              </mat-form-field>
+
+              <div *ngIf="!(last && i === 0)" class="delete-item">
+                <mat-icon class="delete-btn" (click)="deleteSkill(i)">delete_forever</mat-icon>
+              </div>
             </div>
 
           </ng-container>
+          <div class="add-item">
+            <button mat-mini-fab (click)="addSkill()">
+              <mat-icon class="add-course-btn">add</mat-icon>
+            </button>
+          </div>
 
         </div>
 
@@ -98,7 +130,7 @@
               </div>
             </div>
           </ng-container>
-          <div class="add-language">
+          <div class="add-item">
             <button mat-mini-fab (click)="addLanguage()">
               <mat-icon class="add-course-btn">add</mat-icon>
             </button>
@@ -106,54 +138,6 @@
 
         </div>
       </div>
-
-
-
-
-
-
-
-
-      <!--<mat-form-field
-        *ngIf="searchTypeSelected === 'Name'" appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput
-          type="text"
-          placeholder="Search for repository name"
-          formControlName="name">
-          <mat-error *ngIf="toolbarForm.controls['name'].hasError('required')">
-            Name is <strong>required</strong>
-          </mat-error>
-      </mat-form-field>
-
-      <mat-form-field
-        *ngIf="searchTypeSelected === 'Name'" class="ml-2" appearance="fill">
-        <mat-label>Language</mat-label>
-        <input matInput
-          type="text"
-          placeholder="Language of the code in repo"
-          formControlName="language">
-      </mat-form-field>
-
-      <mat-form-field
-        *ngIf="searchTypeSelected === 'Name'" class="ml-2" appearance="fill">
-        <mat-label>Minimum numbers of stars</mat-label>
-        <input matInput
-          type="number"
-          formControlName="stars">
-      </mat-form-field>
-
-      <mat-form-field
-        *ngIf="searchTypeSelected === 'Issue'" appearance="fill">
-        <mat-label>Issue text</mat-label>
-        <input matInput
-          type="text"
-          formControlName="issue">
-          <mat-error *ngIf="toolbarForm.controls['issue'].hasError('required')">
-            Issue text is <strong>required</strong>
-          </mat-error>
-      </mat-form-field> -->
-
 
     </form>
   </div>
@@ -163,7 +147,7 @@
       type="submit"
       color="primary"
       (click)="submit()">
-      Apply
+      Save skills
     </button>
   </div>
 </app-page>
