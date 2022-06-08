@@ -84,9 +84,13 @@ export class SkillPageComponent implements OnInit, OnDestroy {
 
   submit() {
     console.log('FORM', this.form.getRawValue());
-    this._subs.add(
-      this.api.saveSkills(this.form.getRawValue()).subscribe(() =>  this.router.navigate(['home']))
-    );
+    if (this.form.valid) {
+      this._subs.add(
+        this.api.saveSkills(this.form.getRawValue()).subscribe(() =>  this.router.navigate(['home']))
+      );
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 
   private _createFormGroup() {

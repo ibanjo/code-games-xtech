@@ -296,6 +296,30 @@
     }
   ],
   "person": {
-
+    "isRecruiter": null,
+    "code": null,
+    "name": null,
+    "surname": null,
+    "siteID": "",
+    "remote": false,
+    "yearsOfExperience": null,
+    "position": "",
+    "languages": [
+      {
+        "languageID": null,
+        "levelID": null,
+        "preferred": null
+      }
+    ],
+    "skills": [
+      {
+        "feBeDevops": null,
+        "webMobile": null,
+        "technology": null,
+        "projectRef": null,
+        "description": null,
+        "level": null
+      }
+    ]
   }
 }
