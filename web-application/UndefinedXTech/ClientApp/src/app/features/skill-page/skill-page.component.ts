@@ -1,9 +1,10 @@
-import { Area, Technology } from './../../api/xvision-dto';
+import { Area, SkillDto, Technology } from './../../api/xvision-dto';
 import { XVisionApiService } from './../../api/xvision-api.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { forkJoin, Subscription } from 'rxjs';
-import { Language, LanguageLevel, MacroArea, Site } from 'src/app/api/xvision-dto';
+import { Subscription } from 'rxjs';
+import { MacroArea } from 'src/app/api/xvision-dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-skill-page',
@@ -16,17 +17,18 @@ export class SkillPageComponent implements OnInit, OnDestroy {
 
   skillsList: MacroArea[] = [];
 
-  areaList: Area[] = [];
+  areaList: Area[][] = [];
 
-  techList: Technology[] = [];
+  techList: Technology[][] = [];
 
   languages$ = this.api.getLanguages();
   languagesLevel$ = this.api.getLanguagesLevel();
   sites$ = this.api.getSites();
+  skillLevels$ = this.api.getSkillLevels();
 
   private _subs = new Subscription();
 
-  constructor(private fb: FormBuilder, private api: XVisionApiService) { }
+  constructor(private fb: FormBuilder, private api: XVisionApiService, private router: Router) { }
 
   ngOnInit() {
     this._createFormGroup();
@@ -43,8 +45,8 @@ export class SkillPageComponent implements OnInit, OnDestroy {
 
   addLanguage() {
     const language = this.fb.group({
-      languageID: [],
-      levelID: [],
+      languageID: [null, [Validators.required]],
+      levelID: [null, [Validators.required]],
       preferred: []
     });
 
@@ -61,23 +63,34 @@ export class SkillPageComponent implements OnInit, OnDestroy {
 
   addSkill() {
     const skill = this.fb.group({
-      feBeDevops: [],
-      webMobile: [],
-      technology: [],
+      feBeDevops: [null, [Validators.required]],
+      webMobile: [null, [Validators.required]],
+      technology: [null, [Validators.required]],
       projectRef: [],
       description: [],
-      levelID: []
+      level: [null, [Validators.required]]
     });
 
     this.formSkills.push(skill);
+    this.areaList.push([]);
+    this.techList.push([]);
   }
 
   deleteSkill(index: number) {
     this.formSkills.removeAt(index);
+    this.areaList.splice(index, 1);
+    this.techList.splice(index, 1);
   }
 
   submit() {
     console.log('FORM', this.form.getRawValue());
+    if (this.form.valid) {
+      this._subs.add(
+        this.api.saveSkills(this.form.getRawValue()).subscribe(() =>  this.router.navigate(['home']))
+      );
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 
   private _createFormGroup() {
@@ -92,19 +105,19 @@ export class SkillPageComponent implements OnInit, OnDestroy {
       position: ['', [Validators.required]],
       languages: this.fb.array([
         this.fb.group({
-          languageID: [],
-          levelID: [],
+          languageID: [null, [Validators.required]],
+          levelID: [null, [Validators.required]],
           preferred: []
         })
       ]),
       skills: this.fb.array([
         this.fb.group({
-          feBeDevops: [],
-          webMobile: [],
-          technology: [],
+          feBeDevops: [null, [Validators.required]],
+          webMobile: [null, [Validators.required]],
+          technology: [null, [Validators.required]],
           projectRef: [],
           description: [],
-          levelID: []
+          level: [null, [Validators.required]]
         })
       ])
     });
@@ -121,7 +134,12 @@ export class SkillPageComponent implements OnInit, OnDestroy {
         }
       })
     );
-    //TODO: capire come disabilitare elementi nel selettore
+    this._subs.add(
+      this.formSkills.valueChanges.subscribe((value: SkillDto[]) => value?.forEach((v, index) => {
+        this.areaList[index] = this.skillsList.find(s => s.description === v.feBeDevops)?.areas ?? [];
+        this.techList[index] = this.skillsList.find(s => s.description === v.feBeDevops)?.areas.find(a => a.description === v.webMobile)?.technologies ?? [];
+      }))
+    )
   }
 
 }
