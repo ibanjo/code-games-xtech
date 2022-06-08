@@ -10,19 +10,6 @@ namespace Research.Domain.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Country",
-                columns: table => new
-                {
-                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Country", x => x.CountryId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Language",
                 columns: table => new
                 {
@@ -49,10 +36,24 @@ namespace Research.Domain.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Site",
+                columns: table => new
+                {
+                    SiteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Site", x => x.SiteId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Skill",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<int>(type: "int", nullable: false),
                     FEBEDevops = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WebMobile = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Technology = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -61,43 +62,7 @@ namespace Research.Domain.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Skill", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SkillLevel",
-                columns: table => new
-                {
-                    SkillLevelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SkillLevel", x => x.SkillLevelId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Site",
-                columns: table => new
-                {
-                    SiteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AdditionalInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CAP = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Site", x => x.SiteId);
-                    table.ForeignKey(
-                        name: "FK_Site_Country_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Country",
-                        principalColumn: "CountryId",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Skill", x => x.SkillId);
                 });
 
             migrationBuilder.CreateTable(
@@ -164,7 +129,7 @@ namespace Research.Domain.Migrations
                     Code = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Remote = table.Column<bool>(type: "bit", nullable: false),
-                    Company = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SiteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LanguageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -183,6 +148,12 @@ namespace Research.Domain.Migrations
                         principalTable: "Person",
                         principalColumn: "PersonId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Research_Site_SiteId",
+                        column: x => x.SiteId,
+                        principalTable: "Site",
+                        principalColumn: "SiteId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -190,10 +161,9 @@ namespace Research.Domain.Migrations
                 columns: table => new
                 {
                     SkillLinkId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SkillLevelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Level = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -208,13 +178,7 @@ namespace Research.Domain.Migrations
                         name: "FK_SkillLink_Skill_SkillId",
                         column: x => x.SkillId,
                         principalTable: "Skill",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SkillLink_SkillLevel_SkillLevelId",
-                        column: x => x.SkillLevelId,
-                        principalTable: "SkillLevel",
-                        principalColumn: "SkillLevelId",
+                        principalColumn: "SkillId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -249,9 +213,9 @@ namespace Research.Domain.Migrations
                 column: "PersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Site_CountryId",
-                table: "Site",
-                column: "CountryId");
+                name: "IX_Research_SiteId",
+                table: "Research",
+                column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SkillLink_PersonId",
@@ -262,11 +226,6 @@ namespace Research.Domain.Migrations
                 name: "IX_SkillLink_SkillId",
                 table: "SkillLink",
                 column: "SkillId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SkillLink_SkillLevelId",
-                table: "SkillLink",
-                column: "SkillLevelId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -293,13 +252,7 @@ namespace Research.Domain.Migrations
                 name: "Skill");
 
             migrationBuilder.DropTable(
-                name: "SkillLevel");
-
-            migrationBuilder.DropTable(
                 name: "Site");
-
-            migrationBuilder.DropTable(
-                name: "Country");
         }
     }
 }

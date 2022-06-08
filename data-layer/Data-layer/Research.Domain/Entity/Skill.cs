@@ -12,11 +12,10 @@ namespace Research.Domain.Entity
     public class Skill
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid SkillId { get; set; }
 
-        //[ForeignKey("Id")]
-        //public virtual Guid SkillId { get; set; }
-        
+        public int Code { get; set; }
+
         public string FEBEDevops { get; set; }
         
         public string WebMobile { get; set; }
@@ -26,7 +25,5 @@ namespace Research.Domain.Entity
         public string ProjectRef { get; set; }
         
         public string Description { get; set; }
-        
-        //public Skill Skill1 { get; set; }
     }
 }
