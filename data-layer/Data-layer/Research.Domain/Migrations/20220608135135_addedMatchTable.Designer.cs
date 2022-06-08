@@ -12,8 +12,8 @@ using Research.Domain.Context;
 namespace Research.Domain.Migrations
 {
     [DbContext(typeof(ResearchContext))]
-    [Migration("20220608114903_addedData")]
-    partial class addedData
+    [Migration("20220608135135_addedMatchTable")]
+    partial class addedMatchTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,43 +44,43 @@ namespace Research.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            LanguageId = new Guid("b9ce3cf4-365e-4dea-817c-8d04b5746aa0"),
+                            LanguageId = new Guid("1e2efdac-2e17-4a6d-8929-de39b9db5d54"),
                             Code = 1,
                             Description = "English"
                         },
                         new
                         {
-                            LanguageId = new Guid("c915c0d9-830e-447c-a722-bee0ebb4cb36"),
+                            LanguageId = new Guid("b002104e-1ad5-417a-8fe5-8587a87dc9df"),
                             Code = 2,
                             Description = "French"
                         },
                         new
                         {
-                            LanguageId = new Guid("b966f909-0bed-4f0c-b7dd-89dd72cfbd13"),
+                            LanguageId = new Guid("47ed2fcf-5310-484b-b2ab-4686e78d8225"),
                             Code = 3,
                             Description = "German"
                         },
                         new
                         {
-                            LanguageId = new Guid("811c9b2e-4b81-4dba-8b01-597f4b2b1d01"),
+                            LanguageId = new Guid("c07d3a0b-b93c-4d6d-b6b5-646f91ca8aa8"),
                             Code = 4,
                             Description = "Spanish"
                         },
                         new
                         {
-                            LanguageId = new Guid("500aef74-4334-43b9-8225-e4d58f2d26fc"),
+                            LanguageId = new Guid("0bd1d2c8-7c52-471f-bb03-1148aa7be952"),
                             Code = 5,
                             Description = "Italian"
                         },
                         new
                         {
-                            LanguageId = new Guid("beadbad9-106d-4d69-bddf-86394bee456e"),
+                            LanguageId = new Guid("ffda6091-71b5-4b22-8d8d-0a3882aa5524"),
                             Code = 6,
                             Description = "Portuguese"
                         },
                         new
                         {
-                            LanguageId = new Guid("3a6f9d35-af6a-48bf-b115-53b93cf8eb90"),
+                            LanguageId = new Guid("c3ccfdc4-807b-4769-b4c6-2b7081ec60b2"),
                             Code = 7,
                             Description = "Russian"
                         });
@@ -106,37 +106,37 @@ namespace Research.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            LanguageLevelId = new Guid("6cfb9163-c449-4036-abb8-e23bec855d28"),
+                            LanguageLevelId = new Guid("6bc54b48-f5a7-4b17-a3b9-a59a8d4ed990"),
                             Code = 1,
                             Description = "Beginner"
                         },
                         new
                         {
-                            LanguageLevelId = new Guid("78413890-f8d4-4d86-8adf-e8fc31d9f7ea"),
+                            LanguageLevelId = new Guid("ca1c7e34-9d3b-4baf-9c7d-5bc4dfb03360"),
                             Code = 2,
                             Description = "Elementary"
                         },
                         new
                         {
-                            LanguageLevelId = new Guid("53dc146a-d301-406a-8e88-a06b310a90ce"),
+                            LanguageLevelId = new Guid("837f6f53-731c-4ee4-8121-5f4baf9a5471"),
                             Code = 3,
                             Description = "Pre-Intermediate"
                         },
                         new
                         {
-                            LanguageLevelId = new Guid("5e4ba351-fd4e-4abc-a437-b71225f5b3f3"),
+                            LanguageLevelId = new Guid("8c20c694-be30-4294-890e-aacd0d1f5cf7"),
                             Code = 4,
                             Description = "Intermediate"
                         },
                         new
                         {
-                            LanguageLevelId = new Guid("49cd01f7-bc20-406c-98cf-c520687bd21b"),
+                            LanguageLevelId = new Guid("fa028f12-c30a-497c-8e4a-072eb567483f"),
                             Code = 5,
                             Description = "Upper-Intermediate"
                         },
                         new
                         {
-                            LanguageLevelId = new Guid("0c0fe95c-4726-4a7e-a673-895f5049e087"),
+                            LanguageLevelId = new Guid("6b7b2537-ecc6-48d6-8135-fce805efb951"),
                             Code = 6,
                             Description = "Advanced"
                         });
@@ -173,60 +173,87 @@ namespace Research.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            LanguageLinkId = new Guid("0cbb2375-fee8-4a41-a5a5-905b738e2400"),
-                            LanguageId = new Guid("b9ce3cf4-365e-4dea-817c-8d04b5746aa0"),
-                            LanguageLevelId = new Guid("53dc146a-d301-406a-8e88-a06b310a90ce"),
-                            PersonId = new Guid("238ee722-430f-4936-80c1-017723073961"),
+                            LanguageLinkId = new Guid("d2239273-d1e3-4dcc-8e7f-c46781b37c8e"),
+                            LanguageId = new Guid("1e2efdac-2e17-4a6d-8929-de39b9db5d54"),
+                            LanguageLevelId = new Guid("837f6f53-731c-4ee4-8121-5f4baf9a5471"),
+                            PersonId = new Guid("9c1d3dfa-de29-4ea8-bb6b-1443d4a3160b"),
                             Preferred = true
                         },
                         new
                         {
-                            LanguageLinkId = new Guid("80d3fcf7-fd16-442b-a453-d4dac2a7b24a"),
-                            LanguageId = new Guid("c915c0d9-830e-447c-a722-bee0ebb4cb36"),
-                            LanguageLevelId = new Guid("0c0fe95c-4726-4a7e-a673-895f5049e087"),
-                            PersonId = new Guid("238ee722-430f-4936-80c1-017723073961"),
+                            LanguageLinkId = new Guid("a6f745e4-7ecd-48c5-b418-22fab250a256"),
+                            LanguageId = new Guid("b002104e-1ad5-417a-8fe5-8587a87dc9df"),
+                            LanguageLevelId = new Guid("6b7b2537-ecc6-48d6-8135-fce805efb951"),
+                            PersonId = new Guid("9c1d3dfa-de29-4ea8-bb6b-1443d4a3160b"),
                             Preferred = false
                         },
                         new
                         {
-                            LanguageLinkId = new Guid("4217c122-216d-43b2-a7f4-d2fba97bd42a"),
-                            LanguageId = new Guid("b966f909-0bed-4f0c-b7dd-89dd72cfbd13"),
-                            LanguageLevelId = new Guid("6cfb9163-c449-4036-abb8-e23bec855d28"),
-                            PersonId = new Guid("c78a80d8-d13c-44f9-a511-21674f628826"),
+                            LanguageLinkId = new Guid("6a820aec-c77a-47d9-a54f-0c85abb2d0f6"),
+                            LanguageId = new Guid("47ed2fcf-5310-484b-b2ab-4686e78d8225"),
+                            LanguageLevelId = new Guid("6bc54b48-f5a7-4b17-a3b9-a59a8d4ed990"),
+                            PersonId = new Guid("ebfce3c9-342c-4c36-b585-7028647653e1"),
                             Preferred = true
                         },
                         new
                         {
-                            LanguageLinkId = new Guid("29021107-ca2e-45fc-87ea-57f558c95734"),
-                            LanguageId = new Guid("811c9b2e-4b81-4dba-8b01-597f4b2b1d01"),
-                            LanguageLevelId = new Guid("78413890-f8d4-4d86-8adf-e8fc31d9f7ea"),
-                            PersonId = new Guid("c78a80d8-d13c-44f9-a511-21674f628826"),
+                            LanguageLinkId = new Guid("f583c77b-6749-45bc-a052-0b8b6f85e0ac"),
+                            LanguageId = new Guid("c07d3a0b-b93c-4d6d-b6b5-646f91ca8aa8"),
+                            LanguageLevelId = new Guid("ca1c7e34-9d3b-4baf-9c7d-5bc4dfb03360"),
+                            PersonId = new Guid("ebfce3c9-342c-4c36-b585-7028647653e1"),
                             Preferred = false
                         },
                         new
                         {
-                            LanguageLinkId = new Guid("6eeed4ed-78c2-4819-99e4-e0d43164f3da"),
-                            LanguageId = new Guid("500aef74-4334-43b9-8225-e4d58f2d26fc"),
-                            LanguageLevelId = new Guid("53dc146a-d301-406a-8e88-a06b310a90ce"),
-                            PersonId = new Guid("7790e89c-5ed3-470b-9a61-052c2881cba5"),
+                            LanguageLinkId = new Guid("8c7e3f2a-5e37-4592-8f65-28cd9dc4eae2"),
+                            LanguageId = new Guid("0bd1d2c8-7c52-471f-bb03-1148aa7be952"),
+                            LanguageLevelId = new Guid("837f6f53-731c-4ee4-8121-5f4baf9a5471"),
+                            PersonId = new Guid("98851f86-9dc5-4a96-9258-8a80c35abbcd"),
                             Preferred = true
                         },
                         new
                         {
-                            LanguageLinkId = new Guid("bff76a59-db06-4390-9660-6ef2f89c1fc7"),
-                            LanguageId = new Guid("beadbad9-106d-4d69-bddf-86394bee456e"),
-                            LanguageLevelId = new Guid("5e4ba351-fd4e-4abc-a437-b71225f5b3f3"),
-                            PersonId = new Guid("7790e89c-5ed3-470b-9a61-052c2881cba5"),
+                            LanguageLinkId = new Guid("65e7172e-da9d-4124-b78c-65f7c14eb9ba"),
+                            LanguageId = new Guid("ffda6091-71b5-4b22-8d8d-0a3882aa5524"),
+                            LanguageLevelId = new Guid("8c20c694-be30-4294-890e-aacd0d1f5cf7"),
+                            PersonId = new Guid("98851f86-9dc5-4a96-9258-8a80c35abbcd"),
                             Preferred = false
                         },
                         new
                         {
-                            LanguageLinkId = new Guid("711605f9-dbbc-40d6-a05b-9f06b61d8d1e"),
-                            LanguageId = new Guid("3a6f9d35-af6a-48bf-b115-53b93cf8eb90"),
-                            LanguageLevelId = new Guid("49cd01f7-bc20-406c-98cf-c520687bd21b"),
-                            PersonId = new Guid("f96d5032-cdbc-46e4-adba-f63046c49e8b"),
+                            LanguageLinkId = new Guid("4dd2e64c-9a8a-462f-ac5e-d0430ff8b22f"),
+                            LanguageId = new Guid("c3ccfdc4-807b-4769-b4c6-2b7081ec60b2"),
+                            LanguageLevelId = new Guid("fa028f12-c30a-497c-8e4a-072eb567483f"),
+                            PersonId = new Guid("f888e8c4-9401-44e0-9ec6-65867b249889"),
                             Preferred = true
                         });
+                });
+
+            modelBuilder.Entity("Research.Domain.Entity.Match", b =>
+                {
+                    b.Property<Guid>("MatchId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("EmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool?>("MatchAcceptedByEmployee")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ResearchId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MatchId");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("ResearchId");
+
+                    b.ToTable("Match");
                 });
 
             modelBuilder.Entity("Research.Domain.Entity.Person", b =>
@@ -271,85 +298,85 @@ namespace Research.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            PersonId = new Guid("238ee722-430f-4936-80c1-017723073961"),
+                            PersonId = new Guid("9c1d3dfa-de29-4ea8-bb6b-1443d4a3160b"),
                             Code = 1,
                             IsRecruiter = false,
                             Name = "Nicoletta",
                             Position = "dev",
                             Remote = false,
-                            SiteId = new Guid("57dfe520-ee12-4c61-b9a8-94a78353dfb4"),
+                            SiteId = new Guid("73ba69e6-a7ad-483d-84b9-4cda53e34fe1"),
                             Surnamme = "Morsia",
                             YearsOfExperience = 2
                         },
                         new
                         {
-                            PersonId = new Guid("c78a80d8-d13c-44f9-a511-21674f628826"),
+                            PersonId = new Guid("ebfce3c9-342c-4c36-b585-7028647653e1"),
                             Code = 2,
                             IsRecruiter = true,
                             Name = "Mario",
                             Position = "recuiter",
                             Remote = true,
-                            SiteId = new Guid("09168b51-310d-4f50-9036-878e93203df6"),
+                            SiteId = new Guid("4e145946-4c21-4f2e-a8ba-ed4ee29929f9"),
                             Surnamme = "Rossi",
                             YearsOfExperience = 2
                         },
                         new
                         {
-                            PersonId = new Guid("7790e89c-5ed3-470b-9a61-052c2881cba5"),
+                            PersonId = new Guid("98851f86-9dc5-4a96-9258-8a80c35abbcd"),
                             Code = 3,
                             IsRecruiter = true,
                             Name = "Mario",
                             Position = "recruiter",
                             Remote = false,
-                            SiteId = new Guid("57dfe520-ee12-4c61-b9a8-94a78353dfb4"),
+                            SiteId = new Guid("73ba69e6-a7ad-483d-84b9-4cda53e34fe1"),
                             Surnamme = "Rossi",
                             YearsOfExperience = 2
                         },
                         new
                         {
-                            PersonId = new Guid("f96d5032-cdbc-46e4-adba-f63046c49e8b"),
+                            PersonId = new Guid("f888e8c4-9401-44e0-9ec6-65867b249889"),
                             Code = 4,
                             IsRecruiter = false,
                             Name = "Mario",
                             Position = "dev",
                             Remote = true,
-                            SiteId = new Guid("57dfe520-ee12-4c61-b9a8-94a78353dfb4"),
+                            SiteId = new Guid("73ba69e6-a7ad-483d-84b9-4cda53e34fe1"),
                             Surnamme = "Rossi",
                             YearsOfExperience = 2
                         },
                         new
                         {
-                            PersonId = new Guid("702907dd-3a80-4b4e-98c6-9adaa82d6aab"),
+                            PersonId = new Guid("92a8316e-08d8-4939-b974-90e6e36e6db8"),
                             Code = 5,
                             IsRecruiter = false,
                             Name = "Giovanni",
                             Position = "dev",
                             Remote = true,
-                            SiteId = new Guid("005fe637-637d-4239-94c3-1a2ce756c439"),
+                            SiteId = new Guid("b0bd4bf1-d769-4fef-a2c9-ee8596841566"),
                             Surnamme = "Bianchi",
                             YearsOfExperience = 4
                         },
                         new
                         {
-                            PersonId = new Guid("cd52721a-8579-4cdb-899a-50694e35cd49"),
+                            PersonId = new Guid("2775d42e-c6f6-417b-8860-7e21419c5718"),
                             Code = 6,
                             IsRecruiter = false,
                             Name = "Alessandra",
                             Position = "dev",
                             Remote = true,
-                            SiteId = new Guid("09168b51-310d-4f50-9036-878e93203df6"),
+                            SiteId = new Guid("4e145946-4c21-4f2e-a8ba-ed4ee29929f9"),
                             Surnamme = "Verdi",
                             YearsOfExperience = 15
                         },
                         new
                         {
-                            PersonId = new Guid("5e770d60-4689-4b80-b600-64eed4205a6a"),
+                            PersonId = new Guid("6297cf87-08b5-49b6-9ca6-0dc0af6a3d21"),
                             Code = 7,
                             IsRecruiter = false,
                             Name = "Giovanni",
                             Position = "dev",
                             Remote = true,
-                            SiteId = new Guid("0b9478ca-2e7e-4968-9ca8-7192455a3f76"),
+                            SiteId = new Guid("55c0aaa0-6c28-48c9-935c-a7535c79fb77"),
                             Surnamme = "Novembre",
                             YearsOfExperience = 1
                         });
@@ -393,93 +420,93 @@ namespace Research.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            ResearchId = new Guid("ebfe0954-80db-487d-b6fb-66b422b5c687"),
+                            ResearchId = new Guid("807982ab-bd68-4fde-aa7d-64ad6bbc53d1"),
                             Code = 1,
                             Description = "Front end Angular",
-                            LanguageId = new Guid("b9ce3cf4-365e-4dea-817c-8d04b5746aa0"),
-                            PersonId = new Guid("c78a80d8-d13c-44f9-a511-21674f628826"),
+                            LanguageId = new Guid("1e2efdac-2e17-4a6d-8929-de39b9db5d54"),
+                            PersonId = new Guid("ebfce3c9-342c-4c36-b585-7028647653e1"),
                             Remote = true,
-                            SiteId = new Guid("57dfe520-ee12-4c61-b9a8-94a78353dfb4")
+                            SiteId = new Guid("73ba69e6-a7ad-483d-84b9-4cda53e34fe1")
                         },
                         new
                         {
-                            ResearchId = new Guid("f362086e-758a-474f-b2ef-57af4fe90f31"),
+                            ResearchId = new Guid("82cc01c6-065a-429c-9d0e-fa28751d318b"),
                             Code = 2,
                             Description = "Back end .NET",
-                            LanguageId = new Guid("c915c0d9-830e-447c-a722-bee0ebb4cb36"),
-                            PersonId = new Guid("c78a80d8-d13c-44f9-a511-21674f628826"),
+                            LanguageId = new Guid("b002104e-1ad5-417a-8fe5-8587a87dc9df"),
+                            PersonId = new Guid("ebfce3c9-342c-4c36-b585-7028647653e1"),
                             Remote = true,
-                            SiteId = new Guid("09168b51-310d-4f50-9036-878e93203df6")
+                            SiteId = new Guid("4e145946-4c21-4f2e-a8ba-ed4ee29929f9")
                         },
                         new
                         {
-                            ResearchId = new Guid("3dcd8502-0902-4816-a151-f6c6c2a0b7cc"),
+                            ResearchId = new Guid("de9d58a6-955e-47be-88e2-0d4ce751cfc5"),
                             Code = 3,
                             Description = "Typescript",
-                            LanguageId = new Guid("b9ce3cf4-365e-4dea-817c-8d04b5746aa0"),
-                            PersonId = new Guid("c78a80d8-d13c-44f9-a511-21674f628826"),
+                            LanguageId = new Guid("1e2efdac-2e17-4a6d-8929-de39b9db5d54"),
+                            PersonId = new Guid("ebfce3c9-342c-4c36-b585-7028647653e1"),
                             Remote = true,
-                            SiteId = new Guid("005fe637-637d-4239-94c3-1a2ce756c439")
+                            SiteId = new Guid("b0bd4bf1-d769-4fef-a2c9-ee8596841566")
                         },
                         new
                         {
-                            ResearchId = new Guid("bfb5446d-f1df-4ae2-88df-74a3698c4944"),
+                            ResearchId = new Guid("1924e1c8-d73f-4d5c-85d2-ae4f584869f6"),
                             Code = 4,
                             Description = "Azure",
-                            LanguageId = new Guid("b966f909-0bed-4f0c-b7dd-89dd72cfbd13"),
-                            PersonId = new Guid("c78a80d8-d13c-44f9-a511-21674f628826"),
+                            LanguageId = new Guid("47ed2fcf-5310-484b-b2ab-4686e78d8225"),
+                            PersonId = new Guid("ebfce3c9-342c-4c36-b585-7028647653e1"),
                             Remote = false,
-                            SiteId = new Guid("78fee931-b61d-4732-b637-9cc58c1c02ed")
+                            SiteId = new Guid("876e1396-13f7-40e3-8b12-b03cd709b762")
                         },
                         new
                         {
-                            ResearchId = new Guid("f021f51f-33b3-4668-a55e-b7e541b4b110"),
+                            ResearchId = new Guid("77959fdd-8bd0-47ed-a8c6-6a73ebfaa6b4"),
                             Code = 5,
                             Description = "Smss",
-                            LanguageId = new Guid("811c9b2e-4b81-4dba-8b01-597f4b2b1d01"),
-                            PersonId = new Guid("c78a80d8-d13c-44f9-a511-21674f628826"),
+                            LanguageId = new Guid("c07d3a0b-b93c-4d6d-b6b5-646f91ca8aa8"),
+                            PersonId = new Guid("ebfce3c9-342c-4c36-b585-7028647653e1"),
                             Remote = false,
-                            SiteId = new Guid("0b9478ca-2e7e-4968-9ca8-7192455a3f76")
+                            SiteId = new Guid("55c0aaa0-6c28-48c9-935c-a7535c79fb77")
                         },
                         new
                         {
-                            ResearchId = new Guid("4f8b05ff-33dc-412e-ad45-a62c01443db0"),
+                            ResearchId = new Guid("d6525414-1c05-4e85-a79e-7d5239f60cd9"),
                             Code = 6,
                             Description = "Back end .NET",
-                            LanguageId = new Guid("500aef74-4334-43b9-8225-e4d58f2d26fc"),
-                            PersonId = new Guid("7790e89c-5ed3-470b-9a61-052c2881cba5"),
+                            LanguageId = new Guid("0bd1d2c8-7c52-471f-bb03-1148aa7be952"),
+                            PersonId = new Guid("98851f86-9dc5-4a96-9258-8a80c35abbcd"),
                             Remote = true,
-                            SiteId = new Guid("09168b51-310d-4f50-9036-878e93203df6")
+                            SiteId = new Guid("4e145946-4c21-4f2e-a8ba-ed4ee29929f9")
                         },
                         new
                         {
-                            ResearchId = new Guid("c18ff02c-1aa4-4eb1-a773-fe04c0cc215c"),
+                            ResearchId = new Guid("ae21848a-7f01-4e8c-93af-970dfa4fa004"),
                             Code = 7,
                             Description = "Azure",
-                            LanguageId = new Guid("811c9b2e-4b81-4dba-8b01-597f4b2b1d01"),
-                            PersonId = new Guid("7790e89c-5ed3-470b-9a61-052c2881cba5"),
+                            LanguageId = new Guid("c07d3a0b-b93c-4d6d-b6b5-646f91ca8aa8"),
+                            PersonId = new Guid("98851f86-9dc5-4a96-9258-8a80c35abbcd"),
                             Remote = true,
-                            SiteId = new Guid("78fee931-b61d-4732-b637-9cc58c1c02ed")
+                            SiteId = new Guid("876e1396-13f7-40e3-8b12-b03cd709b762")
                         },
                         new
                         {
-                            ResearchId = new Guid("1e3d0b39-fe87-425a-8697-ef8b5d53f4eb"),
+                            ResearchId = new Guid("a1c20840-6b3e-44d6-8f66-6e04b8253f20"),
                             Code = 8,
                             Description = "Flutter",
-                            LanguageId = new Guid("beadbad9-106d-4d69-bddf-86394bee456e"),
-                            PersonId = new Guid("7790e89c-5ed3-470b-9a61-052c2881cba5"),
+                            LanguageId = new Guid("ffda6091-71b5-4b22-8d8d-0a3882aa5524"),
+                            PersonId = new Guid("98851f86-9dc5-4a96-9258-8a80c35abbcd"),
                             Remote = true,
-                            SiteId = new Guid("57dfe520-ee12-4c61-b9a8-94a78353dfb4")
+                            SiteId = new Guid("73ba69e6-a7ad-483d-84b9-4cda53e34fe1")
                         },
                         new
                         {
-                            ResearchId = new Guid("cb8784dd-332b-40c1-bff5-5b784a908648"),
+                            ResearchId = new Guid("e7dcd6c2-e80a-438e-ad7a-a85027029a62"),
                             Code = 9,
                             Description = "Back end .NET",
-                            LanguageId = new Guid("3a6f9d35-af6a-48bf-b115-53b93cf8eb90"),
-                            PersonId = new Guid("7790e89c-5ed3-470b-9a61-052c2881cba5"),
+                            LanguageId = new Guid("c3ccfdc4-807b-4769-b4c6-2b7081ec60b2"),
+                            PersonId = new Guid("98851f86-9dc5-4a96-9258-8a80c35abbcd"),
                             Remote = true,
-                            SiteId = new Guid("0b9478ca-2e7e-4968-9ca8-7192455a3f76")
+                            SiteId = new Guid("55c0aaa0-6c28-48c9-935c-a7535c79fb77")
                         });
                 });
 
@@ -503,31 +530,31 @@ namespace Research.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            SiteId = new Guid("57dfe520-ee12-4c61-b9a8-94a78353dfb4"),
+                            SiteId = new Guid("73ba69e6-a7ad-483d-84b9-4cda53e34fe1"),
                             Code = 1,
                             Description = "NEW YORK"
                         },
                         new
                         {
-                            SiteId = new Guid("09168b51-310d-4f50-9036-878e93203df6"),
+                            SiteId = new Guid("4e145946-4c21-4f2e-a8ba-ed4ee29929f9"),
                             Code = 2,
                             Description = "CHICAGO"
                         },
                         new
                         {
-                            SiteId = new Guid("005fe637-637d-4239-94c3-1a2ce756c439"),
+                            SiteId = new Guid("b0bd4bf1-d769-4fef-a2c9-ee8596841566"),
                             Code = 3,
                             Description = "WASHINGTON"
                         },
                         new
                         {
-                            SiteId = new Guid("78fee931-b61d-4732-b637-9cc58c1c02ed"),
+                            SiteId = new Guid("876e1396-13f7-40e3-8b12-b03cd709b762"),
                             Code = 4,
                             Description = "LOS ANGELES"
                         },
                         new
                         {
-                            SiteId = new Guid("0b9478ca-2e7e-4968-9ca8-7192455a3f76"),
+                            SiteId = new Guid("55c0aaa0-6c28-48c9-935c-a7535c79fb77"),
                             Code = 5,
                             Description = "LONDON"
                         });
@@ -569,7 +596,7 @@ namespace Research.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            SkillId = new Guid("79cd2fdd-1158-4442-a916-5ea969cb21ac"),
+                            SkillId = new Guid("3d955909-eba7-4e66-8240-6333ba2cbf02"),
                             Code = 1,
                             Description = "Angular 9",
                             FEBEDevops = "",
@@ -579,7 +606,7 @@ namespace Research.Domain.Migrations
                         },
                         new
                         {
-                            SkillId = new Guid("7f9b6ec1-ae0e-417c-80c8-4c80e6270274"),
+                            SkillId = new Guid("ca36c889-16c3-4d59-a702-f648993e5344"),
                             Code = 2,
                             Description = "TS",
                             FEBEDevops = "",
@@ -589,7 +616,7 @@ namespace Research.Domain.Migrations
                         },
                         new
                         {
-                            SkillId = new Guid("76cfa6ae-48bc-457c-bda4-001dc66b80a7"),
+                            SkillId = new Guid("389a1adc-08cd-48a8-8997-c0ec04a05b5f"),
                             Code = 3,
                             Description = "Azure",
                             FEBEDevops = "Azure",
@@ -599,7 +626,7 @@ namespace Research.Domain.Migrations
                         },
                         new
                         {
-                            SkillId = new Guid("aa55f60e-d599-4672-b3c7-788b87a763c0"),
+                            SkillId = new Guid("c394cfbc-a4e0-4a9e-9f15-8d4ce3870c98"),
                             Code = 4,
                             Description = "Flutter",
                             FEBEDevops = "",
@@ -609,7 +636,7 @@ namespace Research.Domain.Migrations
                         },
                         new
                         {
-                            SkillId = new Guid("4cdc25b2-d989-4b08-a403-1d4d25bf38b7"),
+                            SkillId = new Guid("cb655180-1a9d-4627-8bf3-35fade999f03"),
                             Code = 5,
                             Description = "Iot",
                             FEBEDevops = "",
@@ -619,7 +646,7 @@ namespace Research.Domain.Migrations
                         },
                         new
                         {
-                            SkillId = new Guid("2f4fbd0f-97bf-4c9e-bc30-61c18658f338"),
+                            SkillId = new Guid("d436a51e-5040-4c40-9c8c-1ad749fc6c4b"),
                             Code = 6,
                             Description = ".NET",
                             FEBEDevops = ".NET",
@@ -629,7 +656,7 @@ namespace Research.Domain.Migrations
                         },
                         new
                         {
-                            SkillId = new Guid("035bfc8a-c8dd-46ce-9c9f-39ecb0a2a8fe"),
+                            SkillId = new Guid("773db846-42a3-4e36-8b2d-70d3404fad4e"),
                             Code = 7,
                             Description = "SMSS",
                             FEBEDevops = "",
@@ -665,59 +692,59 @@ namespace Research.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            SkillLinkId = new Guid("8a45bf46-4cf0-44b8-bebe-e00a49d99496"),
+                            SkillLinkId = new Guid("c70e9d79-60f5-4e93-b2d2-21cfccd0b9b4"),
                             Level = 1,
-                            PersonId = new Guid("238ee722-430f-4936-80c1-017723073961"),
-                            SkillId = new Guid("79cd2fdd-1158-4442-a916-5ea969cb21ac")
+                            PersonId = new Guid("9c1d3dfa-de29-4ea8-bb6b-1443d4a3160b"),
+                            SkillId = new Guid("3d955909-eba7-4e66-8240-6333ba2cbf02")
                         },
                         new
                         {
-                            SkillLinkId = new Guid("27ee3007-d32f-4147-b6fa-3b19ca68aa06"),
+                            SkillLinkId = new Guid("2372bce7-fbb1-48d3-9acc-35c73691d6fa"),
                             Level = 2,
-                            PersonId = new Guid("238ee722-430f-4936-80c1-017723073961"),
-                            SkillId = new Guid("7f9b6ec1-ae0e-417c-80c8-4c80e6270274")
+                            PersonId = new Guid("9c1d3dfa-de29-4ea8-bb6b-1443d4a3160b"),
+                            SkillId = new Guid("ca36c889-16c3-4d59-a702-f648993e5344")
                         },
                         new
                         {
-                            SkillLinkId = new Guid("f568c356-cfdf-4d9c-99c7-a090f081ba71"),
+                            SkillLinkId = new Guid("d32b47ca-334f-40b6-a552-bec9aedeefc4"),
                             Level = 3,
-                            PersonId = new Guid("c78a80d8-d13c-44f9-a511-21674f628826"),
-                            SkillId = new Guid("76cfa6ae-48bc-457c-bda4-001dc66b80a7")
+                            PersonId = new Guid("ebfce3c9-342c-4c36-b585-7028647653e1"),
+                            SkillId = new Guid("389a1adc-08cd-48a8-8997-c0ec04a05b5f")
                         },
                         new
                         {
-                            SkillLinkId = new Guid("213a5dea-8325-4a90-9429-f070d5b51c55"),
+                            SkillLinkId = new Guid("2de3cd15-f0ba-4d9b-a78e-38d04fc1d609"),
                             Level = 1,
-                            PersonId = new Guid("7790e89c-5ed3-470b-9a61-052c2881cba5"),
-                            SkillId = new Guid("aa55f60e-d599-4672-b3c7-788b87a763c0")
+                            PersonId = new Guid("98851f86-9dc5-4a96-9258-8a80c35abbcd"),
+                            SkillId = new Guid("c394cfbc-a4e0-4a9e-9f15-8d4ce3870c98")
                         },
                         new
                         {
-                            SkillLinkId = new Guid("01012ed8-e893-4fbd-a98f-3f02ebc18a4f"),
+                            SkillLinkId = new Guid("d276e241-a4f5-40de-89a1-690735c0ec00"),
                             Level = 6,
-                            PersonId = new Guid("f96d5032-cdbc-46e4-adba-f63046c49e8b"),
-                            SkillId = new Guid("4cdc25b2-d989-4b08-a403-1d4d25bf38b7")
+                            PersonId = new Guid("f888e8c4-9401-44e0-9ec6-65867b249889"),
+                            SkillId = new Guid("cb655180-1a9d-4627-8bf3-35fade999f03")
                         },
                         new
                         {
-                            SkillLinkId = new Guid("b848a613-7dbc-4b99-a4c6-5afe2e50843e"),
+                            SkillLinkId = new Guid("0b20f2af-c902-43bb-b985-a6f57be93230"),
                             Level = 3,
-                            PersonId = new Guid("f96d5032-cdbc-46e4-adba-f63046c49e8b"),
-                            SkillId = new Guid("2f4fbd0f-97bf-4c9e-bc30-61c18658f338")
+                            PersonId = new Guid("f888e8c4-9401-44e0-9ec6-65867b249889"),
+                            SkillId = new Guid("d436a51e-5040-4c40-9c8c-1ad749fc6c4b")
                         },
                         new
                         {
-                            SkillLinkId = new Guid("f7f145e2-b5f1-4990-afaf-3bc0ec879569"),
+                            SkillLinkId = new Guid("8fbee0c9-7bc1-42bf-8810-beba19ef8f8c"),
                             Level = 2,
-                            PersonId = new Guid("f96d5032-cdbc-46e4-adba-f63046c49e8b"),
-                            SkillId = new Guid("76cfa6ae-48bc-457c-bda4-001dc66b80a7")
+                            PersonId = new Guid("f888e8c4-9401-44e0-9ec6-65867b249889"),
+                            SkillId = new Guid("389a1adc-08cd-48a8-8997-c0ec04a05b5f")
                         },
                         new
                         {
-                            SkillLinkId = new Guid("fa1274a5-0ed0-4299-9afb-0f43e8fb5789"),
+                            SkillLinkId = new Guid("d844f4fd-39c2-465b-a4f5-f8230b35490d"),
                             Level = 2,
-                            PersonId = new Guid("702907dd-3a80-4b4e-98c6-9adaa82d6aab"),
-                            SkillId = new Guid("035bfc8a-c8dd-46ce-9c9f-39ecb0a2a8fe")
+                            PersonId = new Guid("92a8316e-08d8-4939-b974-90e6e36e6db8"),
+                            SkillId = new Guid("773db846-42a3-4e36-8b2d-70d3404fad4e")
                         });
                 });
 
@@ -744,6 +771,23 @@ namespace Research.Domain.Migrations
                     b.Navigation("LanguageLevel");
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("Research.Domain.Entity.Match", b =>
+                {
+                    b.HasOne("Research.Domain.Entity.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Research.Domain.Entity.Research", "Research")
+                        .WithMany()
+                        .HasForeignKey("ResearchId");
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Research");
                 });
 
             modelBuilder.Entity("Research.Domain.Entity.Person", b =>
