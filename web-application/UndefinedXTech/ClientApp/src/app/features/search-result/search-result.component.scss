@@ -4,7 +4,8 @@
   max-height: calc(100vh - 12rem);
 
   .spinner-container {
-    height: calc(100vh - 12rem);
+    height: calc(100vh - 14rem);
+    width: calc(100% - 5rem);
   }
 }
 
@@ -40,6 +41,22 @@
   .title-skill {
     font-weight: 500;
     margin-bottom: 0.5rem;
+  }
+}
+
+.waiting-text {
+  position: absolute;
+  bottom: 11rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: calc(100% - 5rem);
+  font-size: 1rem;
+
+  @media screen and (min-width: 1720px) {
+    bottom: 13rem;
   }
 }
 
