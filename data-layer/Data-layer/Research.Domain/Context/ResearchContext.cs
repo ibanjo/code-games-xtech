@@ -124,6 +124,15 @@ namespace Research.Domain.Context
             var skill6 = Guid.NewGuid();
             var skill7 = Guid.NewGuid();
 
+            var skillss = new List<Guid>();
+            skillss.Add(skill1);
+            skillss.Add(skill2);
+            skillss.Add(skill3);
+            skillss.Add(skill4);
+            skillss.Add(skill5);
+            skillss.Add(skill6);
+            skillss.Add(skill7);
+
             modelBuilder.Entity<Skill>().HasData(
                 new Skill { SkillId = skill1, Code = 1, FEBEDevops = "", WebMobile ="angular", Technology = "", ProjectRef = "", Description = "Angular 9" },
                 new Skill { SkillId = skill2, Code = 2, FEBEDevops = "" , WebMobile = "typescript", Technology = "", ProjectRef = "", Description = "TS" },
@@ -180,6 +189,19 @@ namespace Research.Domain.Context
                 new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person5, SkillId = skill7, Level = 2 }
                 );
 
+            List<Entity.SkillLink> skills = new List<Entity.SkillLink>();
+            for (int i = 0; i < 1000; i++)
+            {
+                skills.Add(new Entity.SkillLink()
+                {
+                    SkillLinkId = Guid.NewGuid(),
+                    SkillId = skillss[new Random().Next(skillss.Count)],
+                    PersonId = people[new Random().Next(people.Count)],
+                    Level = new Random().Next(0, 7)
+                });
+            };
+
+            modelBuilder.Entity<Entity.SkillLink>().HasData(skills.ToArray());
 
             #endregion
 
@@ -202,7 +224,7 @@ namespace Research.Domain.Context
             #region Research
 
             List<Entity.Research> researches = new List<Entity.Research>();
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 researches.Add(new Entity.Research()
                 {
