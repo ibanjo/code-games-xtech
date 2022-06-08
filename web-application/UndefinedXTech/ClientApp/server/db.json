@@ -302,24 +302,343 @@
     "surname": null,
     "siteID": "",
     "remote": false,
-    "yearsOfExperience": null,
-    "position": "",
+    "yearsOfExperience": 5,
+    "position": "test",
     "languages": [
       {
-        "languageID": null,
-        "levelID": null,
+        "languageID": "72c8854c-634e-4105-8f03-ca107dd3741a",
+        "levelID": "a3392ba0-d385-49b1-9eae-92bd503cf5fd",
         "preferred": null
       }
     ],
     "skills": [
       {
-        "feBeDevops": null,
-        "webMobile": null,
-        "technology": null,
+        "feBeDevops": "Backend",
+        "webMobile": "Mobile",
+        "technology": "Spring",
         "projectRef": null,
         "description": null,
-        "level": null
+        "level": 1
       }
     ]
-  }
+  },
+  "searchResult": [
+    {
+      "id": "f34a7524-1506-4c6f-bb31-5532ea2e13c3",
+      "name": "John",
+      "surname": "Smith",
+      "city": "",
+      "remote": true,
+      "yearsOfExperience": 4,
+      "position": "Developer",
+      "skills": [
+        {
+          "feBeDevops": "Frontend",
+          "webMobile": "Web",
+          "technology": "React",
+          "projectRef": "Kleos Browser",
+          "description": "",
+          "level": 2
+        },
+        {
+          "feBeDevops": "Frontend",
+          "webMobile": "Web",
+          "technology": "Angular",
+          "projectRef": "",
+          "description": "",
+          "level": 1
+        },
+        {
+          "feBeDevops": "Backend",
+          "webMobile": "Web",
+          "technology": "Spring",
+          "projectRef": "",
+          "description": "",
+          "level": 2
+        }
+      ],
+      "languages": [
+        {
+          "code": 0,
+          "description": "English",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "B2",
+          "preferred": false
+        },
+        {
+          "code": 0,
+          "description": "Italian",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "C2",
+          "preferred": true
+        }
+      ]
+    },
+    {
+      "id": "0524cc3f-e642-4f53-aa27-f6f69fbcd108",
+      "name": "Alaya",
+      "surname": "Kestrel",
+      "city": "Milan",
+      "remote": false,
+      "yearsOfExperience": 2,
+      "position": "Engineer",
+      "skills": [
+        {
+          "feBeDevops": "DevOps",
+          "webMobile": "Web",
+          "technology": ".NET",
+          "projectRef": "",
+          "description": "",
+          "level": 2
+        },
+        {
+          "feBeDevops": "Frontend",
+          "webMobile": "Web",
+          "technology": "React",
+          "projectRef": "Kleos Browser",
+          "description": "",
+          "level": 2
+        },
+        {
+          "feBeDevops": "Frontend",
+          "webMobile": "Web",
+          "technology": "Vue",
+          "projectRef": "",
+          "description": "",
+          "level": 0
+        }
+      ],
+      "languages": [
+        {
+          "code": 0,
+          "description": "German",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "B2",
+          "preferred": false
+        },
+        {
+          "code": 0,
+          "description": "French",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "C2",
+          "preferred": true
+        }
+      ]
+    },
+    {
+      "id": "126785dc-7b92-48c2-b512-9afeb7210566",
+      "name": "Charnette",
+      "surname": "Kasey",
+      "city": "Madrid",
+      "remote": false,
+      "yearsOfExperience": 4,
+      "position": "Software Engineer",
+      "skills": [
+        {
+          "feBeDevops": "Backend",
+          "webMobile": "Web",
+          "technology": "Spring",
+          "projectRef": "",
+          "description": "",
+          "level": 2
+        },
+        {
+          "feBeDevops": "Frontend",
+          "webMobile": "Web",
+          "technology": "Vue",
+          "projectRef": "",
+          "description": "",
+          "level": 1
+        }
+      ],
+      "languages": [
+        {
+          "code": 0,
+          "description": "English",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "B2",
+          "preferred": false
+        },
+        {
+          "code": 0,
+          "description": "Dutch",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "A2",
+          "preferred": true
+        }
+      ]
+    },
+    {
+      "id": "d3817c9c-1f8d-4d96-880c-a97ba4c48424",
+      "name": "Bonita",
+      "surname": "Aden",
+      "city": "Amsterdam",
+      "remote": false,
+      "yearsOfExperience": 8,
+      "position": "Software Engineer",
+      "skills": [
+        {
+          "feBeDevops": "DevOps",
+          "webMobile": "Mobile",
+          "technology": ".NET",
+          "projectRef": "",
+          "description": "",
+          "level": 2
+        },
+        {
+          "feBeDevops": "Frontend",
+          "webMobile": "Mobile",
+          "technology": "Vue",
+          "projectRef": "",
+          "description": "",
+          "level": 1
+        }
+      ],
+      "languages": [
+        {
+          "code": 0,
+          "description": "Italian",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "B2",
+          "preferred": false
+        },
+        {
+          "code": 0,
+          "description": "French",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "C2",
+          "preferred": true
+        }
+      ]
+    },
+    {
+      "id": "c0050928-4fb4-4c79-bd1b-a884ef977973",
+      "name": "Alvena",
+      "surname": "Garnet",
+      "city": "Berlin",
+      "remote": false,
+      "yearsOfExperience": 6,
+      "position": "Tester",
+      "skills": [
+        {
+          "feBeDevops": "DevOps",
+          "webMobile": "Web",
+          "technology": ".NET",
+          "projectRef": "",
+          "description": "",
+          "level": 2
+        },
+        {
+          "feBeDevops": "Frontend",
+          "webMobile": "Web",
+          "technology": "Angular",
+          "projectRef": "",
+          "description": "",
+          "level": 2
+        }
+      ],
+      "languages": [
+        {
+          "code": 0,
+          "description": "Chinese",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "B2",
+          "preferred": false
+        },
+        {
+          "code": 0,
+          "description": "French",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "C2",
+          "preferred": true
+        }
+      ]
+    },
+    {
+      "id": "2b3cef8d-7e9b-498b-adc3-f0cc281c663e",
+      "name": "Priscilla",
+      "surname": "Courteney",
+      "city": "New York",
+      "remote": false,
+      "yearsOfExperience": 4,
+      "position": "Software Engineer",
+      "skills": [
+        {
+          "feBeDevops": "Backend",
+          "webMobile": "Web",
+          "technology": ".NET",
+          "projectRef": "",
+          "description": "",
+          "level": 2
+        },
+        {
+          "feBeDevops": "Frontend",
+          "webMobile": "Web",
+          "technology": "React",
+          "projectRef": "",
+          "description": "",
+          "level": 1
+        }
+      ],
+      "languages": [
+        {
+          "code": 0,
+          "description": "English",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "B2",
+          "preferred": false
+        },
+        {
+          "code": 0,
+          "description": "French",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "C2",
+          "preferred": true
+        }
+      ]
+    },
+    {
+      "id": "296ab3d8-0e88-400c-9d48-3cbc0406f479",
+      "name": "Ronnie",
+      "surname": "Esmond",
+      "city": "Paris",
+      "remote": false,
+      "yearsOfExperience": 2,
+      "position": "Software Engineer",
+      "skills": [
+        {
+          "feBeDevops": "DevOps",
+          "webMobile": "Web",
+          "technology": "Laravel",
+          "projectRef": "",
+          "description": "",
+          "level": 2
+        },
+        {
+          "feBeDevops": "Frontend",
+          "webMobile": "Mobile",
+          "technology": "Vue",
+          "projectRef": "",
+          "description": "",
+          "level": 1
+        }
+      ],
+      "languages": [
+        {
+          "code": 0,
+          "description": "Italian",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "B2",
+          "preferred": false
+        },
+        {
+          "code": 0,
+          "description": "French",
+          "languageLevelCode": 0,
+          "languageLevelDescription": "C2",
+          "preferred": true
+        }
+      ]
+    }
+  ]
 }

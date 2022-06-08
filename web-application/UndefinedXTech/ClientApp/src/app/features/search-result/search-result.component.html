@@ -1,1 +1,57 @@
-<p>search-result works!</p>
+<app-page>
+  <div class="header-container" slot="header">
+    <h1 class="mr-4">Search results</h1>
+  </div>
+  <div class="content-container" slot="content">
+    <div *ngIf="isLoading" class="spinner-container">
+      <app-spinner></app-spinner>
+    </div>
+
+    <div class="card-container">
+      <mat-card class="person-card" *ngFor="let person of searchResults; let i = index;">
+        <mat-card-title>{{ person.name }} {{ person.surname }}</mat-card-title>
+        <mat-card-subtitle>{{ person.position }} - {{ person.yearsOfExperience }} years of experience</mat-card-subtitle>
+        <mat-card-content>
+          <p *ngIf="person.city">Location: {{ person.city }}</p>
+          <p *ngIf="!person.city">Location: Remote</p>
+
+          <div class="skills-container">
+            <div>
+              <div class="title-skill">Skills:</div>
+              <ul>
+                <li *ngFor="let skill of person.skills"
+                  [style.color] = "skill.level === 0 ? 'red' : skill.level === 1 ? 'yellow' : 'green'">{{ skill.technology}}
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div class="title-skill">Languages:</div>
+              <ul>
+                <li *ngFor="let language of person.languages">
+                  {{ language.description }} ({{ language.languageLevelDescription }})
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button (click)="addLike(i)">
+            <mat-icon [style.color]="person.liked ? 'red' : 'lightgray'" >favorite</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+
+  <div class="footer-container" slot="footer">
+    <button *ngIf="!isLoading" class="ml-2"
+      mat-raised-button
+      type="submit"
+      color="secondary"
+      (click)="back()">
+      Back
+    </button>
+  </div>
+</app-page>
