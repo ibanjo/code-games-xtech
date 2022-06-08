@@ -1,0 +1,64 @@
+.header-container {
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.content-container {
+  height: 100%;
+  width: 100%;
+
+  .first-row-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr 1fr;
+    column-gap: 1rem;
+    align-items: center;
+  }
+
+  .form-array-container {
+    display: grid;
+    grid-template-columns: 65% 35%;
+  }
+
+  .skills-container {
+    border: 1px solid gainsboro;
+    border-right: none;
+    padding: 1rem;
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .languages-container {
+    border: 1px solid gainsboro;
+    padding: 1rem;
+
+    .language-row {
+      display: grid;
+      grid-template-columns: 40% 25% 18% 5%;
+      align-items: center;
+      column-gap: 1rem;
+    }
+  }
+
+  .delete-item {
+    cursor: pointer;
+  }
+
+  .add-language {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+.footer-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  margin-top: 2rem;
+}
