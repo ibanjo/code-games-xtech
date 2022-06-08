@@ -39,15 +39,12 @@ class Similarity:
         kmeans.fit(X)
 
         y_pred_fit = kmeans.predict(X)
-        X_dist = kmeans.transform(X) ** 2
-
-        data_fit = training_data.assign(cluster=y_pred_fit, distance=X_dist.sum(axis=1))
+        data_fit = training_data.assign(cluster=y_pred_fit)
 
         data_fit.to_pickle("./data.pkl")
         pickle.dump(kmeans, open("./model.pkl", "wb"))
 
         cluster_num = Counter(kmeans.labels_)
-        return cluster_num
     
     def research(self, features):
         df = pickle.load(open("./data.pkl", "rb"))
@@ -58,4 +55,4 @@ class Similarity:
 
         df_result = df[df['cluster'] == y_pred[0]]
 
-        return y_pred, df_result
+        return df_result
