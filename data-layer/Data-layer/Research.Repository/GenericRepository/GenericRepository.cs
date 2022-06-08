@@ -19,7 +19,7 @@ namespace Research.Repository
 
         public GenericRepository(DbContextOptions options)
         {
-            _context = new ResearchContext(options);
+            _context = new ResearchContext();
             _dbSet = _context.Set<TEntity>();
         }
 
