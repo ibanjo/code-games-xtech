@@ -33,15 +33,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this._subs.unsubscribe();
   }
 
-  back() {
-    this.router.navigate(['search']);
-  }
-
   addLike(index: number) {
     this.searchResults[index].liked = !this.searchResults[index].liked;
     //TODO: call API
   }
-
-
 
 }

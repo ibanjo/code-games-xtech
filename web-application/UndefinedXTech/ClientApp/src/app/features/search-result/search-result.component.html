@@ -20,6 +20,7 @@
               <div class="title-skill">Skills:</div>
               <ul>
                 <li *ngFor="let skill of person.skills"
+                  [matTooltip]="skill.level === 0 ? 'Beginner' : skill.level === 1 ? 'Medium' : 'Advanced'"
                   [style.color] = "skill.level === 0 ? 'red' : skill.level === 1 ? 'yellow' : 'green'">{{ skill.technology}}
                 </li>
               </ul>
@@ -46,12 +47,5 @@
 
 
   <div class="footer-container" slot="footer">
-    <button *ngIf="!isLoading" class="ml-2"
-      mat-raised-button
-      type="submit"
-      color="secondary"
-      (click)="back()">
-      Back
-    </button>
   </div>
 </app-page>
