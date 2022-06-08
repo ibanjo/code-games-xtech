@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Research.Domain.GenericService;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,21 +13,21 @@ namespace Research.API.Controllers
         [HttpGet]
         public IEnumerable<Domain.Entity.Person> Get()
         {
-            return new ServiceLayer.GenericService.GenericService<Domain.Entity.Person, Guid>().Get();
+            return new GenericService<Domain.Entity.Person, Guid>().Get();
         }
 
         // GET api/<Person>/5
         [HttpGet("{id}")]
         public Domain.Entity.Person Get(Guid id)
         {
-            return new ServiceLayer.GenericService.GenericService<Domain.Entity.Person, Guid>().GetById(id);
+            return new GenericService<Domain.Entity.Person, Guid>().GetById(id);
         }
 
         // POST api/<Person>
         [HttpPost]
         public void Post([FromBody] Domain.Entity.Person value)
         {
-            new ServiceLayer.GenericService.GenericService<Domain.Entity.Person, Guid>().Insert(value);
+            new GenericService<Domain.Entity.Person, Guid>().Insert(value);
         }
     }
 }

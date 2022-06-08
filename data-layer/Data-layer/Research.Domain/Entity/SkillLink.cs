@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Research.Domain.Entity
 {
     [Table("SkillLink")]
-    public class SkillLink
+    public class SkillLink 
     {
         [Key]
         public Guid SkillLinkId { get; set; }
