@@ -1,3 +1,5 @@
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,7 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    //options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+    options.AddSecurityDefinition("Swagger acces token", new OpenApiSecurityScheme
+    {
+        Name = "Swagger access token",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.OAuth2
+    });
+});
 
 var app = builder.Build();
 
