@@ -4,7 +4,6 @@ import { MatchService } from './match.service';
 
 @Module({
   providers: [MatchService],
-  controllers: [MatchController],
-  exports: [MatchService]
+  controllers: [MatchController]
 })
 export class MatchModule { }

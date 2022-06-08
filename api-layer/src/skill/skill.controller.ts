@@ -1,6 +1,6 @@
 import { Get, Controller, Query, Param, ParseUUIDPipe } from '@nestjs/common';
 import { SkillService } from './skill.service';
-import { SkillListDto,UserSkillListDto } from './dto/skill.dto';
+import { SkillListDto } from './dto/skill.dto';
 
 @Controller('skills')
 export class SkillController {
@@ -12,7 +12,7 @@ export class SkillController {
     }
 
     @Get(':userId')
-    async findByUserId(@Query() query, @Param('userId', ParseUUIDPipe) userId: string): Promise<UserSkillListDto> {
+    async findByUserId(@Query() query, @Param('userId', ParseUUIDPipe) userId: string): Promise<SkillListDto> {
         return await this.skillService.findByUserId(query, userId);
     }
 }
