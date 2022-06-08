@@ -35,6 +35,7 @@
       <div class="form-array-container">
 
         <div class="skills-container" formArrayName="skills">
+          <h2>Skills</h2>
           <ng-container *ngFor="let skill of formSkills.controls; let i = index; let last = last"; >
             <div class="skill-row" [formGroupName]="i">
               <mat-form-field appearance="fill">
@@ -102,6 +103,7 @@
         </div>
 
         <div class="languages-container" formArrayName="languages">
+          <h2>Languages</h2>
           <ng-container *ngFor="let language of formLanguages.controls; let i = index; let last = last"; >
             <div class="language-row" [formGroupName]="i">
 
@@ -146,6 +148,8 @@
       mat-raised-button
       type="submit"
       color="primary"
+      [class.spinner]="loading"
+      [disabled]="loading"
       (click)="submit()">
       Save skills
     </button>

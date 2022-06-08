@@ -17,7 +17,7 @@ namespace Research.ServiceLayer.GenericService
 
         void Delete(TEntity entityToDelete);
 
-        void Insert(TEntity entity);
+        HttpResponseMessage Insert(TEntity entity);
 
         void Update(TEntity entityToUpdate);
     }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Language, LanguageLevel, MacroArea, PersonDto, Profile, Site, SkillLevel } from './xvision-dto';
+import { Language, LanguageLevel, MacroArea, PersonDto, Profile, SearchDto, SearchResultDto, Site, SkillLevel } from './xvision-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +43,10 @@ export class XVisionApiService {
     return this.http.post<any>(`${environment.apiBaseUrl}/person`, body, {'headers':headers});
   }
 
+  getSuggestions(dto: SearchDto): Observable<SearchResultDto[]> {
+    return this.http.get<any>(`${environment.apiBaseUrl}/searchResult`);
+  }
+
 }
 
 export class XVisionFakeApiService extends XVisionApiService {
@@ -69,6 +73,16 @@ export class XVisionFakeApiService extends XVisionApiService {
 
   getSkillLevels(): Observable<SkillLevel[]> {
     return this.http.get<any>(`${environment.apiBaseUrl}/skillLevel`)
+  }
+
+  saveSkills(dto: PersonDto): Observable<void> {
+    const headers = { 'content-type': 'application/json'}
+    const body = JSON.stringify(dto);
+    return this.http.post<any>(`${environment.apiBaseUrl}/person`, body, {'headers':headers});
+  }
+
+  getSuggestions(dto: SearchDto): Observable<SearchResultDto[]> {
+    return this.http.get<any>(`${environment.apiBaseUrl}/searchResult`);
   }
 
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace Research.ServiceLayer.GenericService
 
         protected ResearchContext Context => _context;
 
-        public GenericService(DbContextOptions options)
+        public GenericService()
         {
             _context = new ResearchContext();
         }
@@ -80,9 +81,18 @@ namespace Research.ServiceLayer.GenericService
             return _context.Set<TEntity>().Find(id);
         }
 
-        public void Insert(TEntity entity)
+        public HttpResponseMessage Insert(TEntity entity)
         {
-            _context.Set<TEntity>().Attach(entity);
+            try
+            {
+                _context.Set<TEntity>().AddRange(entity);
+                _context.SaveChanges();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public void Update(TEntity entity)

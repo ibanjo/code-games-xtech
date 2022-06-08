@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Research.Domain.Entity;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,47 +26,174 @@ namespace Research.Domain.Context
         public DbSet<LanguageLink> LanguageLink { get; set; }
         public DbSet<Person> Person { get; set; }
         public DbSet<Entity.Research> Research { get; set; }
-        public DbSet<Site> Site{ get; set; }
+        public DbSet<Site> Site { get; set; }
         public DbSet<Skill> Skill { get; set; }
         public DbSet<SkillLink> SkillLink { get; set; }
 
         public string _connectionString = @"Server=20201067-AIT\MEMA;Database=App;Trusted_Connection=True;";
 
-        //public ResearchContext(DbContextOptions options) : base(options)
-        //{
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            #region MyRegion
+            var language1 = Guid.NewGuid();
+            var language2 = Guid.NewGuid();
+            var language3 = Guid.NewGuid();
+            var language4 = Guid.NewGuid();
+            var language5 = Guid.NewGuid();
+            var language6 = Guid.NewGuid();
+            var language7 = Guid.NewGuid();
+
+            modelBuilder.Entity<Language>().HasData(
+                new Language { LanguageId = language1, Code = 1, Description = "English" },
+                new Language { LanguageId = language2, Code = 2, Description = "French" },
+                new Language { LanguageId = language3, Code = 3, Description = "German" },
+                new Language { LanguageId = language4, Code = 4, Description = "Spanish" },
+                new Language { LanguageId = language5, Code = 5, Description = "Italian" },
+                new Language { LanguageId = language6, Code = 6, Description = "Portuguese" },
+                new Language { LanguageId = language7, Code = 7, Description = "Russian" }
+                );
+            #endregion
+
+            #region LanguageLevel
+
+            /////
+            var level1 = Guid.NewGuid();
+            var level2 = Guid.NewGuid();
+            var level3 = Guid.NewGuid();
+            var level4 = Guid.NewGuid();
+            var level5 = Guid.NewGuid();
+            var level6 = Guid.NewGuid();
+
+            modelBuilder.Entity<LanguageLevel>().HasData(
+                new LanguageLevel { LanguageLevelId = level1, Code = 1, Description = "Beginner" },
+                new LanguageLevel { LanguageLevelId = level2, Code = 2, Description = "Elementary" },
+                new LanguageLevel { LanguageLevelId = level3, Code = 3, Description = "Pre-Intermediate" },
+                new LanguageLevel { LanguageLevelId = level4, Code = 4, Description = "Intermediate" },
+                new LanguageLevel { LanguageLevelId = level5, Code = 5, Description = "Upper-Intermediate" },
+                new LanguageLevel { LanguageLevelId = level6, Code = 6, Description = "Advanced" }
+                );
+
+            #endregion
+
+            #region Site
+            ///
+            var site1 = Guid.NewGuid();
+            var site2 = Guid.NewGuid();
+            var site3 = Guid.NewGuid();
+            var site4 = Guid.NewGuid();
+            var site5 = Guid.NewGuid();
+
+            modelBuilder.Entity<Site>().HasData(
+                new Site { SiteId = site1, Code = 1, Description = "NEW YORK" },
+                new Site { SiteId = site2, Code = 2, Description = "CHICAGO" },
+                new Site { SiteId = site3, Code = 3, Description = "WASHINGTON" },
+                new Site { SiteId = site4, Code = 4, Description = "LOS ANGELES" },
+                new Site { SiteId = site5, Code = 5, Description = "LONDON" }
+                );
+
+            /////
+            #endregion
+
+            #region Skill
+
+            var skill1 = Guid.NewGuid();
+            var skill2 = Guid.NewGuid();
+            var skill3 = Guid.NewGuid();
+            var skill4 = Guid.NewGuid();
+            var skill5 = Guid.NewGuid();
+            var skill6 = Guid.NewGuid();
+            var skill7 = Guid.NewGuid();
+
+            modelBuilder.Entity<Skill>().HasData(
+                new Skill { SkillId = skill1, Code = 1, FEBEDevops = "", WebMobile ="angular", Technology = "", ProjectRef = "", Description = "Angular 9" },
+                new Skill { SkillId = skill2, Code = 2, FEBEDevops = "" , WebMobile = "typescript", Technology = "", ProjectRef = "", Description = "TS" },
+                new Skill { SkillId = skill3, Code = 3, FEBEDevops = "Azure", WebMobile = "", Technology = "", ProjectRef = "", Description = "Azure" },
+                new Skill { SkillId = skill4, Code = 4, FEBEDevops = "", WebMobile = "Flutter", Technology = "", ProjectRef = "", Description = "Flutter" },
+                new Skill { SkillId = skill5, Code = 5, FEBEDevops = "", WebMobile = "", Technology = "Iot", ProjectRef = "", Description = "Iot" },
+                new Skill { SkillId = skill6, Code = 6, FEBEDevops = ".NET", WebMobile = "", Technology = "", ProjectRef = "", Description = ".NET" },
+                new Skill { SkillId = skill7, Code = 7, FEBEDevops = "", WebMobile = "", Technology = "SSMS", ProjectRef = "", Description = "SMSS" }
+                );
+
+            #endregion
+
+            #region Person
+
+            var person1 = Guid.NewGuid();
+            var person2 = Guid.NewGuid();
+            var person3 = Guid.NewGuid();
+            var person4 = Guid.NewGuid();
+            var person5 = Guid.NewGuid();
+            var person6 = Guid.NewGuid();
+            var person7 = Guid.NewGuid();
+
+            modelBuilder.Entity<Person>().HasData(
+                new Person { PersonId = person1, Code = 1, Name = "Nicoletta", Surnamme = "Morsia", SiteId = site1, YearsOfExperience = 2, Position = "dev", Remote = false, IsRecruiter = false },
+                new Person { PersonId = person2, Code = 2, Name = "Mario", Surnamme = "Rossi", SiteId = site2, YearsOfExperience = 2, Position = "recuiter", Remote = true, IsRecruiter = true},
+                new Person { PersonId = person3, Code = 3, Name = "Mario", Surnamme = "Rossi", SiteId = site1, YearsOfExperience = 2, Position = "recruiter", Remote = false, IsRecruiter = true },
+                new Person { PersonId = person4, Code = 4, Name = "Mario", Surnamme = "Rossi", SiteId = site1, YearsOfExperience = 2, Position = "dev", Remote = true, IsRecruiter = false},
+                new Person { PersonId = person5, Code = 5, Name = "Giovanni", Surnamme = "Bianchi", SiteId = site3, YearsOfExperience = 4, Position = "dev", Remote = true, IsRecruiter = false},
+                new Person { PersonId = person6, Code = 6, Name = "Alessandra", Surnamme = "Verdi", SiteId = site2, YearsOfExperience = 15, Position = "dev", Remote = true, IsRecruiter = false},
+                new Person { PersonId = person7, Code = 7, Name = "Giovanni", Surnamme = "Novembre", SiteId = site5, YearsOfExperience = 1, Position = "dev", Remote = true, IsRecruiter = false}
+                );
+
+            #endregion
+
+            #region SkillLink
+
+            modelBuilder.Entity<SkillLink>().HasData(
+                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person1, SkillId = skill1, Level = 1 },
+                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person1, SkillId = skill2, Level = 2 },
+                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person2, SkillId = skill3, Level = 3 },
+                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person3, SkillId = skill4, Level = 1 },
+                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person4, SkillId = skill5, Level = 6 },
+                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person4, SkillId = skill6, Level = 3 },
+                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person4, SkillId = skill3, Level = 2 },
+                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person5, SkillId = skill7, Level = 2 }
+                );
+
+
+            #endregion
+
+            #region LanguageLink
+
+            modelBuilder.Entity<LanguageLink>().HasData(
+                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language1, LanguageLevelId = level3, PersonId = person1, Preferred = true },
+                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language2, LanguageLevelId = level6, PersonId = person1, Preferred = false },
+                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language3, LanguageLevelId = level1, PersonId = person2, Preferred = true },
+                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language4, LanguageLevelId = level2, PersonId = person2, Preferred = false },
+                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language5, LanguageLevelId = level3, PersonId = person3, Preferred = true },
+                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language6, LanguageLevelId = level4, PersonId = person3, Preferred = false },
+                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language7, LanguageLevelId = level5, PersonId = person4, Preferred = true }
+                );
+
+            /////
+            ///
+            #endregion
+
+            #region Research
+
+            modelBuilder.Entity<Entity.Research>().HasData(
+                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 1, Description = "Front end Angular", Remote = true, SiteId = site1, PersonId = person2, LanguageId = language1 },
+                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 2, Description = "Back end .NET", Remote = true, SiteId = site2, PersonId = person2, LanguageId = language2 },
+                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 3, Description = "Typescript", Remote = true, SiteId = site3, PersonId = person2, LanguageId = language1 },
+                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 4, Description = "Azure", Remote = false, SiteId = site4, PersonId = person2, LanguageId = language3 },
+                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 5, Description = "Smss", Remote = false, SiteId = site5, PersonId = person2, LanguageId = language4 },
+                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 6, Description = "Back end .NET", Remote = true, SiteId = site2, PersonId = person3, LanguageId = language5 },
+                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 7, Description = "Azure", Remote = true, SiteId = site4, PersonId = person3, LanguageId = language4 },
+                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 8, Description = "Flutter", Remote = true, SiteId = site1, PersonId = person3, LanguageId = language6 },
+                new Entity.Research { ResearchId = Guid.NewGuid(), Code = 9, Description = "Back end .NET", Remote = true, SiteId = site5, PersonId = person3, LanguageId = language7 }
+                );
+            #endregion
+
+        }
 
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(_connectionString);
         }
-    }
-    
-    //public static class MigrationUtility
-    //{
-    //    public enum MigrationType
-    //    {
-    //        Up,
-    //        Down
-    //    }
 
-    //    public static string ReadSql(Type migrationType, MigrationType migrationTypeEnum)
-    //    {
-    //        var assembly = migrationType.Assembly;
-    //        string resourceName = $"{migrationType.Namespace}.scripts.{migrationType.Name}.{migrationTypeEnum.ToString()}.sql";
-    //        using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourceName))
-    //        {
-    //            if (stream == null)
-    //            {
-    //                throw new FileNotFoundException("Unable to find the SQL file from an embedded resource", resourceName);
-    //            }
-    //            using (var reader = new StreamReader(stream))
-    //            {
-    //                string content = reader.ReadToEnd();
-    //                return content;
-    //            }
-    //        }
-    //    }
-    //}
+    }
 }

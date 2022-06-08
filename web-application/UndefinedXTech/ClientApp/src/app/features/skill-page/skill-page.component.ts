@@ -5,6 +5,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MacroArea } from 'src/app/api/xvision-dto';
 import { Router } from '@angular/router';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-skill-page',
@@ -20,6 +21,8 @@ export class SkillPageComponent implements OnInit, OnDestroy {
   areaList: Area[][] = [];
 
   techList: Technology[][] = [];
+
+  loading = false;
 
   languages$ = this.api.getLanguages();
   languagesLevel$ = this.api.getLanguagesLevel();
@@ -85,8 +88,9 @@ export class SkillPageComponent implements OnInit, OnDestroy {
   submit() {
     console.log('FORM', this.form.getRawValue());
     if (this.form.valid) {
+      this.loading = true;
       this._subs.add(
-        this.api.saveSkills(this.form.getRawValue()).subscribe(() =>  this.router.navigate(['home']))
+        this.api.saveSkills(this.form.getRawValue()).pipe(delay(500)).subscribe(() =>  this.router.navigate(['home']))
       );
     } else {
       this.form.markAllAsTouched();
@@ -139,7 +143,6 @@ export class SkillPageComponent implements OnInit, OnDestroy {
         this.areaList[index] = this.skillsList.find(s => s.description === v.feBeDevops)?.areas ?? [];
         this.techList[index] = this.skillsList.find(s => s.description === v.feBeDevops)?.areas.find(a => a.description === v.webMobile)?.technologies ?? [];
       }))
-    )
+    );
   }
-
 }

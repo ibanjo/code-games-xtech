@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'skill-form',
     loadChildren: () => import('./features/skill-page/skill-page.module').then(m => m.SkillPageModule)
+  },
+  {
+    path: 'search-result',
+    loadChildren: () => import('./features/search-result/search-result.module').then(m => m.SearchResultModule)
   }
 ];
 
