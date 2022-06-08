@@ -37,6 +37,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     this._subs.unsubscribe();
   }
 
+  goBack() {
+    this.router.navigate(['home']);
+  }
+
   apply() {
     if (this.form.valid) {
       this.router.navigate(['search-result'], {

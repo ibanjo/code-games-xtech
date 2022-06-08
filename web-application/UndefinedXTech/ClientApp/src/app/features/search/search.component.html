@@ -69,7 +69,13 @@
   </div>
 
   <div class="footer-container" slot="footer">
-    <button class="ml-2"
+    <button
+      mat-raised-button
+      color="secondary"
+      (click)="goBack()">
+      Cancel
+    </button>
+    <button class="ml-3"
       mat-raised-button
       type="submit"
       color="primary"

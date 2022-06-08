@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 
 @Component({
@@ -8,6 +9,10 @@ import { AuthService } from '../../auth.service';
 })
 export class NavbarComponent {
 
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService, private router: Router) {}
+
+  goHome() {
+    this.router.navigate(['home']);
+  }
 
 }
