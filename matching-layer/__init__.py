@@ -1,10 +1,11 @@
-from flask import Flask
+from flask import Flask, request
+import pandas as pd
 
 from models.research import Research
 from similarity import Similarity
 from utils.map_input import map_input
 from utils.model_mapping import research_to_model_table
-from utils.training_data_gen import generate_training_data
+from utils.training_data import generate_training_data_from_json
 
 app = Flask(__name__)
 
@@ -14,7 +15,10 @@ def init():
 
 @app.route("/fitSearch", methods=['POST'])
 def fit_search():
-    training_data = generate_training_data()
+    values = request.get_json()
+    data = generate_training_data_from_json(values)
+    training_data = pd.DataFrame(data)
+    training_data.head()
     sim = Similarity()
     sim.fit(training_data)
     return "True"
