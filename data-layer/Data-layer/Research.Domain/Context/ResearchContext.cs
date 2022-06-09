@@ -33,6 +33,12 @@ namespace Research.Domain.Context
 
         public string _connectionString = @"Server=(LocalDb)\MSSQLLocalDB;Database=App;Trusted_Connection=True;";
 
+        private T GetRandomItem<T>(List<T> input, Random rng)
+        {
+            int randIndex = rng.Next(input.Count);
+            return input[randIndex];
+        }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -116,32 +122,39 @@ namespace Research.Domain.Context
 
             #region Skill
 
-            var skill1 = Guid.NewGuid();
-            var skill2 = Guid.NewGuid();
-            var skill3 = Guid.NewGuid();
-            var skill4 = Guid.NewGuid();
-            var skill5 = Guid.NewGuid();
-            var skill6 = Guid.NewGuid();
-            var skill7 = Guid.NewGuid();
+            var seedArray = new Guid[1000];
+            List<Guid> skillGuids = seedArray.Select(x => Guid.NewGuid()).ToList();
+            var skillAreas = new List<string> {"Frontend", "Backend", "DevOps"};
+            var skillEnvs = new List<string> {"Web", "Mobile"};
+            var skillTree = new Dictionary<string, List<string>>
+            {
+                {"Frontend", new List<string>{"Angular", "Vue", "React", "Svelte"}},
+                {"Backend", new List<string>{".NET", "Spring", "Laravel", "Django", "ExpressJS"}},
+                {"DevOps", new List<string>{"Terraform", "Docker", "Kubernetes", "GitLab"}}
+            };
 
-            var skillss = new List<Guid>();
-            skillss.Add(skill1);
-            skillss.Add(skill2);
-            skillss.Add(skill3);
-            skillss.Add(skill4);
-            skillss.Add(skill5);
-            skillss.Add(skill6);
-            skillss.Add(skill7);
+            var rng = new Random();
+            var skillArray = new List<Skill>();
+            foreach (Guid skillGuid in skillGuids)
+            {
+                string? skillArea = GetRandomItem(skillAreas, rng);
+                List<string> availableSkills = skillTree[skillArea];
+                string skill = GetRandomItem(availableSkills, rng);
+                string skillEnv = GetRandomItem(skillEnvs, rng);
+                var theSkill = new Skill
+                {
+                    Code = rng.Next(1000),
+                    SkillId = skillGuid,
+                    FEBEDevops = skillArea,
+                    WebMobile = skillEnv,
+                    Technology = skill,
+                    Description = $"{skillArea} - {skillEnv} - {skill}",
+                    ProjectRef = ""
+                };
+                skillArray.Add(theSkill);
+            }
 
-            modelBuilder.Entity<Skill>().HasData(
-                new Skill { SkillId = skill1, Code = 1, FEBEDevops = "", WebMobile ="angular", Technology = "", ProjectRef = "", Description = "Angular 9" },
-                new Skill { SkillId = skill2, Code = 2, FEBEDevops = "" , WebMobile = "typescript", Technology = "", ProjectRef = "", Description = "TS" },
-                new Skill { SkillId = skill3, Code = 3, FEBEDevops = "Azure", WebMobile = "", Technology = "", ProjectRef = "", Description = "Azure" },
-                new Skill { SkillId = skill4, Code = 4, FEBEDevops = "", WebMobile = "Flutter", Technology = "", ProjectRef = "", Description = "Flutter" },
-                new Skill { SkillId = skill5, Code = 5, FEBEDevops = "", WebMobile = "", Technology = "Iot", ProjectRef = "", Description = "Iot" },
-                new Skill { SkillId = skill6, Code = 6, FEBEDevops = ".NET", WebMobile = "", Technology = "", ProjectRef = "", Description = ".NET" },
-                new Skill { SkillId = skill7, Code = 7, FEBEDevops = "", WebMobile = "", Technology = "SSMS", ProjectRef = "", Description = "SMSS" }
-                );
+            modelBuilder.Entity<Skill>().HasData(skillArray.ToArray());
 
             #endregion
 
