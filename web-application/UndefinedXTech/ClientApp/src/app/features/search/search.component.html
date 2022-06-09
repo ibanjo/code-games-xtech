@@ -9,7 +9,7 @@
       <div class="form-grid-skill">
         <mat-form-field appearance="fill">
           <mat-label>Macro area</mat-label>
-          <mat-select formControlName="feBeDevops">
+          <mat-select formControlName="FEBEDevops">
             <mat-option *ngFor="let skill of skillsList" [value]="skill.description">
               {{skill.description}}
             </mat-option>
@@ -18,7 +18,7 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Area</mat-label>
-          <mat-select formControlName="webMobile" [disabled]="!form.value.feBeDevops">
+          <mat-select formControlName="webMobile" [disabled]="!form.value.FEBEDevops">
             <mat-option *ngFor="let area of areaList" [value]="area.description">
               {{area.description}}
             </mat-option>

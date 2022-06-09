@@ -27,9 +27,9 @@ export class UserService {
       FEBEDevops: dto.FEBEDevops,
       WebMobile: dto.webMobile,
       Technology: dto.technology,
-      SkillLevel: dto.skillLevel
+      SkillLevel: dto.level
     };
-    const research = await this.researchService.findById(dto.researchID);
+    //const research = await this.researchService.findById(dto.researchID);
     //ML layer
     const resultML = await this.MLLayer.postAsync(matchResearch, "/getSimilarities");
     const personIds = Object.values(resultML);
@@ -38,7 +38,15 @@ export class UserService {
     const usersEntities = allUsers.filter(person => personIds.find(personId => String(personId).toLowerCase() === person.personId.toLowerCase()));
     const users = instanceToInstance<UserDto[]>(usersEntities);
     const usersCount = users.length;
-    return { research, users, usersCount };
+    return { research: {
+        researchId: dto.researchID,
+        code: 42,
+        description: 'Test',
+        remote: false,
+        siteId: 'asd',
+        userId: '',
+        languageId: ''
+    }, users, usersCount };
   }
 
   async findAll(query): Promise<UserListDto> {

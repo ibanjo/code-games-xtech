@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsUUID } from 'class-validator';
 
 export class GetSimilaritiesRequestDto {
-    @IsUUID()
+    //@IsUUID()
     researchID: string;
     languageID: string;
     languageLevel: number;
@@ -11,5 +11,5 @@ export class GetSimilaritiesRequestDto {
     webMobile: string;
     @IsNotEmpty()
     technology: string;
-    skillLevel: number;
+    level: number;
 }
