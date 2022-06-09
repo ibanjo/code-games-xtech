@@ -35,7 +35,7 @@ class Similarity:
             distortions = self.calc_inertia(K, X)
             self.show_elbow(K, distortions)
         
-        kmeans = KMeans(n_clusters=18, init='k-means++', n_init=50)
+        kmeans = KMeans(n_clusters=20, init='k-means++', n_init=50)
         kmeans.fit(X)
 
         y_pred_fit = kmeans.predict(X)
