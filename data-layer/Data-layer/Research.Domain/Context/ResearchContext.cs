@@ -33,6 +33,12 @@ namespace Research.Domain.Context
 
         public string _connectionString = @"Server=20201067-AIT\MEMA;Database=App;Trusted_Connection=True;";
 
+        private T GetRandomItem<T>(List<T> input, Random rng)
+        {
+            int randIndex = rng.Next(input.Count);
+            return input[randIndex];
+        }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -76,6 +82,14 @@ namespace Research.Domain.Context
             var level5 = Guid.NewGuid();
             var level6 = Guid.NewGuid();
 
+            var levels = new List<Guid>();
+            levels.Add(level1);
+            levels.Add(level2);
+            levels.Add(level3);
+            levels.Add(level4);
+            levels.Add(level5);
+            levels.Add(level6);
+
             modelBuilder.Entity<LanguageLevel>().HasData(
                 new LanguageLevel { LanguageLevelId = level1, Code = 1, Description = "Beginner" },
                 new LanguageLevel { LanguageLevelId = level2, Code = 2, Description = "Elementary" },
@@ -116,84 +130,109 @@ namespace Research.Domain.Context
 
             #region Skill
 
-            var skill1 = Guid.NewGuid();
-            var skill2 = Guid.NewGuid();
-            var skill3 = Guid.NewGuid();
-            var skill4 = Guid.NewGuid();
-            var skill5 = Guid.NewGuid();
-            var skill6 = Guid.NewGuid();
-            var skill7 = Guid.NewGuid();
+            var seedArray = new Guid[1000];
+            List<Guid> skillGuids = seedArray.Select(x => Guid.NewGuid()).ToList();
+            var skillAreas = new List<string> {"Frontend", "Backend", "DevOps"};
+            var skillEnvs = new List<string> {"Web", "Mobile"};
+            var skillTree = new Dictionary<string, List<string>>
+            {
+                {"Frontend", new List<string>{"Angular", "Vue", "React", "Svelte"}},
+                {"Backend", new List<string>{".NET", "Spring", "Laravel", "Django", "ExpressJS"}},
+                {"DevOps", new List<string>{"Terraform", "Docker", "Kubernetes", "GitLab"}}
+            };
 
-            modelBuilder.Entity<Skill>().HasData(
-                new Skill { SkillId = skill1, Code = 1, FEBEDevops = "", WebMobile ="angular", Technology = "", ProjectRef = "", Description = "Angular 9" },
-                new Skill { SkillId = skill2, Code = 2, FEBEDevops = "" , WebMobile = "typescript", Technology = "", ProjectRef = "", Description = "TS" },
-                new Skill { SkillId = skill3, Code = 3, FEBEDevops = "Azure", WebMobile = "", Technology = "", ProjectRef = "", Description = "Azure" },
-                new Skill { SkillId = skill4, Code = 4, FEBEDevops = "", WebMobile = "Flutter", Technology = "", ProjectRef = "", Description = "Flutter" },
-                new Skill { SkillId = skill5, Code = 5, FEBEDevops = "", WebMobile = "", Technology = "Iot", ProjectRef = "", Description = "Iot" },
-                new Skill { SkillId = skill6, Code = 6, FEBEDevops = ".NET", WebMobile = "", Technology = "", ProjectRef = "", Description = ".NET" },
-                new Skill { SkillId = skill7, Code = 7, FEBEDevops = "", WebMobile = "", Technology = "SSMS", ProjectRef = "", Description = "SMSS" }
-                );
+            var rng = new Random();
+            var skillArray = new List<Skill>();
+            foreach (Guid skillGuid in skillGuids)
+            {
+                string? skillArea = GetRandomItem(skillAreas, rng);
+                List<string> availableSkills = skillTree[skillArea];
+                string skill = GetRandomItem(availableSkills, rng);
+                string skillEnv = GetRandomItem(skillEnvs, rng);
+                var theSkill = new Skill
+                {
+                    Code = rng.Next(1000),
+                    SkillId = skillGuid,
+                    FEBEDevops = skillArea,
+                    WebMobile = skillEnv,
+                    Technology = skill,
+                    Description = $"{skillArea} - {skillEnv} - {skill}",
+                    ProjectRef = ""
+                };
+                skillArray.Add(theSkill);
+            }
+
+            modelBuilder.Entity<Skill>().HasData(skillArray.ToArray());
 
             #endregion
 
             #region Person
 
-            var person1 = Guid.NewGuid();
-            var person2 = Guid.NewGuid();
-            var person3 = Guid.NewGuid();
-            var person4 = Guid.NewGuid();
-            var person5 = Guid.NewGuid();
-            var person6 = Guid.NewGuid();
-            var person7 = Guid.NewGuid();
+            var seedPeople = new Guid[300];
+            List<Guid> peopleGuids = seedPeople.Select(x => Guid.NewGuid()).ToList();
+            var peopleName = new List<string> { "Nicoletta", "Mario", "Maurizio", "Giuseppe", "Giovanni", "Alessandro", "Alessandra", "Maria", "Giorgia", "Sara", "Monica", "Giuseppina", "Caterina" };
+            var peopleSurname = new List<string> { "Morsia", "Ziliani", "Novembre", "Bianchi", "Rossi,", "Verdi", "Nero", "Cannone", "Deca", "Bianco", "Gialli", "Balsamo" };
+            var positions = new List<string> { "Senior Developer", "Junior Developer", "Senior Architect", "Junior Architect", "Senior Manager", "Junior Manager", "Senior Consultant", "Junior Consultant", "Senior Tester", "Junior Tester", "Senior Designer", "Junior Designer" };
+            
+            var rng1 = new Random();
+            var peopleArray = new List<Person>();
+            foreach (Guid peopleGuid in peopleGuids)
+            {
+                string name = GetRandomItem(peopleName, rng1);
+                string surname = GetRandomItem(peopleSurname, rng1);
+                var thePerson = new Person
+                {
+                    PersonId = peopleGuid,
+                    Name = name,
+                    Surnamme = surname,
+                    SiteId = GetRandomItem(sites, rng1),
+                    YearsOfExperience = rng1.Next(1, 10),
+                    Position = GetRandomItem(positions, rng1),
+                    Remote = rng1.Next(0, 1) == 1,
+                    IsRecruiter = rng1.Next(0, 1) == 1,
+                };
+                
+                peopleArray.Add(thePerson);
+            }
 
-            var people = new List<Guid>();
-            people.Add(person1);
-            people.Add(person2);
-            people.Add(person3);
-            people.Add(person4);
-            people.Add(person5);
-            people.Add(person6);
-            people.Add(person7);
-
-            modelBuilder.Entity<Person>().HasData(
-                new Person { PersonId = person1, Code = 1, Name = "Nicoletta", Surnamme = "Morsia", SiteId = site1, YearsOfExperience = 2, Position = "dev", Remote = false, IsRecruiter = false },
-                new Person { PersonId = person2, Code = 2, Name = "Mario", Surnamme = "Rossi", SiteId = site2, YearsOfExperience = 2, Position = "recuiter", Remote = true, IsRecruiter = true},
-                new Person { PersonId = person3, Code = 3, Name = "Mario", Surnamme = "Rossi", SiteId = site1, YearsOfExperience = 2, Position = "recruiter", Remote = false, IsRecruiter = true },
-                new Person { PersonId = person4, Code = 4, Name = "Mario", Surnamme = "Rossi", SiteId = site1, YearsOfExperience = 2, Position = "dev", Remote = true, IsRecruiter = false},
-                new Person { PersonId = person5, Code = 5, Name = "Giovanni", Surnamme = "Bianchi", SiteId = site3, YearsOfExperience = 4, Position = "dev", Remote = true, IsRecruiter = false},
-                new Person { PersonId = person6, Code = 6, Name = "Alessandra", Surnamme = "Verdi", SiteId = site2, YearsOfExperience = 15, Position = "dev", Remote = true, IsRecruiter = false},
-                new Person { PersonId = person7, Code = 7, Name = "Giovanni", Surnamme = "Novembre", SiteId = site5, YearsOfExperience = 1, Position = "dev", Remote = true, IsRecruiter = false}
-                );
-
+            modelBuilder.Entity<Person>().HasData(peopleArray.ToArray());
             #endregion
 
             #region SkillLink
 
-            modelBuilder.Entity<SkillLink>().HasData(
-                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person1, SkillId = skill1, Level = 1 },
-                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person1, SkillId = skill2, Level = 2 },
-                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person2, SkillId = skill3, Level = 3 },
-                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person3, SkillId = skill4, Level = 1 },
-                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person4, SkillId = skill5, Level = 6 },
-                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person4, SkillId = skill6, Level = 3 },
-                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person4, SkillId = skill3, Level = 2 },
-                new SkillLink { SkillLinkId = Guid.NewGuid(), PersonId = person5, SkillId = skill7, Level = 2 }
-                );
 
+            List<Entity.SkillLink> skills = new List<Entity.SkillLink>();
+            for (int i = 0; i < 1000; i++)
+            {
+                skills.Add(new Entity.SkillLink()
+                {
+                    SkillLinkId = Guid.NewGuid(),
+                    SkillId = skillArray[new Random().Next(skillArray.Count)].SkillId,
+                    PersonId = peopleArray[new Random().Next(peopleArray.Count)].PersonId,
+                    Level = new Random().Next(0, 7)
+                });
+            };
+
+            modelBuilder.Entity<Entity.SkillLink>().HasData(skills.ToArray());
 
             #endregion
 
             #region LanguageLink
 
-            modelBuilder.Entity<LanguageLink>().HasData(
-                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language1, LanguageLevelId = level3, PersonId = person1, Preferred = true },
-                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language2, LanguageLevelId = level6, PersonId = person1, Preferred = false },
-                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language3, LanguageLevelId = level1, PersonId = person2, Preferred = true },
-                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language4, LanguageLevelId = level2, PersonId = person2, Preferred = false },
-                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language5, LanguageLevelId = level3, PersonId = person3, Preferred = true },
-                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language6, LanguageLevelId = level4, PersonId = person3, Preferred = false },
-                new LanguageLink { LanguageLinkId = Guid.NewGuid(), LanguageId = language7, LanguageLevelId = level5, PersonId = person4, Preferred = true }
-                );
+            List<LanguageLink> languagess = new List<LanguageLink>();
+            for (int i = 0; i < 400; i++)
+            {
+                languagess.Add(new LanguageLink()
+                {
+                    LanguageLinkId = Guid.NewGuid(),
+                    LanguageId = languages[new Random().Next(languages.Count)],
+                    PersonId = peopleArray[new Random().Next(peopleArray.Count)].PersonId,
+                    LanguageLevelId = levels[new Random().Next(levels.Count)],
+                    Preferred = new Random().Next(0, 1) == 1
+                });
+            };
+
+            modelBuilder.Entity<LanguageLink>().HasData(languagess.ToArray());
 
             /////
             ///
@@ -202,7 +241,7 @@ namespace Research.Domain.Context
             #region Research
 
             List<Entity.Research> researches = new List<Entity.Research>();
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 researches.Add(new Entity.Research()
                 {
@@ -211,7 +250,7 @@ namespace Research.Domain.Context
                     Description = "Research " + i,
                     Remote = new Random().Next(0, 1) == 1,
                     SiteId = sites[new Random().Next(sites.Count)],
-                    PersonId = people[new Random().Next(people.Count)],
+                    PersonId = peopleArray[new Random().Next(peopleArray.Count)].PersonId,
                     LanguageId = languages[new Random().Next(languages.Count)]
                 });
             };

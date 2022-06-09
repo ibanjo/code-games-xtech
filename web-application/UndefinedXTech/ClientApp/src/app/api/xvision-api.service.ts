@@ -82,7 +82,8 @@ export class XVisionFakeApiService extends XVisionApiService {
   }
 
   getSuggestions(dto: SearchDto): Observable<SearchResultDto[]> {
-    return this.http.get<any>(`${environment.apiBaseUrl}/searchResult`);
+    return this.http.post<any>(`http://localhost:3000/users/get-similarities`, dto);
+    //return this.http.get<any>(`${environment.apiBaseUrl}/searchResult`);
   }
 
 }

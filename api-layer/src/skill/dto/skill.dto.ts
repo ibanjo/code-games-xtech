@@ -12,6 +12,12 @@ export class UserSkillDto extends SkillDto {
     level: number;
 }
 
+export class MLUserSkillDto {
+    FEBEDevops: string;
+    webMobile: string;
+    technology: string;
+}
+
 export interface SkillListDto {
     skills: SkillDto[];
     skillsCount: number;

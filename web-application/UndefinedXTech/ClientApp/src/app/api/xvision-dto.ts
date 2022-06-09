@@ -80,7 +80,7 @@ export interface PersonDto {
 }
 
 export interface SearchDto {
-  feBeDevops: string;
+  FEBEDevops: string;
   webMobile: string;
   technology: string;
   level?: number;

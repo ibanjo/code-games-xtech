@@ -22,7 +22,7 @@ namespace Research.Domain.Entity
 
         public int Level { get; set; }
 
-        public Skill Skill { get; set; }
-        public Person Person { get; set; }
+        public Skill? Skill { get; set; }
+        public Person? Person { get; set; }
     }
 }

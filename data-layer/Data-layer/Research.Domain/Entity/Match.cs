@@ -15,14 +15,14 @@ namespace Research.Domain.Entity
         public Guid MatchId { get; set; }
         
         [ForeignKey("PersonId")]
-        public virtual Guid? EmployeeId { get; set; }
+        public virtual Guid? PersonId { get; set; }
 
         [ForeignKey("ResearchId")]
         public virtual Guid? ResearchId { get; set; }
         
         public bool? MatchAcceptedByEmployee { get; set; }
 
-        public Person Person { get; set; }
-        public Research Research { get; set; }
+        public Person? Person { get; set; }
+        public Research? Research { get; set; }
     }
 }

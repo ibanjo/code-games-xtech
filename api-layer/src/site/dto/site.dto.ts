@@ -1,7 +1,7 @@
 export interface SiteDto {
-    siteId: string;
-    code: number;
-    description: string;
+    siteId?: string;
+    code?: number;
+    description?: string;
 }
 
 export interface SiteListDto {

@@ -1,9 +1,8 @@
 export class MatchDto {
-    matchId: string;
-    researchId: string;
-    recruiterId: string;
-    userId: string;
-    matchAccepted: boolean;
+    matchId?: string;
+    employeeId?: string;
+    researchId?: string;
+    matchAcceptedByEmployee?: boolean;
 }
 
 export interface MatchListDto {

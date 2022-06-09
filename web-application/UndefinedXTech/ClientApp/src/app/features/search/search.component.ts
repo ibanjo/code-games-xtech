@@ -55,7 +55,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private _createFormGroup() {
     this.form = this.fb.group({
-      feBeDevops: [null, [Validators.required]],
+      FEBEDevops: [null, [Validators.required]],
       webMobile: [null, [Validators.required]],
       technology: [null, [Validators.required]],
       level: [],
@@ -72,8 +72,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     );
     this._subs.add(
       this.form.valueChanges.subscribe((value: SearchDto) => {
-        this.areaList = this.skillsList.find(s => s.description === value.feBeDevops)?.areas ?? [];
-        this.techList = this.skillsList.find(s => s.description === value.feBeDevops)?.areas.find(a => a.description === value.webMobile)?.technologies ?? [];
+        this.areaList = this.skillsList.find(s => s.description === value.FEBEDevops)?.areas ?? [];
+        this.techList = this.skillsList.find(s => s.description === value.FEBEDevops)?.areas.find(a => a.description === value.webMobile)?.technologies ?? [];
       }
     ));
   }

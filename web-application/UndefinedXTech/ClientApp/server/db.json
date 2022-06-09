@@ -203,39 +203,19 @@
           "technologies": [
             {
               "id": "30663433-bb39-45aa-ad0b-9bbae7e5a3d1",
-              "description": "Angular"
+              "description": "Terraform"
             },
             {
               "id": "0ea6676b-2e94-453e-ba6e-de7c0706bf6d",
-              "description": "React"
+              "description": "Docker"
             },
             {
               "id": "74ca108e-0fff-496d-92e5-6d1a59e53bcc",
-              "description": "Vue"
+              "description": "Kubernetes"
             },
             {
               "id": "3862a9f3-6c00-4753-b4a1-76e9b5f531a5",
-              "description": "Svelte"
-            },
-            {
-              "id": "91c6bcc4-ddd1-4f90-a7ee-16704b48eb6d",
-              "description": ".NET"
-            },
-            {
-              "id": "177e73bd-125a-47be-b726-fc0d138980eb",
-              "description": "Spring"
-            },
-            {
-              "id": "257ce9c8-5f96-4273-8560-28e80c749e49",
-              "description": "Laravel"
-            },
-            {
-              "id": "92a55327-1458-4f36-babe-1c661f2dce16",
-              "description": "Django"
-            },
-            {
-              "id": "e047a737-c5ae-4834-ab4c-13c8333e170b",
-              "description": "ExpressJS"
+              "description": "GitLab"
             }
           ]
         },
@@ -245,39 +225,19 @@
           "technologies": [
             {
               "id": "30663433-bb39-45aa-ad0b-9bbae7e5a3d1",
-              "description": "Angular"
+              "description": "Terraform"
             },
             {
               "id": "0ea6676b-2e94-453e-ba6e-de7c0706bf6d",
-              "description": "React"
+              "description": "Docker"
             },
             {
               "id": "74ca108e-0fff-496d-92e5-6d1a59e53bcc",
-              "description": "Vue"
+              "description": "Kubernetes"
             },
             {
               "id": "3862a9f3-6c00-4753-b4a1-76e9b5f531a5",
-              "description": "Svelte"
-            },
-            {
-              "id": "91c6bcc4-ddd1-4f90-a7ee-16704b48eb6d",
-              "description": ".NET"
-            },
-            {
-              "id": "177e73bd-125a-47be-b726-fc0d138980eb",
-              "description": "Spring"
-            },
-            {
-              "id": "257ce9c8-5f96-4273-8560-28e80c749e49",
-              "description": "Laravel"
-            },
-            {
-              "id": "92a55327-1458-4f36-babe-1c661f2dce16",
-              "description": "Django"
-            },
-            {
-              "id": "e047a737-c5ae-4834-ab4c-13c8333e170b",
-              "description": "ExpressJS"
+              "description": "GitLab"
             }
           ]
         }
