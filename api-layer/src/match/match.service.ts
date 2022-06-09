@@ -7,11 +7,11 @@ import { HttpStatus } from '@nestjs/common';
 import { CreateMatchDto } from './dto/create-match.dto';
 import { UpdateMatchDto } from './dto/update-match.dto';
 import { ConfigService } from '@nestjs/config';
+import { DataLayerClient } from 'src/adapter/data-layer';
 
 @Injectable()
 export class MatchService {
-    constructor(private readonly configService: ConfigService) {
-    }
+    constructor(private readonly configService: ConfigService, private readonly dataLayer: DataLayerClient) { }
 
     async findAll(query): Promise<MatchListDto> {
         // data access layer
@@ -66,17 +66,18 @@ export class MatchService {
             throw new HttpException({ message: 'Input data validation failed', errors }, HttpStatus.BAD_REQUEST);
         } else {
             // create new match
-            let newMatch = instanceToInstance(dto);
-            // data access layer
-            const match = {
-                matchId: '1',
-                researchId: '1',
-                userId: '1',
-                recruiterId: '1',
-                matchAccepted: false
+            let m = {
+                personId: dto.userId,
+                researchId: dto.researchId,
+                matchAcceptedByEmployee: false,
+                init: null,
+                toJSON: null
             };
+            // data access layer
+            let result = await this.dataLayer.matchPOST(m);
+
             // return saved match
-            return instanceToInstance<MatchDto>(match);
+            return instanceToInstance<MatchDto>(m);
         }
     }
 

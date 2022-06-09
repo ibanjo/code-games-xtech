@@ -415,6 +415,170 @@ export class DataLayerClientBase {
     /**
      * @return Success
      */
+    matchAll(  cancelToken?: CancelToken | undefined): Promise<Match[]> {
+        let url_ = this.baseUrl + "/api/Match";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "text/plain"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processMatchAll(_response);
+        });
+    }
+
+    protected processMatchAll(response: AxiosResponse): Promise<Match[]> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(Match.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return Promise.resolve<Match[]>(result200);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Match[]>(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    matchPOST(body: Match | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/api/Match";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_: AxiosRequestConfig = {
+            data: content_,
+            method: "POST",
+            url: url_,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processMatchPOST(_response);
+        });
+    }
+
+    protected processMatchPOST(response: AxiosResponse): Promise<void> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            return Promise.resolve<void>(null as any);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<void>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    matchGET(id: string , cancelToken?: CancelToken | undefined): Promise<Match> {
+        let url_ = this.baseUrl + "/api/Match/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "text/plain"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processMatchGET(_response);
+        });
+    }
+
+    protected processMatchGET(response: AxiosResponse): Promise<Match> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = Match.fromJS(resultData200);
+            return Promise.resolve<Match>(result200);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<Match>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
     personAll(  cancelToken?: CancelToken | undefined): Promise<Person[]> {
         let url_ = this.baseUrl + "/api/Person";
         url_ = url_.replace(/[?&]$/, "");
@@ -1238,7 +1402,7 @@ export class DataLayerClientBase {
 }
 
 export class HttpContent {
-    readonly headers!: StringStringIEnumerableKeyValuePair[] | undefined;
+    readonly headers?: StringStringIEnumerableKeyValuePair[] | null;
 
     init(_data?: any) {
         if (_data) {
@@ -1246,6 +1410,9 @@ export class HttpContent {
                 (<any>this).headers = [] as any;
                 for (let item of _data["headers"])
                     (<any>this).headers!.push(StringStringIEnumerableKeyValuePair.fromJS(item));
+            }
+            else {
+                (<any>this).headers = <any>null;
             }
         }
     }
@@ -1269,11 +1436,11 @@ export class HttpContent {
 }
 
 export class HttpMethod {
-    method!: string | undefined;
+    method?: string | null;
 
     init(_data?: any) {
         if (_data) {
-            this.method = _data["method"];
+            this.method = _data["method"] !== undefined ? _data["method"] : <any>null;
         }
     }
 
@@ -1286,46 +1453,55 @@ export class HttpMethod {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["method"] = this.method;
+        data["method"] = this.method !== undefined ? this.method : <any>null;
         return data;
     }
 }
 
 export class HttpRequestMessage {
-    version!: Version;
-    versionPolicy!: HttpVersionPolicy;
-    content!: HttpContent;
-    method!: HttpMethod;
-    requestUri!: string | undefined;
-    readonly headers!: StringStringIEnumerableKeyValuePair[] | undefined;
-    readonly properties!: { [key: string]: any; } | undefined;
-    readonly options!: { [key: string]: any; } | undefined;
+    version?: Version;
+    versionPolicy?: HttpVersionPolicy;
+    content?: HttpContent;
+    method?: HttpMethod;
+    requestUri?: string | null;
+    readonly headers?: StringStringIEnumerableKeyValuePair[] | null;
+    readonly properties?: { [key: string]: any; } | null;
+    readonly options?: { [key: string]: any; } | null;
 
     init(_data?: any) {
         if (_data) {
-            this.version = _data["version"] ? Version.fromJS(_data["version"]) : <any>undefined;
-            this.versionPolicy = _data["versionPolicy"];
-            this.content = _data["content"] ? HttpContent.fromJS(_data["content"]) : <any>undefined;
-            this.method = _data["method"] ? HttpMethod.fromJS(_data["method"]) : <any>undefined;
-            this.requestUri = _data["requestUri"];
+            this.version = _data["version"] ? Version.fromJS(_data["version"]) : <any>null;
+            this.versionPolicy = _data["versionPolicy"] !== undefined ? _data["versionPolicy"] : <any>null;
+            this.content = _data["content"] ? HttpContent.fromJS(_data["content"]) : <any>null;
+            this.method = _data["method"] ? HttpMethod.fromJS(_data["method"]) : <any>null;
+            this.requestUri = _data["requestUri"] !== undefined ? _data["requestUri"] : <any>null;
             if (Array.isArray(_data["headers"])) {
                 (<any>this).headers = [] as any;
                 for (let item of _data["headers"])
                     (<any>this).headers!.push(StringStringIEnumerableKeyValuePair.fromJS(item));
             }
+            else {
+                (<any>this).headers = <any>null;
+            }
             if (_data["properties"]) {
                 (<any>this).properties = {} as any;
                 for (let key in _data["properties"]) {
                     if (_data["properties"].hasOwnProperty(key))
-                        (<any>(<any>this).properties)![key] = _data["properties"][key];
+                        (<any>(<any>this).properties)![key] = _data["properties"][key] !== undefined ? _data["properties"][key] : <any>null;
                 }
+            }
+            else {
+                (<any>this).properties = <any>null;
             }
             if (_data["options"]) {
                 (<any>this).options = {} as any;
                 for (let key in _data["options"]) {
                     if (_data["options"].hasOwnProperty(key))
-                        (<any>(<any>this).options)![key] = _data["options"][key];
+                        (<any>(<any>this).options)![key] = _data["options"][key] !== undefined ? _data["options"][key] : <any>null;
                 }
+            }
+            else {
+                (<any>this).options = <any>null;
             }
         }
     }
@@ -1339,11 +1515,11 @@ export class HttpRequestMessage {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["version"] = this.version ? this.version.toJSON() : <any>undefined;
-        data["versionPolicy"] = this.versionPolicy;
-        data["content"] = this.content ? this.content.toJSON() : <any>undefined;
-        data["method"] = this.method ? this.method.toJSON() : <any>undefined;
-        data["requestUri"] = this.requestUri;
+        data["version"] = this.version ? this.version.toJSON() : <any>null;
+        data["versionPolicy"] = this.versionPolicy !== undefined ? this.versionPolicy : <any>null;
+        data["content"] = this.content ? this.content.toJSON() : <any>null;
+        data["method"] = this.method ? this.method.toJSON() : <any>null;
+        data["requestUri"] = this.requestUri !== undefined ? this.requestUri : <any>null;
         if (Array.isArray(this.headers)) {
             data["headers"] = [];
             for (let item of this.headers)
@@ -1353,14 +1529,14 @@ export class HttpRequestMessage {
             data["properties"] = {};
             for (let key in this.properties) {
                 if (this.properties.hasOwnProperty(key))
-                    (<any>data["properties"])[key] = (<any>this.properties)[key];
+                    (<any>data["properties"])[key] = this.properties[key] !== undefined ? this.properties[key] : <any>null;
             }
         }
         if (this.options) {
             data["options"] = {};
             for (let key in this.options) {
                 if (this.options.hasOwnProperty(key))
-                    (<any>data["options"])[key] = (<any>this.options)[key];
+                    (<any>data["options"])[key] = this.options[key] !== undefined ? this.options[key] : <any>null;
             }
         }
         return data;
@@ -1368,33 +1544,39 @@ export class HttpRequestMessage {
 }
 
 export class HttpResponseMessage {
-    version!: Version;
-    content!: HttpContent;
-    statusCode!: HttpStatusCode;
-    reasonPhrase!: string | undefined;
-    readonly headers!: StringStringIEnumerableKeyValuePair[] | undefined;
-    readonly trailingHeaders!: StringStringIEnumerableKeyValuePair[] | undefined;
-    requestMessage!: HttpRequestMessage;
-    readonly isSuccessStatusCode!: boolean;
+    version?: Version;
+    content?: HttpContent;
+    statusCode?: HttpStatusCode;
+    reasonPhrase?: string | null;
+    readonly headers?: StringStringIEnumerableKeyValuePair[] | null;
+    readonly trailingHeaders?: StringStringIEnumerableKeyValuePair[] | null;
+    requestMessage?: HttpRequestMessage;
+    readonly isSuccessStatusCode?: boolean;
 
     init(_data?: any) {
         if (_data) {
-            this.version = _data["version"] ? Version.fromJS(_data["version"]) : <any>undefined;
-            this.content = _data["content"] ? HttpContent.fromJS(_data["content"]) : <any>undefined;
-            this.statusCode = _data["statusCode"];
-            this.reasonPhrase = _data["reasonPhrase"];
+            this.version = _data["version"] ? Version.fromJS(_data["version"]) : <any>null;
+            this.content = _data["content"] ? HttpContent.fromJS(_data["content"]) : <any>null;
+            this.statusCode = _data["statusCode"] !== undefined ? _data["statusCode"] : <any>null;
+            this.reasonPhrase = _data["reasonPhrase"] !== undefined ? _data["reasonPhrase"] : <any>null;
             if (Array.isArray(_data["headers"])) {
                 (<any>this).headers = [] as any;
                 for (let item of _data["headers"])
                     (<any>this).headers!.push(StringStringIEnumerableKeyValuePair.fromJS(item));
+            }
+            else {
+                (<any>this).headers = <any>null;
             }
             if (Array.isArray(_data["trailingHeaders"])) {
                 (<any>this).trailingHeaders = [] as any;
                 for (let item of _data["trailingHeaders"])
                     (<any>this).trailingHeaders!.push(StringStringIEnumerableKeyValuePair.fromJS(item));
             }
-            this.requestMessage = _data["requestMessage"] ? HttpRequestMessage.fromJS(_data["requestMessage"]) : <any>undefined;
-            (<any>this).isSuccessStatusCode = _data["isSuccessStatusCode"];
+            else {
+                (<any>this).trailingHeaders = <any>null;
+            }
+            this.requestMessage = _data["requestMessage"] ? HttpRequestMessage.fromJS(_data["requestMessage"]) : <any>null;
+            (<any>this).isSuccessStatusCode = _data["isSuccessStatusCode"] !== undefined ? _data["isSuccessStatusCode"] : <any>null;
         }
     }
 
@@ -1407,10 +1589,10 @@ export class HttpResponseMessage {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["version"] = this.version ? this.version.toJSON() : <any>undefined;
-        data["content"] = this.content ? this.content.toJSON() : <any>undefined;
-        data["statusCode"] = this.statusCode;
-        data["reasonPhrase"] = this.reasonPhrase;
+        data["version"] = this.version ? this.version.toJSON() : <any>null;
+        data["content"] = this.content ? this.content.toJSON() : <any>null;
+        data["statusCode"] = this.statusCode !== undefined ? this.statusCode : <any>null;
+        data["reasonPhrase"] = this.reasonPhrase !== undefined ? this.reasonPhrase : <any>null;
         if (Array.isArray(this.headers)) {
             data["headers"] = [];
             for (let item of this.headers)
@@ -1421,8 +1603,8 @@ export class HttpResponseMessage {
             for (let item of this.trailingHeaders)
                 data["trailingHeaders"].push(item.toJSON());
         }
-        data["requestMessage"] = this.requestMessage ? this.requestMessage.toJSON() : <any>undefined;
-        data["isSuccessStatusCode"] = this.isSuccessStatusCode;
+        data["requestMessage"] = this.requestMessage ? this.requestMessage.toJSON() : <any>null;
+        data["isSuccessStatusCode"] = this.isSuccessStatusCode !== undefined ? this.isSuccessStatusCode : <any>null;
         return data;
     }
 }
@@ -1498,15 +1680,15 @@ export enum HttpVersionPolicy {
 }
 
 export class Language {
-    languageId!: string;
-    code!: number;
-    description!: string | undefined;
+    languageId?: string;
+    code?: number;
+    description?: string | null;
 
     init(_data?: any) {
         if (_data) {
-            this.languageId = _data["languageId"];
-            this.code = _data["code"];
-            this.description = _data["description"];
+            this.languageId = _data["languageId"] !== undefined ? _data["languageId"] : <any>null;
+            this.code = _data["code"] !== undefined ? _data["code"] : <any>null;
+            this.description = _data["description"] !== undefined ? _data["description"] : <any>null;
         }
     }
 
@@ -1519,23 +1701,23 @@ export class Language {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["languageId"] = this.languageId;
-        data["code"] = this.code;
-        data["description"] = this.description;
+        data["languageId"] = this.languageId !== undefined ? this.languageId : <any>null;
+        data["code"] = this.code !== undefined ? this.code : <any>null;
+        data["description"] = this.description !== undefined ? this.description : <any>null;
         return data;
     }
 }
 
 export class LanguageLevel {
-    languageLevelId!: string;
-    code!: number;
-    description!: string | undefined;
+    languageLevelId?: string;
+    code?: number;
+    description?: string | null;
 
     init(_data?: any) {
         if (_data) {
-            this.languageLevelId = _data["languageLevelId"];
-            this.code = _data["code"];
-            this.description = _data["description"];
+            this.languageLevelId = _data["languageLevelId"] !== undefined ? _data["languageLevelId"] : <any>null;
+            this.code = _data["code"] !== undefined ? _data["code"] : <any>null;
+            this.description = _data["description"] !== undefined ? _data["description"] : <any>null;
         }
     }
 
@@ -1548,33 +1730,33 @@ export class LanguageLevel {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["languageLevelId"] = this.languageLevelId;
-        data["code"] = this.code;
-        data["description"] = this.description;
+        data["languageLevelId"] = this.languageLevelId !== undefined ? this.languageLevelId : <any>null;
+        data["code"] = this.code !== undefined ? this.code : <any>null;
+        data["description"] = this.description !== undefined ? this.description : <any>null;
         return data;
     }
 }
 
 export class LanguageLink {
-    languageLinkId!: string;
-    languageId!: string;
-    personId!: string;
-    languageLevelId!: string | undefined;
-    preferred!: boolean | undefined;
-    language!: Language;
-    person!: Person;
-    languageLevel!: LanguageLevel;
+    languageLinkId?: string;
+    languageId?: string;
+    personId?: string;
+    languageLevelId?: string | null;
+    preferred?: boolean | null;
+    language?: Language;
+    person?: Person;
+    languageLevel?: LanguageLevel;
 
     init(_data?: any) {
         if (_data) {
-            this.languageLinkId = _data["languageLinkId"];
-            this.languageId = _data["languageId"];
-            this.personId = _data["personId"];
-            this.languageLevelId = _data["languageLevelId"];
-            this.preferred = _data["preferred"];
-            this.language = _data["language"] ? Language.fromJS(_data["language"]) : <any>undefined;
-            this.person = _data["person"] ? Person.fromJS(_data["person"]) : <any>undefined;
-            this.languageLevel = _data["languageLevel"] ? LanguageLevel.fromJS(_data["languageLevel"]) : <any>undefined;
+            this.languageLinkId = _data["languageLinkId"] !== undefined ? _data["languageLinkId"] : <any>null;
+            this.languageId = _data["languageId"] !== undefined ? _data["languageId"] : <any>null;
+            this.personId = _data["personId"] !== undefined ? _data["personId"] : <any>null;
+            this.languageLevelId = _data["languageLevelId"] !== undefined ? _data["languageLevelId"] : <any>null;
+            this.preferred = _data["preferred"] !== undefined ? _data["preferred"] : <any>null;
+            this.language = _data["language"] ? Language.fromJS(_data["language"]) : <any>null;
+            this.person = _data["person"] ? Person.fromJS(_data["person"]) : <any>null;
+            this.languageLevel = _data["languageLevel"] ? LanguageLevel.fromJS(_data["languageLevel"]) : <any>null;
         }
     }
 
@@ -1587,42 +1769,80 @@ export class LanguageLink {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["languageLinkId"] = this.languageLinkId;
-        data["languageId"] = this.languageId;
-        data["personId"] = this.personId;
-        data["languageLevelId"] = this.languageLevelId;
-        data["preferred"] = this.preferred;
-        data["language"] = this.language ? this.language.toJSON() : <any>undefined;
-        data["person"] = this.person ? this.person.toJSON() : <any>undefined;
-        data["languageLevel"] = this.languageLevel ? this.languageLevel.toJSON() : <any>undefined;
+        data["languageLinkId"] = this.languageLinkId !== undefined ? this.languageLinkId : <any>null;
+        data["languageId"] = this.languageId !== undefined ? this.languageId : <any>null;
+        data["personId"] = this.personId !== undefined ? this.personId : <any>null;
+        data["languageLevelId"] = this.languageLevelId !== undefined ? this.languageLevelId : <any>null;
+        data["preferred"] = this.preferred !== undefined ? this.preferred : <any>null;
+        data["language"] = this.language ? this.language.toJSON() : <any>null;
+        data["person"] = this.person ? this.person.toJSON() : <any>null;
+        data["languageLevel"] = this.languageLevel ? this.languageLevel.toJSON() : <any>null;
+        return data;
+    }
+}
+
+export class Match {
+    matchId?: string;
+    employeeId?: string | null;
+    researchId?: string | null;
+    matchAcceptedByEmployee?: boolean | null;
+    person?: Person;
+    research?: Research;
+
+    init(_data?: any) {
+        if (_data) {
+            this.matchId = _data["matchId"] !== undefined ? _data["matchId"] : <any>null;
+            this.employeeId = _data["employeeId"] !== undefined ? _data["employeeId"] : <any>null;
+            this.researchId = _data["researchId"] !== undefined ? _data["researchId"] : <any>null;
+            this.matchAcceptedByEmployee = _data["matchAcceptedByEmployee"] !== undefined ? _data["matchAcceptedByEmployee"] : <any>null;
+            this.person = _data["person"] ? Person.fromJS(_data["person"]) : <any>null;
+            this.research = _data["research"] ? Research.fromJS(_data["research"]) : <any>null;
+        }
+    }
+
+    static fromJS(data: any): Match {
+        data = typeof data === 'object' ? data : {};
+        let result = new Match();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["matchId"] = this.matchId !== undefined ? this.matchId : <any>null;
+        data["employeeId"] = this.employeeId !== undefined ? this.employeeId : <any>null;
+        data["researchId"] = this.researchId !== undefined ? this.researchId : <any>null;
+        data["matchAcceptedByEmployee"] = this.matchAcceptedByEmployee !== undefined ? this.matchAcceptedByEmployee : <any>null;
+        data["person"] = this.person ? this.person.toJSON() : <any>null;
+        data["research"] = this.research ? this.research.toJSON() : <any>null;
         return data;
     }
 }
 
 export class Person {
-    personId!: string;
-    code!: number;
-    name!: string | undefined;
-    surnamme!: string | undefined;
-    siteId!: string | undefined;
-    yearsOfExperience!: number | undefined;
-    position!: string | undefined;
-    remote!: boolean;
-    isRecruiter!: boolean;
-    site!: Site;
+    personId?: string;
+    code?: number;
+    name?: string | null;
+    surnamme?: string | null;
+    siteId?: string | null;
+    yearsOfExperience?: number | null;
+    position?: string | null;
+    remote?: boolean;
+    isRecruiter?: boolean;
+    site?: Site;
 
     init(_data?: any) {
         if (_data) {
-            this.personId = _data["personId"];
-            this.code = _data["code"];
-            this.name = _data["name"];
-            this.surnamme = _data["surnamme"];
-            this.siteId = _data["siteId"];
-            this.yearsOfExperience = _data["yearsOfExperience"];
-            this.position = _data["position"];
-            this.remote = _data["remote"];
-            this.isRecruiter = _data["isRecruiter"];
-            this.site = _data["site"] ? Site.fromJS(_data["site"]) : <any>undefined;
+            this.personId = _data["personId"] !== undefined ? _data["personId"] : <any>null;
+            this.code = _data["code"] !== undefined ? _data["code"] : <any>null;
+            this.name = _data["name"] !== undefined ? _data["name"] : <any>null;
+            this.surnamme = _data["surnamme"] !== undefined ? _data["surnamme"] : <any>null;
+            this.siteId = _data["siteId"] !== undefined ? _data["siteId"] : <any>null;
+            this.yearsOfExperience = _data["yearsOfExperience"] !== undefined ? _data["yearsOfExperience"] : <any>null;
+            this.position = _data["position"] !== undefined ? _data["position"] : <any>null;
+            this.remote = _data["remote"] !== undefined ? _data["remote"] : <any>null;
+            this.isRecruiter = _data["isRecruiter"] !== undefined ? _data["isRecruiter"] : <any>null;
+            this.site = _data["site"] ? Site.fromJS(_data["site"]) : <any>null;
         }
     }
 
@@ -1635,44 +1855,44 @@ export class Person {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["personId"] = this.personId;
-        data["code"] = this.code;
-        data["name"] = this.name;
-        data["surnamme"] = this.surnamme;
-        data["siteId"] = this.siteId;
-        data["yearsOfExperience"] = this.yearsOfExperience;
-        data["position"] = this.position;
-        data["remote"] = this.remote;
-        data["isRecruiter"] = this.isRecruiter;
-        data["site"] = this.site ? this.site.toJSON() : <any>undefined;
+        data["personId"] = this.personId !== undefined ? this.personId : <any>null;
+        data["code"] = this.code !== undefined ? this.code : <any>null;
+        data["name"] = this.name !== undefined ? this.name : <any>null;
+        data["surnamme"] = this.surnamme !== undefined ? this.surnamme : <any>null;
+        data["siteId"] = this.siteId !== undefined ? this.siteId : <any>null;
+        data["yearsOfExperience"] = this.yearsOfExperience !== undefined ? this.yearsOfExperience : <any>null;
+        data["position"] = this.position !== undefined ? this.position : <any>null;
+        data["remote"] = this.remote !== undefined ? this.remote : <any>null;
+        data["isRecruiter"] = this.isRecruiter !== undefined ? this.isRecruiter : <any>null;
+        data["site"] = this.site ? this.site.toJSON() : <any>null;
         return data;
     }
 }
 
 export class Research {
-    researchId!: string;
-    code!: number;
-    description!: string | undefined;
-    remote!: boolean;
-    siteId!: string;
-    personId!: string;
-    languageId!: string;
-    person!: Person;
-    language!: Language;
-    site!: Site;
+    researchId?: string;
+    code?: number;
+    description?: string | null;
+    remote?: boolean;
+    siteId?: string;
+    personId?: string;
+    languageId?: string;
+    person?: Person;
+    language?: Language;
+    site?: Site;
 
     init(_data?: any) {
         if (_data) {
-            this.researchId = _data["researchId"];
-            this.code = _data["code"];
-            this.description = _data["description"];
-            this.remote = _data["remote"];
-            this.siteId = _data["siteId"];
-            this.personId = _data["personId"];
-            this.languageId = _data["languageId"];
-            this.person = _data["person"] ? Person.fromJS(_data["person"]) : <any>undefined;
-            this.language = _data["language"] ? Language.fromJS(_data["language"]) : <any>undefined;
-            this.site = _data["site"] ? Site.fromJS(_data["site"]) : <any>undefined;
+            this.researchId = _data["researchId"] !== undefined ? _data["researchId"] : <any>null;
+            this.code = _data["code"] !== undefined ? _data["code"] : <any>null;
+            this.description = _data["description"] !== undefined ? _data["description"] : <any>null;
+            this.remote = _data["remote"] !== undefined ? _data["remote"] : <any>null;
+            this.siteId = _data["siteId"] !== undefined ? _data["siteId"] : <any>null;
+            this.personId = _data["personId"] !== undefined ? _data["personId"] : <any>null;
+            this.languageId = _data["languageId"] !== undefined ? _data["languageId"] : <any>null;
+            this.person = _data["person"] ? Person.fromJS(_data["person"]) : <any>null;
+            this.language = _data["language"] ? Language.fromJS(_data["language"]) : <any>null;
+            this.site = _data["site"] ? Site.fromJS(_data["site"]) : <any>null;
         }
     }
 
@@ -1685,30 +1905,30 @@ export class Research {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["researchId"] = this.researchId;
-        data["code"] = this.code;
-        data["description"] = this.description;
-        data["remote"] = this.remote;
-        data["siteId"] = this.siteId;
-        data["personId"] = this.personId;
-        data["languageId"] = this.languageId;
-        data["person"] = this.person ? this.person.toJSON() : <any>undefined;
-        data["language"] = this.language ? this.language.toJSON() : <any>undefined;
-        data["site"] = this.site ? this.site.toJSON() : <any>undefined;
+        data["researchId"] = this.researchId !== undefined ? this.researchId : <any>null;
+        data["code"] = this.code !== undefined ? this.code : <any>null;
+        data["description"] = this.description !== undefined ? this.description : <any>null;
+        data["remote"] = this.remote !== undefined ? this.remote : <any>null;
+        data["siteId"] = this.siteId !== undefined ? this.siteId : <any>null;
+        data["personId"] = this.personId !== undefined ? this.personId : <any>null;
+        data["languageId"] = this.languageId !== undefined ? this.languageId : <any>null;
+        data["person"] = this.person ? this.person.toJSON() : <any>null;
+        data["language"] = this.language ? this.language.toJSON() : <any>null;
+        data["site"] = this.site ? this.site.toJSON() : <any>null;
         return data;
     }
 }
 
 export class Site {
-    siteId!: string;
-    code!: number;
-    description!: string | undefined;
+    siteId?: string;
+    code?: number;
+    description?: string | null;
 
     init(_data?: any) {
         if (_data) {
-            this.siteId = _data["siteId"];
-            this.code = _data["code"];
-            this.description = _data["description"];
+            this.siteId = _data["siteId"] !== undefined ? _data["siteId"] : <any>null;
+            this.code = _data["code"] !== undefined ? _data["code"] : <any>null;
+            this.description = _data["description"] !== undefined ? _data["description"] : <any>null;
         }
     }
 
@@ -1721,31 +1941,31 @@ export class Site {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["siteId"] = this.siteId;
-        data["code"] = this.code;
-        data["description"] = this.description;
+        data["siteId"] = this.siteId !== undefined ? this.siteId : <any>null;
+        data["code"] = this.code !== undefined ? this.code : <any>null;
+        data["description"] = this.description !== undefined ? this.description : <any>null;
         return data;
     }
 }
 
 export class Skill {
-    skillId!: string;
-    code!: number;
-    febeDevops!: string | undefined;
-    webMobile!: string | undefined;
-    technology!: string | undefined;
-    projectRef!: string | undefined;
-    description!: string | undefined;
+    skillId?: string;
+    code?: number;
+    febeDevops?: string | null;
+    webMobile?: string | null;
+    technology?: string | null;
+    projectRef?: string | null;
+    description?: string | null;
 
     init(_data?: any) {
         if (_data) {
-            this.skillId = _data["skillId"];
-            this.code = _data["code"];
-            this.febeDevops = _data["febeDevops"];
-            this.webMobile = _data["webMobile"];
-            this.technology = _data["technology"];
-            this.projectRef = _data["projectRef"];
-            this.description = _data["description"];
+            this.skillId = _data["skillId"] !== undefined ? _data["skillId"] : <any>null;
+            this.code = _data["code"] !== undefined ? _data["code"] : <any>null;
+            this.febeDevops = _data["febeDevops"] !== undefined ? _data["febeDevops"] : <any>null;
+            this.webMobile = _data["webMobile"] !== undefined ? _data["webMobile"] : <any>null;
+            this.technology = _data["technology"] !== undefined ? _data["technology"] : <any>null;
+            this.projectRef = _data["projectRef"] !== undefined ? _data["projectRef"] : <any>null;
+            this.description = _data["description"] !== undefined ? _data["description"] : <any>null;
         }
     }
 
@@ -1758,33 +1978,33 @@ export class Skill {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["skillId"] = this.skillId;
-        data["code"] = this.code;
-        data["febeDevops"] = this.febeDevops;
-        data["webMobile"] = this.webMobile;
-        data["technology"] = this.technology;
-        data["projectRef"] = this.projectRef;
-        data["description"] = this.description;
+        data["skillId"] = this.skillId !== undefined ? this.skillId : <any>null;
+        data["code"] = this.code !== undefined ? this.code : <any>null;
+        data["febeDevops"] = this.febeDevops !== undefined ? this.febeDevops : <any>null;
+        data["webMobile"] = this.webMobile !== undefined ? this.webMobile : <any>null;
+        data["technology"] = this.technology !== undefined ? this.technology : <any>null;
+        data["projectRef"] = this.projectRef !== undefined ? this.projectRef : <any>null;
+        data["description"] = this.description !== undefined ? this.description : <any>null;
         return data;
     }
 }
 
 export class SkillLink {
-    skillLinkId!: string;
-    skillId!: string;
-    personId!: string;
-    level!: number;
-    skill!: Skill;
-    person!: Person;
+    skillLinkId?: string;
+    skillId?: string;
+    personId?: string;
+    level?: number;
+    skill?: Skill;
+    person?: Person;
 
     init(_data?: any) {
         if (_data) {
-            this.skillLinkId = _data["skillLinkId"];
-            this.skillId = _data["skillId"];
-            this.personId = _data["personId"];
-            this.level = _data["level"];
-            this.skill = _data["skill"] ? Skill.fromJS(_data["skill"]) : <any>undefined;
-            this.person = _data["person"] ? Person.fromJS(_data["person"]) : <any>undefined;
+            this.skillLinkId = _data["skillLinkId"] !== undefined ? _data["skillLinkId"] : <any>null;
+            this.skillId = _data["skillId"] !== undefined ? _data["skillId"] : <any>null;
+            this.personId = _data["personId"] !== undefined ? _data["personId"] : <any>null;
+            this.level = _data["level"] !== undefined ? _data["level"] : <any>null;
+            this.skill = _data["skill"] ? Skill.fromJS(_data["skill"]) : <any>null;
+            this.person = _data["person"] ? Person.fromJS(_data["person"]) : <any>null;
         }
     }
 
@@ -1797,27 +2017,30 @@ export class SkillLink {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["skillLinkId"] = this.skillLinkId;
-        data["skillId"] = this.skillId;
-        data["personId"] = this.personId;
-        data["level"] = this.level;
-        data["skill"] = this.skill ? this.skill.toJSON() : <any>undefined;
-        data["person"] = this.person ? this.person.toJSON() : <any>undefined;
+        data["skillLinkId"] = this.skillLinkId !== undefined ? this.skillLinkId : <any>null;
+        data["skillId"] = this.skillId !== undefined ? this.skillId : <any>null;
+        data["personId"] = this.personId !== undefined ? this.personId : <any>null;
+        data["level"] = this.level !== undefined ? this.level : <any>null;
+        data["skill"] = this.skill ? this.skill.toJSON() : <any>null;
+        data["person"] = this.person ? this.person.toJSON() : <any>null;
         return data;
     }
 }
 
 export class StringStringIEnumerableKeyValuePair {
-    key!: string | undefined;
-    value!: string[] | undefined;
+    key?: string | null;
+    value?: string[] | null;
 
     init(_data?: any) {
         if (_data) {
-            this.key = _data["key"];
+            this.key = _data["key"] !== undefined ? _data["key"] : <any>null;
             if (Array.isArray(_data["value"])) {
                 this.value = [] as any;
                 for (let item of _data["value"])
                     this.value!.push(item);
+            }
+            else {
+                this.value = <any>null;
             }
         }
     }
@@ -1831,7 +2054,7 @@ export class StringStringIEnumerableKeyValuePair {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["key"] = this.key;
+        data["key"] = this.key !== undefined ? this.key : <any>null;
         if (Array.isArray(this.value)) {
             data["value"] = [];
             for (let item of this.value)
@@ -1842,21 +2065,21 @@ export class StringStringIEnumerableKeyValuePair {
 }
 
 export class Version {
-    readonly major!: number;
-    readonly minor!: number;
-    readonly build!: number;
-    readonly revision!: number;
-    readonly majorRevision!: number;
-    readonly minorRevision!: number;
+    readonly major?: number;
+    readonly minor?: number;
+    readonly build?: number;
+    readonly revision?: number;
+    readonly majorRevision?: number;
+    readonly minorRevision?: number;
 
     init(_data?: any) {
         if (_data) {
-            (<any>this).major = _data["major"];
-            (<any>this).minor = _data["minor"];
-            (<any>this).build = _data["build"];
-            (<any>this).revision = _data["revision"];
-            (<any>this).majorRevision = _data["majorRevision"];
-            (<any>this).minorRevision = _data["minorRevision"];
+            (<any>this).major = _data["major"] !== undefined ? _data["major"] : <any>null;
+            (<any>this).minor = _data["minor"] !== undefined ? _data["minor"] : <any>null;
+            (<any>this).build = _data["build"] !== undefined ? _data["build"] : <any>null;
+            (<any>this).revision = _data["revision"] !== undefined ? _data["revision"] : <any>null;
+            (<any>this).majorRevision = _data["majorRevision"] !== undefined ? _data["majorRevision"] : <any>null;
+            (<any>this).minorRevision = _data["minorRevision"] !== undefined ? _data["minorRevision"] : <any>null;
         }
     }
 
@@ -1869,12 +2092,12 @@ export class Version {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["major"] = this.major;
-        data["minor"] = this.minor;
-        data["build"] = this.build;
-        data["revision"] = this.revision;
-        data["majorRevision"] = this.majorRevision;
-        data["minorRevision"] = this.minorRevision;
+        data["major"] = this.major !== undefined ? this.major : <any>null;
+        data["minor"] = this.minor !== undefined ? this.minor : <any>null;
+        data["build"] = this.build !== undefined ? this.build : <any>null;
+        data["revision"] = this.revision !== undefined ? this.revision : <any>null;
+        data["majorRevision"] = this.majorRevision !== undefined ? this.majorRevision : <any>null;
+        data["minorRevision"] = this.minorRevision !== undefined ? this.minorRevision : <any>null;
         return data;
     }
 }

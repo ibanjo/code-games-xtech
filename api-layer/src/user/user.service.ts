@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UserDto, UserListDto } from './dto/user.dto';
+import { MLUserDto, UserDto, UserListDto } from './dto/user.dto';
 import { validate } from 'class-validator';
 import { instanceToInstance } from 'class-transformer';
 import { HttpException } from '@nestjs/common/exceptions/http.exception';
@@ -53,10 +53,36 @@ export class UserService {
     const research = await this.researchService.findById(query.researchId);
 
     const people = await this.dataLayer.personAll();
-    const users = instanceToInstance<UserDto[]>(people,);
+    const users = instanceToInstance<UserDto[]>(people);
     const usersCount = users.length;
 
     return { research, users, usersCount };
+  }
+
+
+  async fetchMLData(): Promise<MLUserDto[]> {
+    const people = (await this.dataLayer.personAll()).map(x => x.personId);
+    const skills = await this.dataLayer.skillAll();
+    let skillLinks;
+    let result = [];
+    for (let i = 0; i < people.length; i++) {
+      skillLinks = (await this.dataLayer.skillLinkAll()).filter(x => people[i].toLowerCase() === x.personId.toLowerCase()).map(f=>f.skillId);
+      let userSkills = [];
+      for (let s = 0; s < skillLinks.length; s++) {
+        userSkills.push({
+          FEBEDevops: skills.find(x => x.skillId.toLowerCase() === skillLinks[s].toLowerCase()).febeDevops,
+          WebMobile: skills.find(x => x.skillId.toLowerCase() === skillLinks[s].toLowerCase()).webMobile,
+          Technology: skills.find(x => x.skillId.toLowerCase() === skillLinks[s].toLowerCase()).technology
+        });
+      }
+
+      result.push({
+        personId: people[i],
+        skills: userSkills
+      });
+    }
+
+    return result;
   }
 
   async findById(id: string): Promise<UserDto> {

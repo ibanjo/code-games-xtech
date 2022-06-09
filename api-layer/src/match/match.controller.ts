@@ -21,13 +21,11 @@ export class MatchController {
     @Post('create-match')
     @HttpCode(204)
     async create(@Body() matchData: CreateMatchDto): Promise<MatchDto> {
-        var result = await this.matchService.create(matchData);
-        console.log(result);
-        return result;
+        return await this.matchService.create(matchData);
     }
 
     @Put(':id')
-    update(@Param('id') id: string, @Body() matchData: UpdateMatchDto) {
-      return `This action updates a #${id} cat`;
+    async update(@Param('id') id: string, @Body() matchData: UpdateMatchDto) {
+        return await this.matchService.update(id, matchData);
     }
 }
