@@ -29,8 +29,8 @@ namespace Research.Domain.Entity
         [ForeignKey("LanguageId")]
         public virtual Guid LanguageId { get; set; }
 
-        public Person Person { get; set; }
-        public Language Language { get; set; }
-        public Site Site { get; set; }
+        public Person? Person { get; set; }
+        public Language? Language { get; set; }
+        public Site? Site { get; set; }
     }
 }

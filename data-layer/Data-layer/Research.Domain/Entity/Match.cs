@@ -22,7 +22,7 @@ namespace Research.Domain.Entity
         
         public bool? MatchAcceptedByEmployee { get; set; }
 
-        public Person Person { get; set; }
-        public Research Research { get; set; }
+        public Person? Person { get; set; }
+        public Research? Research { get; set; }
     }
 }
