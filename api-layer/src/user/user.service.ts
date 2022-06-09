@@ -10,6 +10,7 @@ import { MatchService } from 'src/match/match.service';
 import { DataLayerClient } from 'src/adapter/data-layer';
 import { MLLayerClient } from 'src/adapter/ml-layer';
 import { GetSimilaritiesRequestDto } from './dto/get-similarities-request.dto';
+import { SkillDto } from '../skill/dto/skill.dto';
 
 @Injectable()
 export class UserService {
@@ -21,7 +22,7 @@ export class UserService {
 
   async getSimilarities(dto: GetSimilaritiesRequestDto): Promise<UserListDto> {
     let matchResearch = {
-      ResearchID: dto.researchID,
+      ResearchID: '1e889ade-b5ed-4276-b7fc-7f612b04c7c7',
       LanguageID: dto.languageID,
       LanguageLevel: dto.languageLevel,
       FEBEDevops: dto.FEBEDevops,
@@ -38,6 +39,32 @@ export class UserService {
     const usersEntities = allUsers.filter(person => personIds.find(personId => String(personId).toLowerCase() === person.personId.toLowerCase()));
     const users = instanceToInstance<UserDto[]>(usersEntities);
     const usersCount = users.length;
+
+    const allSkills = await this.dataLayer.skillAll();
+    // data access layer
+    let fullUsers = [];
+    for (let user of users) {
+      const skillLinks = (await this.dataLayer.skillLinkAll()).filter(x => user.personId.toLowerCase() === x.personId.toLowerCase()).map(s => s.skillId);
+      const allTheSkills = allSkills.filter(s => skillLinks.includes(s.skillId)).map(s => ({
+        skillId: s.skillId,
+        FEBEDevops: s.febeDevops,
+        webMobile: s.webMobile,
+        technology: s.technology,
+        projectRef: s.projectRef,
+        description: s.description
+      } as SkillDto));
+
+      const fullUser = {
+        ...user,
+        skills: {
+          skills: allTheSkills,
+          skillsCount: allTheSkills.length
+        }
+      } as UserDto
+      
+      fullUsers.push(fullUser);
+    }
+    
     return { research: {
         researchId: dto.researchID,
         code: 42,
@@ -46,7 +73,7 @@ export class UserService {
         siteId: 'asd',
         userId: '',
         languageId: ''
-    }, users, usersCount };
+    }, users: fullUsers, usersCount };
   }
 
   async findAll(query): Promise<UserListDto> {

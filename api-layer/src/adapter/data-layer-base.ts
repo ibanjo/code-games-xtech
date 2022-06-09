@@ -20,7 +20,7 @@ export class DataLayerClientBase {
 
         this.instance = instance ? instance : axios.create();
 
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://localhost:5280";
 
     }
 

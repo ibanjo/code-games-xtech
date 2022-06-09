@@ -23,9 +23,28 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const searchDto = window?.history?.state?.searchDto;
     this._subs.add(
-      this.api.getSuggestions(searchDto).pipe(delay(3000)).subscribe(values => {
+      this.api.getSuggestions(searchDto).subscribe(values => {
+        const newVals = values.users.map(user => ({
+          id: user.personId,
+          name: user.name,
+          surname: user.surnamme,
+          city: user.site.description,
+          remote: user.remote,
+          yearsOfExperience: user.yearsOfExperience,
+          position: user.position,
+          skills: user.skills.skills.map((s: any) => ({
+            feBeDevops: s.FEBEDevops,
+            webMobile: s.webMobile,
+            technology: s.technology,
+            projectRef: s.projectRef,
+            description: s.description,
+            level: 2
+          })),
+          languages: [],
+          liked: false
+        }));
         this.isLoading = false;
-        this.searchResults = values;
+        this.searchResults = newVals;
       })
     );
   }

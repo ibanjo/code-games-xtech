@@ -43,7 +43,7 @@ export class XVisionApiService {
     return this.http.post<any>(`${environment.apiBaseUrl}/person`, body, {'headers':headers});
   }
 
-  getSuggestions(dto: SearchDto): Observable<SearchResultDto[]> {
+  getSuggestions(dto: SearchDto): Observable<{ users: any[] }> {
     return this.http.get<any>(`${environment.apiBaseUrl}/searchResult`);
   }
 
@@ -81,7 +81,7 @@ export class XVisionFakeApiService extends XVisionApiService {
     return this.http.post<any>(`${environment.apiBaseUrl}/person`, body, {'headers':headers});
   }
 
-  getSuggestions(dto: SearchDto): Observable<SearchResultDto[]> {
+  getSuggestions(dto: SearchDto): Observable<{ users: any[] }> {
     return this.http.post<any>(`http://localhost:3000/users/get-similarities`, dto);
     //return this.http.get<any>(`${environment.apiBaseUrl}/searchResult`);
   }
