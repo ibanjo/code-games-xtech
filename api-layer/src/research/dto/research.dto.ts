@@ -1,9 +1,9 @@
 export class ResearchDto {
-    researchId: string;
+    researchId?: string;
     code: number;
     description: string;
     remote: boolean;
     siteId: string;
-    userId: string;
+    personId: string;
     languageId: string;
   }

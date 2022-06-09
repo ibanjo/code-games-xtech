@@ -5,10 +5,10 @@ export class CreateResearchDto {
   @MaxLength(200)
   readonly description: string;
   readonly remote: boolean;
-  @IsUUID()
+  // @IsUUID()
   readonly siteId: string;
-  @IsUUID()
+  // @IsUUID()
   readonly userId: string;
-  @IsUUID()
-  readonly languageId: string;
+  // @IsUUID()
+  readonly languageID: string;
 }

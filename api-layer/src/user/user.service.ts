@@ -10,18 +10,22 @@ import { MatchService } from 'src/match/match.service';
 import { DataLayerClient } from 'src/adapter/data-layer';
 import { MLLayerClient } from 'src/adapter/ml-layer';
 import { GetSimilaritiesRequestDto } from './dto/get-similarities-request.dto';
+import { SkillService } from 'src/skill/skill.service';
+import { CreateResearchDto } from 'src/research/dto/create-research.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly matchService: MatchService,
     private readonly researchService: ResearchService,
+    private readonly skillService: SkillService,
     private readonly dataLayer: DataLayerClient,
     private readonly MLLayer: MLLayerClient) { }
 
   async getSimilarities(dto: GetSimilaritiesRequestDto): Promise<UserListDto> {
+    const research = await this.researchService.create(instanceToInstance<CreateResearchDto>(dto));
     let matchResearch = {
-      ResearchID: dto.researchID,
+      ResearchID: research.researchId,
       LanguageID: dto.languageID,
       LanguageLevel: dto.languageLevel,
       FEBEDevops: dto.FEBEDevops,
@@ -29,7 +33,6 @@ export class UserService {
       Technology: dto.technology,
       SkillLevel: dto.level
     };
-    //const research = await this.researchService.findById(dto.researchID);
     //ML layer
     const resultML = await this.MLLayer.postAsync(matchResearch, "/getSimilarities");
     const personIds = Object.values(resultML);
@@ -38,15 +41,7 @@ export class UserService {
     const usersEntities = allUsers.filter(person => personIds.find(personId => String(personId).toLowerCase() === person.personId.toLowerCase()));
     const users = instanceToInstance<UserDto[]>(usersEntities);
     const usersCount = users.length;
-    return { research: {
-        researchId: dto.researchID,
-        code: 42,
-        description: 'Test',
-        remote: false,
-        siteId: 'asd',
-        userId: '',
-        languageId: ''
-    }, users, usersCount };
+    return { research, users, usersCount };
   }
 
   async findAll(query): Promise<UserListDto> {
@@ -70,26 +65,14 @@ export class UserService {
 
   async fetchMLData(): Promise<MLUserDto[]> {
     const people = (await this.dataLayer.personAll()).map(x => x.personId);
-    const skills = await this.dataLayer.skillAll();
-    let skillLinks;
-    let result = [];
+    const result = [];
     for (let i = 0; i < people.length; i++) {
-      skillLinks = (await this.dataLayer.skillLinkAll()).filter(x => people[i].toLowerCase() === x.personId.toLowerCase()).map(f=>f.skillId);
-      let userSkills = [];
-      for (let s = 0; s < skillLinks.length; s++) {
-        userSkills.push({
-          FEBEDevops: skills.find(x => x.skillId.toLowerCase() === skillLinks[s].toLowerCase()).febeDevops,
-          WebMobile: skills.find(x => x.skillId.toLowerCase() === skillLinks[s].toLowerCase()).webMobile,
-          Technology: skills.find(x => x.skillId.toLowerCase() === skillLinks[s].toLowerCase()).technology
-        });
-      }
-
+      const userSkills = await this.skillService.findByUserId(people[i]);
       result.push({
         personId: people[i],
         skills: userSkills
       });
     }
-
     return result;
   }
 

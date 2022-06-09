@@ -12,7 +12,7 @@ export class SkillController {
     }
 
     @Get(':userId')
-    async findByUserId(@Query() query, @Param('userId', ParseUUIDPipe) userId: string): Promise<SkillListDto> {
-        return await this.skillService.findByUserId(query, userId);
+    async findByUserId(@Param('userId', ParseUUIDPipe) userId: string): Promise<SkillListDto> {
+        return await this.skillService.findByUserId(userId);
     }
 }
